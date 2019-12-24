@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM  "module.dtd">
+<module english="root" chinese="功能菜单">
+    <subModules>
+        <module english="index" chinese="索引管理" display="false">
+            <subModules>
+                <module english="state" chinese="索引状况">
+                    <commands>
+                        <command english="query" chinese="查询索引"/>
+                    </commands>
+                </module>
+                <module english="setup" chinese="索引设置">
+                    <commands>
+                        <command english="rebuidAll" chinese="重建索引"/>
+                        <command english="clearTask" chinese="取消定时重建"/>
+                        <command english="setTask" chinese="设置定时重建"/>
+                        <command english="query" chinese="查询状态"/>
+                    </commands>
+                </module>
+            </subModules>
+        </module>
+    </subModules>
+</module>

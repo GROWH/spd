@@ -1,0 +1,16 @@
+# 源码下载后，首先，进入各个pom.xml文件所在的目录下，终端下执行命令以创建eclipse工程：mvn eclipse:eclipse -Dwtpversion=1.0
+JRPlat_Web/src/main/webapp/platform/include/jrplat_merge.css
+JRPlat_Web/src/main/webapp/platform/include/jrplat_merge.js
+JRPlat_Web/src/main/webapp/css/login_merge.css
+JRPlat_Web/src/main/webapp/js/login_merge.js
+JRPlat_Web/src/main/resources/licences/jrplat.licence
+JRPlat_Web/src/main/java/util/AuthorizationUtils.java
+JRPlat_Web/src/main/resources/db.local.properties
+.settings/
+.classpath
+.project
+*/target/
+.metadata/
+Servers/
+*.iml
+.idea/

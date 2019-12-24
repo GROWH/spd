@@ -1,0 +1,19 @@
+﻿.x-grid3-scroller {
+    /* overflow:visible;
+    display:inline;
+    注释掉才会出现滚动条
+    */
+}
+
+.x-grid3 {
+    overflow: visible;
+    display: inline;
+}
+
+.x-panel-body {
+    overflow: visible;
+}
+
+.x-grid3-viewport {
+    overflow: visible;
+}

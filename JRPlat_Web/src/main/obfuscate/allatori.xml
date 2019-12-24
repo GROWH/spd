@@ -1,0 +1,19 @@
+<config>
+    <!--  Note: You can reference properties defined in the Ant build file from the Allatori configuration file using standard Ant syntax: ${PropertyName}.   -->
+    <jars>
+        <jar in="../../../target/JRPlat_Web-${jrplat.version}/WEB-INF/lib/JRPlat_Core-${jrplat.version}.jar"
+             out="../../../target/JRPlat_Web-${jrplat.version}/WEB-INF/lib/JRPlat_Core-${jrplat.version}.jar"/>
+        <jar in="../../../target/JRPlat_Web-${jrplat.version}/WEB-INF/lib/JRPlat_Module-${jrplat.version}.jar"
+             out="../../../target/JRPlat_Web-${jrplat.version}/WEB-INF/lib/JRPlat_Module-${jrplat.version}.jar"/>
+    </jars>
+
+    <keep-names>
+        <class access="protected+"/>
+        <field access="protected+"/>
+        <method access="protected+"/>
+    </keep-names>
+
+    <property name="log-file" value="../../../target/obfuscate_log.xml"/>
+
+    <watermark key="jierankeji@163.com" value="JRPlat捷然开发平台（西安捷然）"/>
+</config>

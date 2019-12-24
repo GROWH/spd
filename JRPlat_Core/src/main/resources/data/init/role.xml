@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE role SYSTEM "role.dtd">
+<!--
+        角色
+-->
+<role roleName="角色">
+    <subRoles>
+        <role roleName="超级管理员" superManager="true"/>
+    </subRoles>
+</role>

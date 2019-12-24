@@ -1,0 +1,32 @@
+#生成密钥库
+1、keytool -genkey -alias jrplat  -storepass jrplat_core_module -keypass jrplat_core_module -keyalg RSA -validity 100000 -keysize 2048 -keystore   d:\jrplat.keystore
+#生成证书请求（之后使用生成的jrplat.csr去 https://www.startssl.com/ 请求证书，使用数字证书 杨尚川_startssl.p12 登录网站）
+2、keytool -certreq -alias jrplat  -keyalg RSA -file d:\jrplat.csr -keystore d:\jrplat.keystore  -storepass jrplat_core_module
+#导入根证书（http://www.startssl.com/certs/ca.pem）
+3、keytool -import -trustcacerts -alias root -file d:\ca.pem   -keystore  d:\jrplat.keystore    -storepass jrplat_core_module 
+#导入中级根证书（http://www.startssl.com/certs/sub.class1.server.ca.pem）
+4、keytool -import -trustcacerts -alias inter -file d:\sub.class1.server.ca.pem -keystore   d:\jrplat.keystore    -storepass jrplat_core_module 
+#导入jrplat证书（由www.startssl.com生成）
+5、keytool -import -trustcacerts -alias jrplat -file  d:\jrplat.crt  -keystore  d:\jrplat.keystore    -storepass jrplat_core_module 
+
+#导出公钥（数字证书）
+6、keytool -export -alias jrplat -file d:\jrplat_public.crt -keystore d:\jrplat.keystore   -storepass jrplat_core_module -keypass jrplat_core_module
+
+
+
+
+keytool -list -v -alias jrplat -keystore d:\jrplat.keystore -storepass jrplat_core_module
+keytool -delete -alias root -keystore d:\jrplat.keystore  -storepass jrplat_core_module
+
+注意：将以下配置加入tomcat的server.xml中
+
+<Connector port="443" protocol="org.apache.coyote.http11.Http11NioProtocol" SSLEnabled="true" maxThreads="150" scheme="https" secure="true" clientAuth="false" sslProtocol="TLS"          	
+  keystoreFile="d:/jrplat.keystore"       
+  keystorePass="jrplat_core_module" URIEncoding="utf-8"/>
+
+在Jboss中修改以下文件：
+jboss-5.0.1.GA\server\default\deploy\jbossweb.sar\server.xml
+
+注意：在C:\Windows\System32\drivers\etc\hosts文件中添加以下两行
+127.0.0.1				www.jrplat.com
+127.0.0.1				jrplat.com
