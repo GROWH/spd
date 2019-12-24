@@ -5,7 +5,6 @@ JRPlat_Web/src/main/webapp/css/login_merge.css
 JRPlat_Web/src/main/webapp/js/login_merge.js
 JRPlat_Web/src/main/resources/licences/jrplat.licence
 JRPlat_Web/src/main/java/util/AuthorizationUtils.java
-JRPlat_Web/src/main/resources/db.local.properties
 .settings/
 .classpath
 .project
