@@ -5,7 +5,7 @@
     <groupId>org.jrplat</groupId>
     <artifactId>JRPlat</artifactId>
     <version>2.5</version>
-    <name>basicInformation</name>
+    <name>spd</name>
     <packaging>pom</packaging>
 
     <url>https://github.com/ysc/JRPlat</url>
