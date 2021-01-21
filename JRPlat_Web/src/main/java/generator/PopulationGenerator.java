@@ -41,10 +41,7 @@ public class PopulationGenerator {
         //生成action
         ActionGenerator.generate(modelInfos, workspaceModuleBasePath);
         Set<String> generateModules = new HashSet<>();
-        generateModules.add("basicData");
-        generateModules.add("vehicleManagement");
-        generateModules.add("transportationManagement");
-        generateModules.add("chargeCenter");
+        generateModules.add("ordermanagement");
         //运行此生成器之前确保module.xml，和相关的model已经建立完毕
         WebGenerator.generate(generateModules);
     }

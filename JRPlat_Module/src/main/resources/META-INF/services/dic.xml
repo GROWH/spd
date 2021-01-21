@@ -36,5 +36,16 @@
                 </dic>
             </subDics>
         </dic>
+        <dic english="Commodity" chinese="商品管理">
+            <subDics>
+                <dic english="encodingFormat" chinese="编号格式">
+                    <dicItems>
+                        <dicItem code="1" name="UDI（GS1）"/>
+                        <dicItem code="2" name="UDI（MA码）"/>
+                        <dicItem code="3" name="TC（自编码）"/>
+                    </dicItems>
+                </dic>
+            </subDics>
+        </dic>
     </subDics>
 </dic>
