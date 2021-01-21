@@ -19,5 +19,20 @@
                 </module>
             </subModules>
         </module>
+
+        <module english="unitInfo" chinese="单位管理">
+            <subModules>
+                <module english="unit" chinese="单位信息">
+                    <commands>
+                        <command english="create" chinese="添加单位基础信息"/>
+                        <command english="delete" chinese="删除单位基础信息"/>
+                        <command english="update" chinese="修改单位基础信息"/>
+                        <command english="query" chinese="查询单位基础信息"/>
+                        <command english="refresh" chinese="刷新"/>
+                        <command english="help" chinese="帮助" />
+                    </commands>
+                </module>
+            </subModules>
+        </module>
     </subModules>
 </module>
