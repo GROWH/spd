@@ -50,7 +50,7 @@
         </module>
         <module english="ordermanagement" chinese="订单管理">
             <subModules>
-                <module english="Order" chinese="订单信息">
+                <module english="OrderManagement" chinese="订单信息">
                     <commands>
                         <command english="create" chinese="添加订单信息"/>
                         <command english="delete" chinese="删除订单信息"/>

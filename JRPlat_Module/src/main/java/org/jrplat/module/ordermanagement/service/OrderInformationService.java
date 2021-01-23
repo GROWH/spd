@@ -1,6 +1,6 @@
 package org.jrplat.module.ordermanagement.service;
 
-import org.jrplat.module.ordermanagement.model.Order;
+
 import org.jrplat.module.ordermanagement.model.OrderInformation;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;
