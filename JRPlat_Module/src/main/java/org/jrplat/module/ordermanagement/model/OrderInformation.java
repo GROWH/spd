@@ -113,6 +113,18 @@ public class OrderInformation extends SimpleModel {
     @Column(length = 500)
     protected String GYSRemarks;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ModelAttr("总单ID")
+    @ModelAttrRef("id")
+    protected OrderManagement orderManagement;
+
+    public OrderManagement getOrderManagement() {
+        return orderManagement;
+    }
+
+    public void setOrderManagement(OrderManagement orderManagement) {
+        this.orderManagement = orderManagement;
+    }
 
     @XmlAttribute
     public Integer getLineNumber() {
