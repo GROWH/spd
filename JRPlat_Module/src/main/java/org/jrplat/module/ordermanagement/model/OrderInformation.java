@@ -19,6 +19,8 @@
 
 package org.jrplat.module.ordermanagement.model;
 
+import org.jrplat.module.commodityInfo.model.Commodity;
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.generator.ActionGenerator;
 import org.jrplat.platform.model.SimpleModel;
 import org.jrplat.platform.annotation.*;
@@ -45,11 +47,11 @@ public class OrderInformation extends SimpleModel {
     @ModelAttr("行号")
     protected Integer lineNumber;
 
-    @DisplayIgnore
-    @ModelAttrNotNull
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @ModelAttr("产品编号")
-    @Column(length = 500)
-    protected String productNo;
+    @ModelAttrRef("number")
+    protected Commodity productNo;
 
     @DisplayIgnore
     @ModelAttr("产品名称")
@@ -121,15 +123,14 @@ public class OrderInformation extends SimpleModel {
         this.lineNumber = lineNumber;
     }
 
-    @XmlAttribute
-    public String getProductNo() {
+    public Commodity getProductNo() {
         return productNo;
     }
 
-    public void setProductNo(String productNo) {
+    public void setProductNo(Commodity productNo) {
         this.productNo = productNo;
     }
-
+    
     @XmlAttribute
     public String getProductName() {
         return productName;
