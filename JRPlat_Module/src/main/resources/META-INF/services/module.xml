@@ -20,37 +20,9 @@
             </subModules>
         </module>
 
-        <module english="unitInfo" chinese="单位管理">
-            <subModules>
-                <module english="unit" chinese="单位信息">
-                    <commands>
-                        <command english="create" chinese="添加单位基础信息"/>
-                        <command english="delete" chinese="删除单位基础信息"/>
-                        <command english="update" chinese="修改单位基础信息"/>
-                        <command english="query" chinese="查询单位基础信息"/>
-                        <command english="refresh" chinese="刷新"/>
-                        <command english="help" chinese="帮助" />
-                    </commands>
-                </module>
-            </subModules>
-        </module>
-        <module english="commodityInfo" chinese="商品管理">
-            <subModules>
-                <module english="Commodity" chinese="商品信息">
-                    <commands>
-                        <command english="create" chinese="添加商品信息"/>
-                        <command english="delete" chinese="删除商品信息"/>
-                        <command english="update" chinese="修改商品信息"/>
-                        <command english="query" chinese="查询商品信息"/>
-                        <command english="refresh" chinese="刷新"/>
-                        <command english="help" chinese="帮助" />
-                    </commands>
-                </module>
-            </subModules>
-        </module>
         <module english="ordermanagement" chinese="订单管理">
             <subModules>
-                <module english="Order" chinese="订单信息">
+                <module english="OrderManagement" chinese="订单信息">
                     <commands>
                         <command english="create" chinese="添加订单信息"/>
                         <command english="delete" chinese="删除订单信息"/>
@@ -66,6 +38,16 @@
                         <command english="delete" chinese="删除订货信息"/>
                         <command english="update" chinese="修改订货信息"/>
                         <command english="query" chinese="查询订货信息"/>
+                        <command english="refresh" chinese="刷新"/>
+                        <command english="help" chinese="帮助" />
+                    </commands>
+                </module>
+                <module english="Outboundrecords" chinese="出库记录">
+                    <commands>
+                        <command english="create" chinese="添加出库信息"/>
+                        <command english="delete" chinese="删除出库信息"/>
+                        <command english="update" chinese="修改出库信息"/>
+                        <command english="query" chinese="查询出库信息"/>
                         <command english="refresh" chinese="刷新"/>
                         <command english="help" chinese="帮助" />
                     </commands>

@@ -19,16 +19,19 @@
 
 package org.jrplat.module.commodityInfo.model;
 
+import org.jrplat.module.dictionary.model.DicItem;
+import org.jrplat.platform.annotation.DisplayIgnore;
+import org.jrplat.platform.annotation.ModelAttr;
+import org.jrplat.platform.annotation.ModelAttrNotNull;
+import org.jrplat.platform.annotation.SimpleDic;
 import org.jrplat.platform.generator.ActionGenerator;
 import org.jrplat.platform.model.SimpleModel;
-import org.jrplat.platform.annotation.*;
-import org.jrplat.module.dictionary.model.DicItem;
-
-import javax.persistence.*;
-
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;

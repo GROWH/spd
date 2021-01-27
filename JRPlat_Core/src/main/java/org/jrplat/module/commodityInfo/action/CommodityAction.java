@@ -1,19 +1,20 @@
-package org.jrplat.module.unitInfo.action;
+package org.jrplat.module.commodityInfo.action;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.jrplat.module.commodityInfo.model.Commodity;
-import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.action.ExtJSSimpleAction;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 /**
  * @Author:wangkang
- * @Date: 2021/1/21 下午3:16
+ * @Date: 2021/1/21 下午3:08
  */
+
 @Scope("prototype")
 @Controller
-@Namespace("/unitinfo")
+@Namespace("/commodityInfo")
+public class CommodityAction extends ExtJSSimpleAction<Commodity>  {
 
-public class UnitAction extends ExtJSSimpleAction<Unit>{
+
 }

@@ -1,6 +1,5 @@
 package org.jrplat.module.unitInfo.service;
 
-import org.jrplat.module.commodityInfo.model.Commodity;
 import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;

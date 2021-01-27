@@ -22,30 +22,5 @@
                 </dic>
             </subDics>
         </dic>
-
-        <dic english="unit" chinese="单位管理">
-            <subDics>
-                <dic english="unitType" chinese="单位类型">
-                    <dicItems>
-                        <dicItem code="1" name="生产企业（统一社会信用代码）"/>
-                        <dicItem code="2" name="经营企业（统一社会信用代码）"/>
-                        <dicItem code="3" name="医疗机构（医疗机构职业许可登记号）"/>
-                        <dicItem code="4" name="科研单位（统一社会信用代码）"/>
-                        <dicItem code="5" name="其它"/>
-                    </dicItems>
-                </dic>
-            </subDics>
-        </dic>
-        <dic english="Commodity" chinese="商品管理">
-            <subDics>
-                <dic english="encodingFormat" chinese="编号格式">
-                    <dicItems>
-                        <dicItem code="1" name="UDI（GS1）"/>
-                        <dicItem code="2" name="UDI（MA码）"/>
-                        <dicItem code="3" name="TC（自编码）"/>
-                    </dicItems>
-                </dic>
-            </subDics>
-        </dic>
     </subDics>
 </dic>

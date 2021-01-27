@@ -37,8 +37,8 @@ import javax.xml.bind.annotation.XmlType;
 @Scope("prototype")
 @Component
 @XmlRootElement
-@XmlType(name = "Order")
-public class Order extends SimpleModel {
+@XmlType(name = "OrderManagement")
+public class OrderManagement extends SimpleModel {
 
     @DisplayIgnore
     @ModelAttrNotNull
@@ -275,7 +275,7 @@ public class Order extends SimpleModel {
     }
 
     public static void main(String[] args) {
-        Order obj = new Order();
+        OrderManagement obj = new OrderManagement();
 //生成Action
         ActionGenerator.generate(obj.getClass());
     }
