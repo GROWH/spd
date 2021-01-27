@@ -19,6 +19,8 @@
 
 package org.jrplat.module.ordermanagement.model;
 
+import org.jrplat.module.dictionary.model.DicItem;
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.generator.ActionGenerator;
 import org.jrplat.platform.model.SimpleModel;
 import org.jrplat.platform.annotation.*;
@@ -46,18 +48,19 @@ public class OrderManagement extends SimpleModel {
     @Column(length = 500)
     protected String serialNumber;
 
+
     @DisplayIgnore
     @ModelAttrNotNull
+    @ManyToOne
     @ModelAttr("订单类型")
-    @Column(length = 500)
-    protected String ordertype;
+    @SimpleDic("ordertype")
+    protected DicItem ordertype;
 
-    @DisplayIgnore
-    @ModelAttrNotNull
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @ModelAttr("供应商名称")
-    @Column(length = 500)
-    protected String GYSName;
-
+    @ModelAttrRef("unitName")
+    protected Unit GYSName;
     @DisplayIgnore
     @ModelAttr("供应商证件编号")
     @Column(length = 500)
@@ -89,11 +92,11 @@ public class OrderManagement extends SimpleModel {
     @Column(length = 500)
     protected String GYSRemarks;
 
-    @DisplayIgnore
-    @ModelAttr("客户名称")
-    @Column(length = 500)
-    protected String KHName;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ModelAttr("客户名称")
+    @ModelAttrRef("unitName")
+    protected Unit KHName;
     @DisplayIgnore
     @ModelAttr("客户证件编号")
     @Column(length = 500)
@@ -134,23 +137,14 @@ public class OrderManagement extends SimpleModel {
         this.serialNumber = serialNumber;
     }
 
-    @XmlAttribute
-    public String getOrdertype() {
+    public DicItem getOrdertype() {
         return ordertype;
     }
 
-    public void setOrdertype(String ordertype) {
+    public void setOrdertype(DicItem ordertype) {
         this.ordertype = ordertype;
     }
 
-    @XmlAttribute
-    public String getGYSName() {
-        return GYSName;
-    }
-
-    public void setGYSName(String GYSName) {
-        this.GYSName = GYSName;
-    }
 
     @XmlAttribute
     public String getGYSNumber() {
@@ -206,14 +200,6 @@ public class OrderManagement extends SimpleModel {
         this.GYSRemarks = GYSRemarks;
     }
 
-    @XmlAttribute
-    public String getKHName() {
-        return KHName;
-    }
-
-    public void setKHName(String KHName) {
-        this.KHName = KHName;
-    }
 
     @XmlAttribute
     public String getKHNumber() {
@@ -267,6 +253,22 @@ public class OrderManagement extends SimpleModel {
 
     public void setKHRemarks(String KHRemarks) {
         this.KHRemarks = KHRemarks;
+    }
+
+    public Unit getGYSName() {
+        return GYSName;
+    }
+
+    public void setGYSName(Unit GYSName) {
+        this.GYSName = GYSName;
+    }
+
+    public Unit getKHName() {
+        return KHName;
+    }
+
+    public void setKHName(Unit KHName) {
+        this.KHName = KHName;
     }
 
     @Override

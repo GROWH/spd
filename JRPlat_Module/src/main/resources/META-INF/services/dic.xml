@@ -22,5 +22,16 @@
                 </dic>
             </subDics>
         </dic>
+
+        <dic english="OrderManagement" chinese="订单管理">
+            <subDics>
+                <dic english="ordertype" chinese="订单类型">
+                    <dicItems>
+                        <dicItem code="1" name="采购"/>
+                        <dicItem code="2" name="销售"/>
+                    </dicItems>
+                </dic>
+            </subDics>
+        </dic>
     </subDics>
 </dic>
