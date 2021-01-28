@@ -5,6 +5,11 @@
 
 package org.jrplat.module.security.action;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.CycleDetectionStrategy;
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.jrplat.module.security.model.Position;
@@ -19,11 +24,13 @@ import org.jrplat.platform.criteria.Operator;
 import org.jrplat.platform.criteria.Property;
 import org.jrplat.platform.criteria.PropertyCriteria;
 import org.jrplat.platform.criteria.PropertyEditor;
+import org.jrplat.platform.result.Page;
 import org.jrplat.platform.util.Struts2Utils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +57,7 @@ public class UserAction extends ExtJSSimpleAction<User> {
     //用户选择组件
     private boolean select;
 
+    private Integer unit;
     @Resource(name = "userReportService")
     private UserReportService userReportService;
     @Resource(name = "userService")
@@ -306,6 +314,25 @@ public class UserAction extends ExtJSSimpleAction<User> {
         map.put("des", model.getDes());
         map.put("ddid", model.getDdid());
         map.put("driverUse", model.isDriverUse());
+        String unitName = "";
+        if (model.getUnit() != null) {
+            unitName = model.getUnit().getUnitName();
+            id = model.getUnit().getId();
+        }
+        map.put("unit",id+ "");
+        map.put("unitName", unitName);
+    }
+
+    @Override
+    public String query() {
+        if (getUnit()!=null){
+            String jpql = "SELECT o FROM User o WHERE o.unit.id = :user";
+            Query query = getService().getEntityManager().createQuery(jpql, User.class)
+                    .setParameter("user",1);
+            List<User> users = query.getResultList();
+            Struts2Utils.renderJson(users);
+        }
+        return super.query();
     }
 
     public void setNewPassword(String newPassword) {
@@ -346,5 +373,13 @@ public class UserAction extends ExtJSSimpleAction<User> {
 
     public void setSelect(boolean select) {
         this.select = select;
+    }
+
+    public Integer getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Integer unit) {
+        this.unit = unit;
     }
 }
