@@ -61,6 +61,7 @@ public class OrderManagement extends SimpleModel {
     @ModelAttr("供应商名称")
     @ModelAttrRef("unitName")
     protected Unit GYSName;
+
     @DisplayIgnore
     @ModelAttr("供应商证件编号")
     @Column(length = 500)
@@ -97,6 +98,7 @@ public class OrderManagement extends SimpleModel {
     @ModelAttr("客户名称")
     @ModelAttrRef("unitName")
     protected Unit KHName;
+
     @DisplayIgnore
     @ModelAttr("客户证件编号")
     @Column(length = 500)
@@ -127,6 +129,12 @@ public class OrderManagement extends SimpleModel {
     @ModelAttr("客户订单备注")
     @Column(length = 500)
     protected String KHRemarks;
+
+
+    @ManyToOne
+    @ModelAttr("订单状态")
+    @SimpleDic("orderStatus")
+    protected DicItem orderStatus;
 
     @XmlAttribute
     public String getSerialNumber() {
@@ -270,6 +278,15 @@ public class OrderManagement extends SimpleModel {
     public void setKHName(Unit KHName) {
         this.KHName = KHName;
     }
+
+    public DicItem getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(DicItem orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
 
     @Override
     public String getMetaData() {
