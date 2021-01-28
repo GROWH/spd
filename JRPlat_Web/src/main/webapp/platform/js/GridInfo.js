@@ -250,6 +250,47 @@ GridInfo = function () {
                     ];
                     break;
                 }
+                /*===================订单管理==================*/
+                case 'order-management' : { //订单信息
+                    namespace = namespaces[2];
+                    columns = [
+                        {header: "平台流水号", dataIndex: 'serialNumber'},
+                        {header: "订单类型", dataIndex: 'ordertype'},
+                        {header: "收单方名称", dataIndex: 'unitName'},
+                        {header: "收单方发货日期", dataIndex: 'abc3'},
+                        {header: "收单方发货单号", dataIndex: 'abc4',},
+                        {header: "收单方发货物流公司", dataIndex: 'abc5'},
+                        {header: "收单方发货物流单号", dataIndex: 'abc6'},
+                        {header: "收单方发货备注", dataIndex: 'abc7'},
+                        {header: "下单方名称", dataIndex: 'abc8'},
+                        {header: "下单方证件编号", dataIndex: 'abc9'},
+                        {header: "下单方订单日期", dataIndex: 'abc10'},
+                        {header: "下单方订单单号", dataIndex: 'abc11'},
+                        {header: "下单方退货物流公司", dataIndex: 'abc12'},
+                        {header: "下单方退货物流单号", dataIndex: 'abc13'},
+                        {header: "下单方订单备注", dataIndex: 'abc14'}
+                    ];
+                    break;
+                }
+                case 'order-management-x' : { //订单信息-细单
+                    namespace = namespaces[2];
+                    columns = [
+                        {header: "产品编号", dataIndex: 'abc11'},
+                        {header: "产品名称", dataIndex: 'abc22'},
+                        {header: "规格/型号", dataIndex: 'abc33'},
+                        {header: "包装单位", dataIndex: 'abc44'},
+                        {header: "生产企业名称", dataIndex: 'abc55',},
+                        {header: "下单方订货/退货数量", dataIndex: 'abc66'},
+                        {header: "收单方发货数量", dataIndex: 'abc77'},
+                        {header: "批号", dataIndex: 'abc88'},
+                        {header: "序列号", dataIndex: 'abc99'},
+                        {header: "生产日期", dataIndex: 'abc111'},
+                        {header: "有效期/失效期", dataIndex: 'abc222'},
+                        {header: "下单方产品备注", dataIndex: 'abc333'},
+                        {header: "收单方产品备注", dataIndex: 'abc333'},
+                    ];
+                    break;
+                }
             }
             gridInfoObj.namespace = namespace;
             gridInfoObj.columns = columns;
