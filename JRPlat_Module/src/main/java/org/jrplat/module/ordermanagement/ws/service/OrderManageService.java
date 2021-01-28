@@ -357,6 +357,7 @@ public class OrderManageService extends SimpleService {
             map.put("ddbh", orderManagement.getId());
             map.put("code", ResultCode.SUCCESS);
             map.put("message", "操作成功");
+            data.add(map);
         }
         result.put("data",data);
 
@@ -559,7 +560,7 @@ public class OrderManageService extends SimpleService {
     public List<OrderInformation> getOrderInformationById(Integer id,String number) {
         String jpql = "select o from OrderInformation o where o.orderManagement.id =:id";
         if(number != null && !number.equals("")){
-            jpql += "and o.productNo.number =:number";
+            jpql += " and o.productNo.number =:number";
 
         }
         Query query = serviceFacade.getEntityManager().createQuery(jpql, OrderInformation.class);
