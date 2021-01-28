@@ -7,6 +7,7 @@ package org.jrplat.module.security.model;
 
 import org.jrplat.module.module.model.Command;
 import org.jrplat.module.module.model.Module;
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.annotation.*;
 import org.jrplat.platform.criteria.Operator;
 import org.jrplat.platform.criteria.PropertyCriteria;
@@ -69,6 +70,11 @@ public class User extends SimpleModel implements UserDetails {
     @ModelAttr("联系地址")
     protected String address;
 
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ModelAttr("单位信息")
+    @ModelAttrRef("id")
+    protected Unit unit;
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "userID")}, inverseJoinColumns = {
@@ -560,6 +566,13 @@ public class User extends SimpleModel implements UserDetails {
         this.driverUse = driverUse;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
     @Override
     public String getMetaData() {
         return "用户信息";

@@ -27,11 +27,21 @@
             <subDics>
                 <dic english="ordertype" chinese="订单类型">
                     <dicItems>
-                        <dicItem code="1" name="采购"/>
-                        <dicItem code="2" name="销售"/>
+                        <dicItem code="1" name="订货"/>
+                        <dicItem code="2" name="出货"/>
+                    </dicItems>
+                </dic>
+                <dic english="orderStatus" chinese="订单状态">
+                    <dicItems>
+                        <dicItem code="1" name="上传"/>
+                        <dicItem code="2" name="下载"/>
+                        <dicItem code="1" name="录入"/>
+                        <dicItem code="2" name="完成"/>
                     </dicItems>
                 </dic>
             </subDics>
         </dic>
+
+
     </subDics>
 </dic>
