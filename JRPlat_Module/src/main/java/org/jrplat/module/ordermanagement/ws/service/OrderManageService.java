@@ -18,6 +18,7 @@ import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.service.ServiceFacade;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
@@ -43,6 +44,7 @@ public class OrderManageService extends SimpleService {
      * @Param: [json]
      * @return:java.lang.String
      **/
+    @Transactional(rollbackFor = Exception.class)
     public String uploadOrder(String json) {
         String checkResult = check(json);
         if (StringUtils.isNotBlank(checkResult)) {
@@ -73,49 +75,71 @@ public class OrderManageService extends SimpleService {
             orderManagement.setGYSName(sunit);
 
             //订单类型
-            DicItem ordertype = StringUtils.isNotBlank(obj.getString("ddlx"))
+            DicItem ordertype = StringUtils.isBlank(obj.getString("ddlx"))
                     ? DicCache.get("ordertype", obj.getString("ddlx")) : null;
+
             orderManagement.setOrdertype(ordertype);
             //供应商发货日期
-            Date GYSDate = StringUtils.isNotBlank(obj.getString("GYSfhrq"))
-                    ? new Date(obj.getLong("GYSfhrq")) : null;
-            orderManagement.setGYSDate(GYSDate);
+            if(obj.get("GYSfhsl") != null && !obj.getString("GYSfhsl").equals("") ){
+                Date GYSDate = new Date(obj.getLong("GYSfhrq"));
+                orderManagement.setGYSDate(GYSDate);
+            }
+
             //供应商发货单号
-            String GYSInvoiceNo = StringUtils.isNotBlank(obj.getString("GYSfhdh"))
-                    ? obj.getString("GYSfhrq") : null;
-            orderManagement.setGYSInvoiceNo(GYSInvoiceNo);
+            if(obj.get("GYSfhrq") != null && !obj.getString("GYSfhrq").equals("") ){
+                String GYSInvoiceNo =  obj.getString("GYSfhrq");
+                orderManagement.setGYSInvoiceNo(GYSInvoiceNo);
+            }
+
             //供应商发货物流公司
-            String GYSLogistics = StringUtils.isNotBlank(obj.getString("GYSfhwlgs"))
-                    ? obj.getString("GYSfhwlgs") : null;
-            orderManagement.setGYSLogistics(GYSLogistics);
+            if(obj.get("GYSfhwlgs") != null && !obj.getString("GYSfhwlgs").equals("") ){
+                String GYSLogistics =  obj.getString("GYSfhwlgs") ;
+                orderManagement.setGYSLogistics(GYSLogistics);
+            }
+
             //供应商发货物流单号
-            String GYSLogisticsNo = StringUtils.isNotBlank(obj.getString("GYSLogisticsNo"))
-                    ? obj.getString("GYSLogisticsNo") : null;
-            orderManagement.setGYSLogisticsNo(GYSLogisticsNo);
+            if(obj.get("GYSLogisticsNo") != null && !obj.getString("GYSLogisticsNo").equals("") ){
+                String GYSLogisticsNo = obj.getString("GYSLogisticsNo") ;
+                orderManagement.setGYSLogisticsNo(GYSLogisticsNo);
+            }
+
             //供应商发货备注
-            String GYSRemarks = StringUtils.isNotBlank(obj.getString("GYSRemarks"))
-                    ? obj.getString("GYSRemarks") : null;
-            orderManagement.setGYSRemarks(GYSRemarks);
+            if(obj.get("GYSRemarks") != null && !obj.getString("GYSRemarks").equals("") ){
+                String GYSRemarks = obj.getString("GYSRemarks");
+                orderManagement.setGYSRemarks(GYSRemarks);
+            }
+
             //客户订单日期
-            Date KHDate = StringUtils.isNotBlank(obj.getString("KHddrq"))
-                    ? new Date(obj.getLong("KHddrq")) : null;
-            orderManagement.setKHDate(KHDate);
+            if(obj.get("KHddrq") != null && !obj.getString("KHddrq").equals("") ){
+                Date KHDate = new Date(obj.getLong("KHddrq"));
+                orderManagement.setKHDate(KHDate);
+            }
+
             //客户订单单号
-            String KHInvoiceNo = StringUtils.isNotBlank(obj.getString("KHdddh"))
-                    ? obj.getString("KHdddh") : null;
-            orderManagement.setKHInvoiceNo(KHInvoiceNo);
+            if(obj.get("KHdddh") != null && !obj.getString("KHdddh").equals("") ){
+                String KHInvoiceNo =  obj.getString("KHdddh") ;
+                orderManagement.setKHInvoiceNo(KHInvoiceNo);
+            }
+
             //客户退货物流公司
-            String KHTHLogistics = StringUtils.isNotBlank(obj.getString("KHdddh"))
-                    ? obj.getString("KHdddh") : null;
-            orderManagement.setKHTHLogistics(KHTHLogistics);
+            if(obj.get("KHthwlgs") != null && !obj.getString("KHthwlgs").equals("") ){
+                String KHTHLogistics = obj.getString("KHthwlgs") ;
+                orderManagement.setKHTHLogistics(KHTHLogistics);
+            }
+
             //客户退货的物流单号
-            String KHTHLogisticsNo = StringUtils.isNotBlank(obj.getString("KHthwldh"))
-                    ? obj.getString("KHthwldh") : null;
-            orderManagement.setKHTHLogisticsNo(KHTHLogisticsNo);
+            if(obj.get("KHthwldh") != null && !obj.getString("KHthwldh").equals("") ){
+                String KHTHLogisticsNo = obj.getString("KHthwldh") ;
+                orderManagement.setKHTHLogisticsNo(KHTHLogisticsNo);
+            }
+
+
             //客户订单备注
-            String KHRemarks = StringUtils.isNotBlank(obj.getString("KHddbz"))
-                    ? obj.getString("KHddbz") : null;
-            orderManagement.setKHRemarks(KHRemarks);
+            if(obj.get("KHddbz") != null && !obj.getString("KHddbz").equals("") ){
+                String KHRemarks = obj.getString("KHddbz");
+                orderManagement.setKHRemarks(KHRemarks);
+            }
+
             orderManagement.setOrderStatus(DicCache.get("orderStatus","上传"));
             getService().create(orderManagement);
 
@@ -123,17 +147,17 @@ public class OrderManageService extends SimpleService {
                 JSONObject ox = (JSONObject) o1;
                 OrderInformation orderInformation = new OrderInformation();
                 //判断必填字段
-                if (StringUtils.isNotBlank(ox.getString("lineNumber"))) {
+                if (StringUtils.isBlank(ox.getString("lineNumber"))) {
                     throw new RuntimeException("行号不能为空");
                 }
                 //获取行号
                 Integer lineNumber = ox.getInt("lineNumber");
                 orderInformation.setLineNumber(lineNumber);
                 //产品编号
-                if (StringUtils.isNotBlank(ox.getString("spbh"))) {
+                if (StringUtils.isBlank(ox.getString("spbm"))) {
                     throw new RuntimeException("产品编号不能为空");
                 }
-                String productNo = obj.getString("spbh");
+                String productNo = ox.getString("spbm");
 
                 Commodity commodity = getCommitityFromName(productNo);
                 if (commodity == null) {
@@ -141,54 +165,59 @@ public class OrderManageService extends SimpleService {
                 }
                 orderInformation.setProductNo(commodity);
                 //规格/型号
-                String specifications = StringUtils.isNotBlank(obj.getString("spgg"))
-                        ? obj.getString("spgg") : null;
+                String specifications = StringUtils.isBlank(ox.getString("spgg"))
+                        ? ox.getString("spgg") : null;
                 orderInformation.setSpecifications(specifications);
                 //包装单位
-                String packagingUnit = StringUtils.isNotBlank(obj.getString("bzdw"))
-                        ? obj.getString("bzdw") : null;
+                String packagingUnit = StringUtils.isBlank(ox.getString("bzdw"))
+                        ? ox.getString("bzdw") : null;
                 orderInformation.setPackagingUnit(packagingUnit);
                 //生产企业名称
-                String manufacturer = StringUtils.isNotBlank(obj.getString("scqymc"))
-                        ? obj.getString("scqymc") : null;
+                String manufacturer = StringUtils.isBlank(ox.getString("scqymc"))
+                        ? ox.getString("scqymc") : null;
 
                 orderInformation.setManufacturer(manufacturer);
                 //客户订货/退货数量
-                if (StringUtils.isNotBlank(ox.getString("dhsl"))) {
+                if (StringUtils.isBlank(ox.getString("dhsl"))) {
                     throw new RuntimeException("订货数量不能为空");
                 }
-                Integer orderQuantity = StringUtils.isNotBlank(obj.getString("dhsl"))
-                        ? obj.getInt("dhsl") : null;
+                Integer orderQuantity = StringUtils.isBlank(ox.getString("dhsl"))
+                        ? ox.getInt("dhsl") : null;
                 orderInformation.setOrderQuantity(orderQuantity);
                 //供应商发货数量
-                Integer shipmentQuantity = StringUtils.isNotBlank(obj.getString("GYSfhsl"))
-                        ? obj.getInt("GYSfhsl") : null;
+                if(ox.get("GYSfhsl") != null && !ox.getString("GYSfhsl").equals("")   ){
+                    Integer shipmentQuantity =  ox.getInt("GYSfhsl") ;
+                    orderInformation.setShipmentQuantity(shipmentQuantity);
+                }
 
-                orderInformation.setShipmentQuantity(shipmentQuantity);
                 //批号
-                String PH = StringUtils.isNotBlank(obj.getString("ph"))
-                        ? obj.getString("ph") : null;
+                String PH = StringUtils.isBlank(ox.getString("ph"))
+                        ? ox.getString("ph") : null;
                 orderInformation.setPH(PH);
                 //序列号
-                String serialNumber = StringUtils.isNotBlank(obj.getString("xlh"))
-                        ? obj.getString("xlh") : null;
+                String serialNumber = StringUtils.isBlank(ox.getString("xlh"))
+                        ? ox.getString("xlh") : null;
                 orderInformation.setSerialNumber(serialNumber);
 
                 //生产日期
-                Date manufacturerDate = StringUtils.isNotBlank(obj.getString("scrq"))
-                        ? new Date(obj.getLong("scrq")) : null;
-                orderInformation.setManufacturerDate(manufacturerDate);
+                if(ox.get("scrq") != null && !ox.getString("scrq").equals("")   ){
+                    Date manufacturerDate =  new Date(ox.getLong("scrq"));
+                    orderInformation.setManufacturerDate(manufacturerDate);
+                }
+
                 //有效期
-                Date effectiveDate = StringUtils.isNotBlank(obj.getString("yxq"))
-                        ? new Date(obj.getLong("yxq")) : null;
-                orderInformation.setEffectiveDate(effectiveDate);
+                if(ox.get("yxq") != null && !ox.getString("yxq").equals("")   ){
+                    Date effectiveDate = new Date(ox.getLong("yxq")) ;
+                    orderInformation.setEffectiveDate(effectiveDate);
+                }
+
                 //客户产品备注
-                String KHRemarksx = StringUtils.isNotBlank(obj.getString("KHspbz"))
-                        ? obj.getString("KHspbz") : null;
+                String KHRemarksx = StringUtils.isBlank(ox.getString("KHspbz"))
+                        ? ox.getString("KHspbz") : null;
                 orderInformation.setKHRemarks(KHRemarksx);
                 //供应商产品备注
-                String GYSRemarksx = StringUtils.isNotBlank(obj.getString("GYSspbz"))
-                        ? obj.getString("GYSspbz") : null;
+                String GYSRemarksx = StringUtils.isBlank(ox.getString("GYSspbz"))
+                        ? ox.getString("GYSspbz") : null;
                 orderInformation.setGYSRemarks(GYSRemarksx);
                 orderInformation.setOrderManagement(orderManagement);
                 getService().create(orderInformation);
@@ -209,6 +238,7 @@ public class OrderManageService extends SimpleService {
      * @Param: [json]
      * @return:java.lang.String
      **/
+    @Transactional(rollbackFor = Exception.class)
     public String downloadOrder(String json) {
         String checkResult = check(json);
         if (StringUtils.isNotBlank(checkResult)) {
@@ -227,7 +257,7 @@ public class OrderManageService extends SimpleService {
             JSONObject obj = (JSONObject) o;
 
             //获取订单编号
-            if (StringUtils.isNotBlank(obj.getString("ddbh"))) {
+            if (StringUtils.isBlank(obj.getString("ddbh"))) {
                 throw new RuntimeException("订单编号不能为空");
             }
 
@@ -269,6 +299,7 @@ public class OrderManageService extends SimpleService {
      * @Param: [json]
      * @return:java.lang.String
      **/
+    @Transactional(rollbackFor = Exception.class)
     public String downloadOrederResult(String json) {
         String checkResult = check(json);
         if (StringUtils.isNotBlank(checkResult)) {
@@ -285,7 +316,7 @@ public class OrderManageService extends SimpleService {
             JSONObject obj = (JSONObject) o;
 
             //获取订单编号
-            if (StringUtils.isNotBlank(obj.getString("ddbh"))) {
+            if (StringUtils.isBlank(obj.getString("ddbh"))) {
                 throw new RuntimeException("订单编号不能为空");
             }
 
@@ -295,24 +326,24 @@ public class OrderManageService extends SimpleService {
             for (Object o1 : obj.getJSONArray("items")) {
                 JSONObject ox = (JSONObject) o1;
                 //获取商品编号
-                if (StringUtils.isNotBlank(ox.getString("spbm"))) {
+                if (StringUtils.isBlank(ox.getString("spbm"))) {
                     throw new RuntimeException("商品编码不能为空");
                 }
                 //根据订单获取订单商品信息
                 List<OrderInformation> orderInformations = getOrderInformationById(orderManagement.getId(),ox.getString("spbm"));
                 OrderInformation orderInformation = orderInformations.get(0);
                 //实际销售数量
-                if (StringUtils.isNotBlank(ox.getString("xssl"))) {
+                if (StringUtils.isBlank(ox.getString("xssl"))) {
                     throw new RuntimeException("实际销售数量不能为空");
                 }
                 orderInformation.setShipmentQuantity(ox.getInt("xssl"));
                 //商品批号
-                if (StringUtils.isNotBlank(ox.getString("spph"))) {
+                if (StringUtils.isBlank(ox.getString("spph"))) {
                     throw new RuntimeException("商品批号不能为空");
                 }
                 orderInformation.setPH(ox.getString("spph"));
                 //有效期
-                if (StringUtils.isNotBlank(ox.getString("yxq"))) {
+                if (StringUtils.isBlank(ox.getString("yxq"))) {
                     throw new RuntimeException("商品有效期不能为空");
                 }
                 orderInformation.setEffectiveDate(new Date(ox.getLong("yxq") ));
@@ -339,6 +370,7 @@ public class OrderManageService extends SimpleService {
      * @Param: [json]
      * @return:java.lang.String
      **/
+    @Transactional(rollbackFor = Exception.class)
     public String uploadOrederResult(String json) {
         String checkResult = check(json);
         if (StringUtils.isNotBlank(checkResult)) {
@@ -357,7 +389,7 @@ public class OrderManageService extends SimpleService {
             JSONObject obj = (JSONObject) o;
 
             //获取订单编号
-            if (StringUtils.isNotBlank(obj.getString("ddbh"))) {
+            if (StringUtils.isBlank(obj.getString("ddbh"))) {
                 throw new RuntimeException("订单编号不能为空");
             }
 
