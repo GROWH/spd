@@ -103,6 +103,13 @@ public class OrderInformation extends SimpleModel {
     @ModelAttr("有效期/失效期")
     protected Date effectiveDate;
 
+
+    @DisplayIgnore
+    @RenderDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @ModelAttr("出库时间")
+    protected Date deliveryTime;
+
     @DisplayIgnore
     @ModelAttr("客户产品备注")
     @Column(length = 500)
@@ -142,7 +149,7 @@ public class OrderInformation extends SimpleModel {
     public void setProductNo(Commodity productNo) {
         this.productNo = productNo;
     }
-    
+
     @XmlAttribute
     public String getProductName() {
         return productName;
@@ -249,6 +256,14 @@ public class OrderInformation extends SimpleModel {
 
     public void setGYSRemarks(String GYSRemarks) {
         this.GYSRemarks = GYSRemarks;
+    }
+
+    public Date getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Date deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     @Override

@@ -19,6 +19,7 @@
 
 package org.jrplat.module.ordermanagement.model;
 
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.generator.ActionGenerator;
 import org.jrplat.platform.model.SimpleModel;
 import org.jrplat.platform.annotation.*;
@@ -64,6 +65,12 @@ public class Outboundrecords extends SimpleModel {
     protected Date deliveryTime;
 
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ModelAttr("供应商名称")
+    @ModelAttrRef("paperworkNo")
+    protected Unit unitNo;
+
+
     @XmlTransient
     public OrderInformation getOrderInformation() {
         return orderInformation;
@@ -98,6 +105,15 @@ public class Outboundrecords extends SimpleModel {
 
     public void setDeliveryTime(Date deliveryTime) {
         this.deliveryTime = deliveryTime;
+    }
+
+
+    public Unit getUnitNo() {
+        return unitNo;
+    }
+
+    public void setUnitNo(Unit unitNo) {
+        this.unitNo = unitNo;
     }
 
     @Override

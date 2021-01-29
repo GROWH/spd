@@ -10,6 +10,7 @@ import org.jrplat.module.dictionary.model.Dic;
 import org.jrplat.module.dictionary.model.DicItem;
 import org.jrplat.module.ordermanagement.model.OrderInformation;
 import org.jrplat.module.ordermanagement.model.OrderManagement;
+import org.jrplat.module.ordermanagement.model.Outboundrecords;
 import org.jrplat.module.ordermanagement.ws.ResultCode;
 import org.jrplat.module.security.model.User;
 import org.jrplat.module.security.service.password.PasswordEncoder;
@@ -309,6 +310,8 @@ public class OrderManageService extends SimpleService {
         JSONObject object = JSONObject.fromObject(json);
         JSONArray array = object.getJSONArray("data");
         JSONObject head = object.getJSONObject("head");
+        //获取用户
+        User user = getUserFromName(head.getString("name"));
         Map<String, Object> result = getResultMapForOk();
         List<Map<String, Object>> data = new ArrayList<>();
         for (Object o : array) {
@@ -332,22 +335,36 @@ public class OrderManageService extends SimpleService {
                 //根据订单获取订单商品信息
                 List<OrderInformation> orderInformations = getOrderInformationById(orderManagement.getId(),ox.getString("spbm"));
                 OrderInformation orderInformation = orderInformations.get(0);
+                Outboundrecords outboundrecords = new Outboundrecords();
                 //实际销售数量
                 if (StringUtils.isBlank(ox.getString("xssl"))) {
                     throw new RuntimeException("实际销售数量不能为空");
                 }
                 orderInformation.setShipmentQuantity(ox.getInt("xssl"));
+                outboundrecords.setQuantity(ox.getString("xssl"));
                 //商品批号
                 if (StringUtils.isBlank(ox.getString("spph"))) {
                     throw new RuntimeException("商品批号不能为空");
                 }
                 orderInformation.setPH(ox.getString("spph"));
+                outboundrecords.setLotNumber(ox.getString("spph"));
                 //有效期
                 if (StringUtils.isBlank(ox.getString("yxq"))) {
                     throw new RuntimeException("商品有效期不能为空");
                 }
                 orderInformation.setEffectiveDate(new Date(ox.getLong("yxq") ));
+                //出货时间
+                if (ox.getString("chsj") == null &&  ox.getString("chsj").equals("")) {
+                    throw new RuntimeException("出货时间不能为空");
+                }
+                orderInformation.setDeliveryTime(new Date(ox.getLong("chsj") ));
+                outboundrecords.setDeliveryTime(new Date(ox.getLong("chsj") ));
                 getService().update(orderInformation);
+                //新增出货记录
+                outboundrecords.setOrderInformation(orderInformation);
+                //添加单位
+                outboundrecords.setUnitNo(user.getUnit());
+                getService().create(outboundrecords);
             }
 
             //更改状态为录入
