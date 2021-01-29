@@ -6,4 +6,7 @@
 
     <!-- 提供用户认证的web service  -->
     <jaxws:endpoint id="userServiceEndpoint" implementor="org.jrplat.module.security.ws.UserServiceImpl" address="/UserService"/>
+
+    <!-- 提供订单管理外部接口 service  -->
+    <jaxws:endpoint id="OrderManageServiceEndpoint" implementor="org.jrplat.module.ordermanagement.ws.impl.OrderManageServiceWSImpl" address="/OrderManageServiceWS"/>
 </beans>
