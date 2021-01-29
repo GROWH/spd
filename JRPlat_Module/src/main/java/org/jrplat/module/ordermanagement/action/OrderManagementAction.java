@@ -2,7 +2,9 @@ package org.jrplat.module.ordermanagement.action;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.jrplat.module.ordermanagement.model.OrderInformation;
 import org.jrplat.module.ordermanagement.model.OrderManagement;
+import org.jrplat.module.ordermanagement.service.OrderInformationService;
 import org.jrplat.module.ordermanagement.service.OrderManagementService;
 import org.jrplat.module.security.model.User;
 import org.jrplat.module.security.service.UserHolder;
@@ -32,6 +34,9 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
 
     @Resource(name = "orderManagementService")
     private OrderManagementService orderManagementService;
+
+    @Resource(name = "orderInformationService")
+    private OrderInformationService orderInformationService;
 
 
     /**
@@ -85,6 +90,37 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
         return null;
     }
 
+    /**
+     * 根据总单id查询细单单
+     *
+     * @return
+     */
+    public String queryOrderInformation() {
+
+
+        try {
+            if(propertyCriteria !=null && !propertyCriteria.equals("")){
+
+            String orderManagementId = propertyCriteria.substring(propertyCriteria.lastIndexOf(":")+1);
+
+            List<OrderInformation> orderInformationList = orderInformationService.queryOrderInformation(orderManagementId);
+
+            Map json = new HashMap();
+
+            json.put("orderInformationList", orderInformationList);
+            Struts2Utils.renderJson(json);
+            }
+
+        } catch (Exception e) {
+            map = new HashMap();
+            map.put("success", false);
+            map.put("message", "查询失败:" + e.getMessage());
+            Struts2Utils.renderJson(map);
+            return null;
+        }
+
+        return null;
+    }
 
 
 
