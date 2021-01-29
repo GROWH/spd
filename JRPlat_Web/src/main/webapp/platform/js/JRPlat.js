@@ -1372,6 +1372,9 @@ GridBaseModel = function () {
             this.grid.on("cellclick", function (grid, rowIndex, columnIndex, e) {
 
             });
+            this.grid.on('rowclick', function (grid, index, e) {
+                GridBaseModel.onRowClick(namespace, action, grid, index, e);
+            });
             this.grid.on('rowdblclick', function (grid, index, e) {
                 GridBaseModel.onRowDblClick(namespace, action);
             });
@@ -1387,6 +1390,9 @@ GridBaseModel = function () {
         },
         getKeys: function () {
             return [];
+        },
+        onRowClick: function (namespace, action, grid, index, e) {
+            GridBaseModel.detail();
         },
         onRowDblClick: function (namespace, action) {
             /*if (parent.isGranted(namespace, action, "updatePart")) {
@@ -1415,6 +1421,7 @@ GridBaseModel = function () {
         beforeShow: function (grid) {
 
         },
+
         show: function (contextPath, namespace, action, pageSize, fields,
                         columns, commands, tips, callbacks) {
             this.grid = this.getGrid(contextPath, namespace, action, pageSize,
@@ -1445,15 +1452,19 @@ DetailGridBaseModel = function () {
                     totalProperty: 'totalProperty',
                     root: 'root'
                 }, Ext.data.Record.create(fields)),
+                // proxy: new parent.Ext.data.HttpProxy({
+                //     url: contextPath + '/' + this.namespace + '/'
+                //     + this.action + '!popupQuery.action' + DetailGridBaseModel.initUrlParams
+                // })
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.namespace + '/'
-                    + this.action + '!popupQuery.action' + DetailGridBaseModel.initUrlParams
+                    + this.action + '!query.action'
                 })
             });
             store.on('beforeload', function (store) {
                 store.baseParams = {
                     propertyCriteria: DetailGridBaseModel.propertyCriteria,
-                    likeQueryValue: DetailGridBaseModel.likeQueryValue
+                    likeQueryInfo: DetailGridBaseModel.likeQueryInfo,
                 };
             });
             store.load({

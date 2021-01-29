@@ -38,132 +38,132 @@ CreateModel = function () {
                         anchor: '98%'
                     },
                     items: [
-                        {
-                            layout: 'column',
-                            defaults: {width: 250},
-                            items: [{
-                                columnWidth: .5,
-                                layout: 'form',
-                                defaultType: 'textfield',
-                                defaults: {
-                                    allowBlank: false,
-                                    anchor: "95%"
-                                },
-
-                                items: [{
-                                    cls: 'attr',
-                                    labelStyle: 'color: red;',
-                                    maxLength: 32,
-                                    name: 'model.unitName',
-                                    fieldLabel: '单位名称',
-                                    blankText: '单位名称不能为空',
-                                },
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.paperworkNo',
-                                        fieldLabel: '证件编号',
-                                        blankText: '证件编号不能为空'
-                                    },
-
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.linkman',
-                                        fieldLabel: '联系人',
-                                        blankText: '联系人不能为空'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.enSHDM',
-                                        fieldLabel: '统一社会信用代码',
-                                        allowBlank: false,
-                                        blankText: '统一社会信用代码不能为空',
-                                        labelStyle: 'color: red;',
-                                        // vtype: 'contact'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.businessAddress',
-                                        fieldLabel: '经营地址',
-                                        allowBlank: true,
-                                        // vtype: 'contact'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                    }]
-                            }, {
-                                columnWidth: .5,
-                                layout: 'form',
-                                defaultType: 'textfield',
-                                defaults: {
-                                    allowBlank: false,
-                                    anchor: "90%"
-                                },
-
-
-                                items: [{
-                                    id: 'unitType',
-                                    xtype: 'combo',
-                                    store: userStateStore,
-                                    emptyText: '',
-                                    mode: 'remote',
-                                    valueField: 'value',
-                                    displayField: 'text',
-                                    triggerAction: 'all',
-                                    forceSelection: true,
-                                    editable: false,
-                                    cls: 'attr',
-                                    labelStyle: 'color: red;',
-                                    hiddenName: 'model.enabled',
-                                    value: model.enabled,
-                                    fieldLabel: '单位类型',
-                                    blankText: '单位类型不能为空'
-                                },
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.orderKey',
-                                        fieldLabel: '订单获取密码',
-                                        blankText: '订单获取密码不能为空'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        xtype: 'numberfield',
-                                        name: 'model.contactPhone',
-                                        fieldLabel: '联系人电话',
-                                        allowBlank: false,
-                                        blankText: '联系人电话不能为空',
-                                        labelStyle: 'color: red;'
-
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 256,
-                                        name: 'model.legalPerson',
-                                        allowBlank: true,
-                                        fieldLabel: '法人'
-                                    },
-                                    {
-                                        xtype: 'textfield',
-                                        maxLength: 256,
-                                        allowBlank: true,
-                                        name: 'model.StorehouseAddress',
-                                        fieldLabel: '仓库地址',
-                                        cls: 'attr',
-                                    }]
-                            }]
-                        }
+                        // {
+                        //     layout: 'column',
+                        //     defaults: {width: 250},
+                        //     items: [{
+                        //         columnWidth: .5,
+                        //         layout: 'form',
+                        //         defaultType: 'textfield',
+                        //         defaults: {
+                        //             allowBlank: false,
+                        //             anchor: "95%"
+                        //         },
+                        //
+                        //         items: [{
+                        //             cls: 'attr',
+                        //             labelStyle: 'color: red;',
+                        //             maxLength: 32,
+                        //             name: 'model.unitName',
+                        //             fieldLabel: '单位名称',
+                        //             blankText: '单位名称不能为空',
+                        //         },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 labelStyle: 'color: red;',
+                        //                 maxLength: 32,
+                        //                 name: 'model.paperworkNo',
+                        //                 fieldLabel: '证件编号',
+                        //                 blankText: '证件编号不能为空'
+                        //             },
+                        //
+                        //             {
+                        //                 cls: 'attr',
+                        //                 labelStyle: 'color: red;',
+                        //                 maxLength: 32,
+                        //                 name: 'model.linkman',
+                        //                 fieldLabel: '联系人',
+                        //                 blankText: '联系人不能为空'
+                        //             },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 maxLength: 32,
+                        //                 name: 'model.enSHDM',
+                        //                 fieldLabel: '统一社会信用代码',
+                        //                 allowBlank: false,
+                        //                 blankText: '统一社会信用代码不能为空',
+                        //                 labelStyle: 'color: red;',
+                        //                 // vtype: 'contact'
+                        //             },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 maxLength: 32,
+                        //                 name: 'model.businessAddress',
+                        //                 fieldLabel: '经营地址',
+                        //                 allowBlank: true,
+                        //                 // vtype: 'contact'
+                        //             },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 maxLength: 32,
+                        //                 name: 'model.version',
+                        //                 fieldLabel: '版本号',
+                        //                 allowBlank: true,
+                        //             }]
+                        //     }, {
+                        //         columnWidth: .5,
+                        //         layout: 'form',
+                        //         defaultType: 'textfield',
+                        //         defaults: {
+                        //             allowBlank: false,
+                        //             anchor: "90%"
+                        //         },
+                        //
+                        //
+                        //         items: [{
+                        //             id: 'unitType',
+                        //             xtype: 'combo',
+                        //             store: userStateStore,
+                        //             emptyText: '',
+                        //             mode: 'remote',
+                        //             valueField: 'value',
+                        //             displayField: 'text',
+                        //             triggerAction: 'all',
+                        //             forceSelection: true,
+                        //             editable: false,
+                        //             cls: 'attr',
+                        //             labelStyle: 'color: red;',
+                        //             hiddenName: 'model.enabled',
+                        //             value: model.enabled,
+                        //             fieldLabel: '单位类型',
+                        //             blankText: '单位类型不能为空'
+                        //         },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 labelStyle: 'color: red;',
+                        //                 maxLength: 32,
+                        //                 name: 'model.orderKey',
+                        //                 fieldLabel: '订单获取密码',
+                        //                 blankText: '订单获取密码不能为空'
+                        //             },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 maxLength: 32,
+                        //                 xtype: 'numberfield',
+                        //                 name: 'model.contactPhone',
+                        //                 fieldLabel: '联系人电话',
+                        //                 allowBlank: false,
+                        //                 blankText: '联系人电话不能为空',
+                        //                 labelStyle: 'color: red;'
+                        //
+                        //             },
+                        //             {
+                        //                 cls: 'attr',
+                        //                 maxLength: 256,
+                        //                 name: 'model.legalPerson',
+                        //                 allowBlank: true,
+                        //                 fieldLabel: '法人'
+                        //             },
+                        //             {
+                        //                 xtype: 'textfield',
+                        //                 maxLength: 256,
+                        //                 allowBlank: true,
+                        //                 name: 'model.StorehouseAddress',
+                        //                 fieldLabel: '仓库地址',
+                        //                 cls: 'attr',
+                        //             }]
+                        //     }]
+                        // }
                     ]
                 }
                 ]
@@ -180,12 +180,7 @@ CreateModel = function () {
 ModifyModel = function () {
     return {
         getItems: function (model) {
-            var cfg = {
-                allowBlank: false,
-                labelStyle: 'color: red;',
-                readOnly: true
-            };
-
+            console.log(model)
             var items = [{
                 layout: 'form',
                 items: [{
@@ -197,133 +192,7 @@ ModifyModel = function () {
                         allowBlank: false,
                         anchor: '95%'
                     },
-                    items: [
-                        {
-                            layout: 'column',
-                            defaults: {width: 250},
-                            items: [{
-                                columnWidth: .5,
-                                layout: 'form',
-                                defaultType: 'textfield',
-                                defaults: {
-                                    allowBlank: false,
-                                    anchor: "90%"
-                                },
-
-                                items: [{
-                                    cls: 'attr',
-                                    labelStyle: 'color: red;',
-                                    maxLength: 32,
-                                    name: 'model.unitName',
-                                    fieldLabel: '单位名称',
-                                    blankText: '单位名称不能为空',
-                                    value: model.unitName,
-                                },
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.paperworkNo',
-                                        fieldLabel: '证件编号',
-                                        blankText: '证件编号不能为空',
-                                        value: model.paperworkNo,
-                                    },
-
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.linkman',
-                                        fieldLabel: '联系人',
-                                        blankText: '联系人不能为空',
-                                        value: model.linkman,
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.enSHDM',
-                                        fieldLabel: '统一社会信用代码',
-                                        allowBlank: false,
-                                        blankText: '统一社会信用代码不能为空',
-                                        labelStyle: 'color: red;',
-                                        value: model.enSHDM,
-                                        // vtype: 'contact'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.businessAddress',
-                                        fieldLabel: '经营地址',
-                                        allowBlank: true,
-                                        // vtype: 'contact'
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                        value: model.version,
-                                    }]
-                            }, {
-                                columnWidth: .5,
-                                layout: 'form',
-                                defaultType: 'textfield',
-                                defaults: {
-                                    allowBlank: false,
-                                    anchor: "90%"
-                                },
-
-
-                                items: [{
-                                    cls: 'attr',
-                                    labelStyle: 'color: red;',
-                                    maxLength: 32,
-                                    id: 'password',
-                                    name: 'model.unitType',
-                                    fieldLabel: '单位类型',
-                                    blankText: '单位类型不能为空',
-                                    value: model.unitType,
-                                },
-                                    {
-                                        cls: 'attr',
-                                        labelStyle: 'color: red;',
-                                        maxLength: 32,
-                                        name: 'model.orderKey',
-                                        fieldLabel: '订单获取密码',
-                                        blankText: '订单获取密码不能为空',
-                                        value: model.orderKey,
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        xtype: 'numberfield',
-                                        name: 'model.contactPhone',
-                                        fieldLabel: '联系人电话',
-                                        allowBlank: false,
-                                        blankText: '联系人电话不能为空',
-                                        labelStyle: 'color: red;',
-                                        value: model.contactPhone,
-
-                                    },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 256,
-                                        name: 'model.legalPerson',
-                                        allowBlank: true,
-                                        fieldLabel: '法人'
-                                    },
-                                    {
-                                        xtype: 'textfield',
-                                        maxLength: 256,
-                                        allowBlank: true,
-                                        name: 'model.StorehouseAddress',
-                                        fieldLabel: '仓库地址',
-                                        cls: 'attr',
-                                    }]
-                            }]
-                        }
-                    ]
+                    items: []
                 }
                 ]
             }];
@@ -331,15 +200,6 @@ ModifyModel = function () {
         },
 
         show: function (model) {
-            // ModifyBaseModel.prepareSubmit = function () {
-            //     Ext.getCmp('roles').setValue(roleSelector.getValue());
-            //     if ("启用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("true");
-            //     }
-            //     if ("停用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("false");
-            //     }
-            // }
             ModifyBaseModel.show('修改订单信息', 'order-management', 800, 300, this.getItems(model), model);
         }
     };
@@ -369,39 +229,59 @@ GridModel = function () {
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 
-            //选择总单,显示对应的细单
             GridBaseModel.onRowClick = function (namespace, action, grid, index, e) {
                 var idList = GridBaseModel.getIdList();
-                var propertyCriteria = 'aliasGroup.id:eq:' + (idList.length === 1 ? idList[0] : 0);
-                console.log(idList,propertyCriteria)
-                // DetailGridBaseModel.refresh(propertyCriteria);
+                var propertyCriteria = 'orderManagement.id:eq:' + (idList.length === 1 ? idList[0] : 0);
+                DetailGridBaseModel.refresh(propertyCriteria);
             };
 
             return grid;
-        }
+        },
+
+        getGridDetail: function () {
+            var gridObj = GridInfo.getGridObj(detail);
+            var queryString = 'orderManagement.id:eq:0';
+            var detailGrid = DetailGridBaseModel.getGrid(namespace, action, gridObj.fields, gridObj.columns, queryString, );
+            return detailGrid;
+        },
     }
 }();
 
 
-//树和表格
-UserPanel = function () {
+//表格
+showViewPort = function () {
     return {
         show: function () {
             var frm = new Ext.Viewport({
                 layout: 'border',
                 items: [ {
                     region: 'center',
-                    autoScroll: true,
-                    height: 300,
                     layout: 'fit',
+                    border: false,
+                    split: true,
                     items: [GridModel.getGrid()]
-                }]
+                }, {
+                    region: "south",
+                    layout: 'fit',
+                    title: '订单信息细单',
+                    border: false,
+                    height: 200,
+                    items: [GridModel.getGridDetail()]
+                }
+                ]
             });
+            //方便外部操作viewport内容
+            this.center_item = frm.items.items[0];
+            this.south_item = frm.items.items[1];
+
+            //设置细单表格默认高为当前页面的固定百分比
+            this.south_item.setHeight(document.body.clientHeight * 0.50);
+            frm.doLayout();
         }
     };
 }();
 
 
 Ext.onReady(function () {
-    UserPanel.show();
+    showViewPort.show();
 });
