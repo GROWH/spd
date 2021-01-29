@@ -2,10 +2,50 @@
 var namespace = 'commodityInfo';
 var action = 'commodity';
 
-// var namespace = 'unitinfo';
-// var action = 'unit';
 
 
+//高级搜索
+AdvancedSearchModel = function () {
+    return {
+        //搜索表单
+        getItems: function () {
+            var items = [
+                {
+                    xtype: 'textfield',
+                    id: 'productName',
+                    fieldLabel: '产品名称'
+                },
+                {
+                    xtype: 'textfield',
+                    id: 'specification',
+                    fieldLabel: '规格型号'
+                }
+            ];
+            return items;
+        },
+        //点击搜索之后的回调方法
+        callback: function () {
+            var data = [];
+
+            var productName = Ext.getCmp('productName').getValue();
+            if (productName != "") {
+                productName = 'productName:eq:$' + productName;
+                data.push(productName);
+            }
+
+            var specification = Ext.getCmp('specification').getValue();
+            if (specification != "") {
+                specification = 'realName:eq:' + specification;
+                data.push(specification);
+            }
+            AdvancedSearchBaseModel.search(data, "User");
+        },
+
+        show: function () {
+            AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
+        }
+    };
+}();
 
 //添加模型信息
 CreateModel = function () {
