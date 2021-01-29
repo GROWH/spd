@@ -2,6 +2,8 @@
 var namespace = 'commodityInfo';
 var action = 'Commodity';
 
+// var namespace = 'unitinfo';
+// var action = 'unit';
 
 
 //添加模型信息
@@ -32,6 +34,14 @@ CreateModel = function () {
                                     anchor: "95%"
                                 },
                                 items: [{
+                                    cls: 'attr',
+                                    labelStyle: 'color: red;',
+                                    maxLength: 32,
+                                    name: 'model.productName',
+                                    fieldLabel: '产品名称',
+                                    blankText: '产品名称不能为空',
+                                },
+                                    {
                                     cls: 'attr',
                                     labelStyle: 'color: red;',
                                     maxLength: 32,
@@ -88,7 +98,22 @@ CreateModel = function () {
                                     anchor: "90%"
                                 },
                                 items: [
-
+                                    {
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.specification',
+                                        fieldLabel: '规格型号',
+                                        blankText: '规格型号不能为空'
+                                    },
+                                    {
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.PackingUnit',
+                                        fieldLabel: '包装单位',
+                                        blankText: '包装单位不能为空'
+                                    },
                                     {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
@@ -163,7 +188,17 @@ ModifyModel = function () {
                                     allowBlank: false,
                                     anchor: "95%"
                                 },
-                                items: [{
+                                items: [
+                                    {
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.productName',
+                                        fieldLabel: '产品名称',
+                                        blankText: '产品名称不能为空',
+                                        value: model.productName,
+                                    },
+                                    {
                                     cls: 'attr',
                                     labelStyle: 'color: red;',
                                     maxLength: 32,
@@ -225,7 +260,24 @@ ModifyModel = function () {
                                     anchor: "90%"
                                 },
                                 items: [
-
+                                    {
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.specification',
+                                        fieldLabel: '规格型号',
+                                        blankText: '规格型号不能为空',
+                                        value: model.specification,
+                                    },
+                                    {
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.PackingUnit',
+                                        fieldLabel: '包装单位',
+                                        blankText: '包装单位不能为空',
+                                        value: model.PackingUnit,
+                                    },
                                     {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',

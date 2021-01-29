@@ -253,6 +253,9 @@ GridInfo = function () {
                 case 'Commodity' : { //商品信息
                     namespace = namespaces[3];
                     columns = [
+                        {header: "产品名称", dataIndex: 'productName'},
+                        {header: "规格型号", dataIndex: 'specification'},
+                        {header: "包装单位", dataIndex: '包装单位'},
                         {header: "包装数量", dataIndex: 'quantity'},
                         {header: "编号格式", dataIndex: 'encodingFormat'},
                         {header: "编号", dataIndex: 'number'},
