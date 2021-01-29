@@ -1948,7 +1948,7 @@ AdvancedSearchBaseModel = function () {
 CreateBaseModel = function () {
     return {
         getLabelWidth: function () {
-            return 80;
+            return 100;
         },
         isFileUpload: function () {
             return false;
@@ -2117,7 +2117,7 @@ CreateBaseModel = function () {
 ModifyBaseModel = function () {
     return {
         getLabelWidth: function () {
-            return 80;
+            return 100;
         },
         isFileUpload: function () {
             return false;

@@ -155,7 +155,16 @@ CreateModel = function () {
                                         blankText: '联系方式不能为空',
                                         labelStyle: 'color: red;',
                                         vtype: 'contact'
-                                    }]
+                                    },
+                                    {
+                                        xtype: 'textfield',
+                                        maxLength: 256,
+                                        allowBlank: true,
+                                        name: 'model.des',
+                                        fieldLabel: '备注',
+                                        cls: 'attr',
+                                    }
+                                ]
                             }, {
                                 columnWidth: .5,
                                 layout: 'form',
@@ -193,13 +202,40 @@ CreateModel = function () {
                                         fieldLabel: '联系地址'
                                     },
                                     {
-                                        xtype: 'textfield',
-                                        maxLength: 256,
-                                        allowBlank: true,
-                                        name: 'model.des',
-                                        fieldLabel: '备注',
-                                        cls: 'attr',
-                                    }]
+                                        id: 'unitId',
+                                        name: 'model.unit.id',
+                                        xtype : 'textfield',
+                                        allowBlank: false,
+                                        blankText: '单位ID不能为空',
+                                        hidden: true
+                                    },
+                                    {
+                                        // cls: 'attr',
+                                        cls: 'querybg',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        fieldLabel: '单位',
+                                        id: "unitName",
+                                        name : 'model.unitName',
+                                        blankText: '单位不能为空',
+                                        readOnly: true,
+                                        listeners: {
+                                            focus: function (field) {
+                                                console.log(field)
+                                                var unitID = Ext.getCmp('unitId').getValue();
+                                                console.log(unitID)
+                                                var thismodule = {};
+                                                thismodule.namespace = "unitInfo";
+                                                thismodule.action = "unit";
+                                                var queryString = unitID;
+                                                var idList = ["unitId","unitName"];
+                                                var colList = ["unit","unitName"];
+                                                QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
+                                            }
+                                        }
+                                    },
+
+                                ]
                             }]
                         }
                     ]

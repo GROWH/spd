@@ -226,7 +226,8 @@ function createViewport() {
                     westPanel.layout.activeItem = panel;
                 }
             }
-            westPanel.doLayout();
+            westPanel.doLayout();  //当某个组件调用add( Ext.Component/Object component ) : Ext.Component
+            // 往组件里填新东西的时候，必须在调用doLayout()方法，更新一下布局，才能看的见刚加入的组件
         }
     });
     var storeTheme = Ext.util.Cookies.get('theme');
