@@ -19,7 +19,7 @@
  */
 
 var namespace='ordermanagement';
-var action='outbound-records';
+var action='outboundrecords';
 
 //添加模型信息
 CreateModel = function () {
