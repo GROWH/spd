@@ -43,6 +43,20 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlType(name = "Commodity")
 public class Commodity extends SimpleModel {
+    @DisplayIgnore
+    @ModelAttr("产品名称")
+    @Column(length = 500)
+    protected String productName;
+
+    @DisplayIgnore
+    @ModelAttr("规格型号")
+    @Column(length = 500)
+    protected String specification;
+
+    @DisplayIgnore
+    @ModelAttr("包装单位")
+    @Column(length = 500)
+    protected String PackingUnit;
 
     @DisplayIgnore
     @ModelAttrNotNull
@@ -146,6 +160,30 @@ public class Commodity extends SimpleModel {
 
     public void setZCNumber(String ZCNumber) {
         this.ZCNumber = ZCNumber;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getPackingUnit() {
+        return PackingUnit;
+    }
+
+    public void setPackingUnit(String packingUnit) {
+        PackingUnit = packingUnit;
     }
 
     @Override
