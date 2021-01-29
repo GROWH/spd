@@ -9,14 +9,14 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>单位信息</title>
+    <title>商品信息</title>
     <%@include file="../include/common.jsp" %>
 
     <script type="text/javascript" src="../js/JRPlat.js"></script>
     <script type="text/javascript" src="../js/OtherGridModel.js"></script>
     <script type="text/javascript" src="../js/OtherGridModelTwo.js"></script>
 
-    <script type="text/javascript" src="js/unit.js"></script>
+    <script type="text/javascript" src="js/Commodity.js"></script>
 </head>
 <body>
 <div id='grid-div' style="width:100%; height:100%;">

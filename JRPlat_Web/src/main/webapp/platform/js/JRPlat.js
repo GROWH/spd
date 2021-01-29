@@ -46,6 +46,7 @@ PubFunc = function () {
                 var maxWidth = 0;
                 var dataIndex = colModel.getColumnAt(i).dataIndex;
                 var headerText = colModel.getColumnAt(i).header;
+                // console.log('headerText',headerText);
                 //使用正则匹配去除掉html标签
                 //主要用于可编辑表格必填项的标记,如果有其他用途,需要更改正则表达式
                 headerText = headerText.replace(/<\w+>|<\w+\sstyle=['"].*['"]>|<\/\w+>/g, '');

@@ -133,7 +133,7 @@ GridInfo = function () {
                 0: 'security',
                 1: 'base',
                 2: 'unitInfo',
-                2: 'ordermanagement',
+                3: 'commodityInfo'
             };
             var gridInfoObj = {}, namespace = '', columns = [];
             var r = this.renderColumns();
@@ -234,7 +234,7 @@ GridInfo = function () {
                     ];
                     break;
                 }
-                case 'unit' : { //单位管理
+                case 'unit' : { //单位信息
                     namespace = namespaces[2];
                     columns = [
                         {header: "单位名称", dataIndex: 'unitName'},
@@ -247,6 +247,19 @@ GridInfo = function () {
                         {header: "法人", dataIndex: 'legalPerson'},
                         {header: "经营地址", dataIndex: 'businessAddress'},
                         {header: "仓库地址", dataIndex: 'StorehouseAddress'}
+                    ];
+                    break;
+                }
+                case 'Commodity' : { //商品信息
+                    namespace = namespaces[3];
+                    columns = [
+                        {header: "包装数量", dataIndex: 'quantity'},
+                        {header: "编号格式", dataIndex: 'encodingFormat'},
+                        {header: "编号", dataIndex: 'number'},
+                        {header: "原分类编码", dataIndex: 'YFLNumber'},
+                        {header: "分类编码", dataIndex: 'FLNumber'},
+                        {header: "生产企业名称", dataIndex: 'manufacturer'},
+                        {header: "注册证编号/备案凭证编码", dataIndex: 'ZCNumber'},
                     ];
                     break;
                 }
