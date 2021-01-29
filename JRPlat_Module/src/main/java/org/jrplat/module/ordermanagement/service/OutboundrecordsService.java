@@ -8,6 +8,7 @@ import org.jrplat.module.security.service.UserHolder;
 import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -20,8 +21,8 @@ import java.util.List;
 public class OutboundrecordsService extends SimpleService<Outboundrecords> {
 
 
-
-    public List<Outboundrecords> queryOrderInformation(){
+    @Transactional(rollbackFor = Exception.class)
+    public List<Outboundrecords> queryOutboundrecords(){
         try {
 
             //获取当前用户

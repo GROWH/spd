@@ -52,7 +52,7 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
         }
         try {
 
-            List<Outboundrecords> outboundrecordsList = outboundrecordsService.queryOrderInformation();
+            List<Outboundrecords> outboundrecordsList = outboundrecordsService.queryOutboundrecords();
             if (len > outboundrecordsList.size()) {
                 len = outboundrecordsList.size();
             }
@@ -84,6 +84,9 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
 
         return null;
     }
+
+
+
 
 
 

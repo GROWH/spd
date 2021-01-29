@@ -7,6 +7,7 @@ import org.jrplat.module.security.service.UserHolder;
 import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class OrderManagementService extends SimpleService<OrderManagement> {
 
 
-
+    @Transactional(rollbackFor = Exception.class)
     public List<OrderManagement> queryOrderManagement(){
         try {
 
