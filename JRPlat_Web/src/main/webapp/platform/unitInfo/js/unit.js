@@ -1,5 +1,4 @@
 
-
 var namespace = 'unitinfo';
 var action = 'unit';
 
@@ -32,7 +31,6 @@ CreateModel = function () {
                                     allowBlank: false,
                                     anchor: "95%"
                                 },
-
                                 items: [{
                                     cls: 'attr',
                                     labelStyle: 'color: red;',
@@ -49,7 +47,6 @@ CreateModel = function () {
                                         fieldLabel: '证件编号',
                                         blankText: '证件编号不能为空'
                                     },
-
                                     {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
@@ -91,13 +88,11 @@ CreateModel = function () {
                                     allowBlank: false,
                                     anchor: "90%"
                                 },
-
-
                                 items: [{
-                                    id: 'unitType',
+                                    // id: 'unitType',
                                     xtype: 'combo',
-                                    store: userStateStore,
-                                    emptyText: '',
+                                    store: unitTypeStore,
+                                    emptyText: '请选择',
                                     mode: 'remote',
                                     valueField: 'value',
                                     displayField: 'text',
@@ -106,8 +101,7 @@ CreateModel = function () {
                                     editable: false,
                                     cls: 'attr',
                                     labelStyle: 'color: red;',
-                                    hiddenName: 'model.enabled',
-                                    value: model.enabled,
+                                    hiddenName: 'model.unitType',
                                     fieldLabel: '单位类型',
                                     blankText: '单位类型不能为空'
                                 },
@@ -155,7 +149,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加单位', 'unit', 800, 300, this.getItems());
+            CreateBaseModel.show('添加单位信息', 'unit', 800, 300, this.getItems());
         }
     };
 }();
@@ -238,6 +232,7 @@ ModifyModel = function () {
                                         name: 'model.businessAddress',
                                         fieldLabel: '经营地址',
                                         allowBlank: true,
+                                        value: model.businessAddress,
                                         // vtype: 'contact'
                                     },
                                     {
@@ -256,18 +251,25 @@ ModifyModel = function () {
                                     allowBlank: false,
                                     anchor: "90%"
                                 },
-
-
-                                items: [{
-                                    cls: 'attr',
-                                    labelStyle: 'color: red;',
-                                    maxLength: 32,
-                                    id: 'password',
-                                    name: 'model.unitType',
-                                    fieldLabel: '单位类型',
-                                    blankText: '单位类型不能为空',
-                                    value: model.unitType,
-                                },
+                                items: [
+                                    {
+                                        // id: 'unitType',
+                                        xtype: 'combo',
+                                        store: unitTypeStore,
+                                        emptyText: '请选择',
+                                        mode: 'remote',
+                                        valueField: 'value',
+                                        displayField: 'text',
+                                        triggerAction: 'all',
+                                        forceSelection: true,
+                                        editable: false,
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        hiddenName: 'model.unitType',
+                                        fieldLabel: '单位类型',
+                                        blankText: '单位类型不能为空',
+                                        value: model.unitType,
+                                    },
                                     {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
@@ -294,7 +296,8 @@ ModifyModel = function () {
                                         maxLength: 256,
                                         name: 'model.legalPerson',
                                         allowBlank: true,
-                                        fieldLabel: '法人'
+                                        fieldLabel: '法人',
+                                        value: model.legalPerson,
                                     },
                                     {
                                         xtype: 'textfield',
@@ -303,6 +306,7 @@ ModifyModel = function () {
                                         name: 'model.StorehouseAddress',
                                         fieldLabel: '仓库地址',
                                         cls: 'attr',
+                                        value: model.StorehouseAddress,
                                     }]
                             }]
                         }
@@ -323,7 +327,7 @@ ModifyModel = function () {
             //         Ext.getCmp('state').setValue("false");
             //     }
             // }
-            ModifyBaseModel.show('修改用户', 'user', 800, 300, this.getItems(model), model);
+            ModifyBaseModel.show('修改单位信息', 'user', 800, 300, this.getItems(model), model);
         }
     };
 }();
@@ -362,8 +366,8 @@ GridModel = function () {
 }();
 
 
-//树和表格
-UserPanel = function () {
+//表格
+UnitPanel = function () {
     return {
         show: function () {
             var frm = new Ext.Viewport({
@@ -381,5 +385,5 @@ UserPanel = function () {
 
 
 Ext.onReady(function () {
-    UserPanel.show();
+    UnitPanel.show();
 });

@@ -195,13 +195,6 @@ CreateModel = function () {
                                         inputType: 'password'
                                     },
                                     {
-                                        cls: 'attr',
-                                        maxLength: 256,
-                                        name: 'model.address',
-                                        allowBlank: true,
-                                        fieldLabel: '联系地址'
-                                    },
-                                    {
                                         id: 'unitId',
                                         name: 'model.unit.id',
                                         xtype : 'textfield',
@@ -210,7 +203,6 @@ CreateModel = function () {
                                         hidden: true
                                     },
                                     {
-                                        // cls: 'attr',
                                         cls: 'querybg',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
@@ -234,7 +226,13 @@ CreateModel = function () {
                                             }
                                         }
                                     },
-
+                                    {
+                                        cls: 'attr',
+                                        maxLength: 256,
+                                        name: 'model.address',
+                                        allowBlank: true,
+                                        fieldLabel: '联系地址'
+                                    },
                                 ]
                             }]
                         }
@@ -332,7 +330,6 @@ ModifyModel = function () {
                                 allowBlank: false,
                                 anchor: "90%"
                             },
-
                             items: [{
                                 readOnly: true,
                                 maxLength: 32,
@@ -362,7 +359,17 @@ ModifyModel = function () {
                                     fieldLabel: '联系方式',
                                     blankText: '联系方式不能为空',
                                     vtype: 'contact'
-                                }]
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    maxLength: 256,
+                                    allowBlank: true,
+                                    name: 'model.des',
+                                    value: model.des,
+                                    cls: 'attr',
+                                    fieldLabel: '备注'
+                                }
+                            ]
                         }, {
                             columnWidth: .5,
                             layout: 'form',
@@ -371,7 +378,6 @@ ModifyModel = function () {
                                 allowBlank: false,
                                 anchor: "90%"
                             },
-
                             items: [
                                  {
                                     id: 'state',
@@ -393,22 +399,46 @@ ModifyModel = function () {
                                     blankText: '状态不能为空'
                                 },
                                 {
+                                    id: 'unitId',
+                                    name: 'model.unit.id',
+                                    xtype : 'textfield',
+                                    allowBlank: false,
+                                    blankText: '单位ID不能为空',
+                                    hidden: true
+                                },
+                                {
+                                    cls: 'querybg',
+                                    labelStyle: 'color: red;',
+                                    maxLength: 32,
+                                    fieldLabel: '单位',
+                                    id: "unitNamee",
+                                    name : 'model.unitName',
+                                    blankText: '单位不能为空',
+                                    value: model.unitName,
+                                    readOnly: true,
+                                    listeners: {
+                                        focus: function (field) {
+                                            console.log(field)
+                                            var unitID = Ext.getCmp('unitId').getValue();
+                                            console.log(unitID)
+                                            var thismodule = {};
+                                            thismodule.namespace = "security";
+                                            thismodule.action = "user";
+                                            var queryString = unitID;
+                                            var idList = ["unitId","unitNamee"];
+                                            var colList = ["unit","unitName"];
+                                            QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
+                                        }
+                                    }
+                                },
+                                {
                                     cls: 'attr',
                                     maxLength: 256,
                                     name: 'model.address',
                                     value: model.address,
                                     allowBlank: true,
                                     fieldLabel: '联系地址'
-                                },
-                                {
-                                    xtype: 'textfield',
-                                    maxLength: 256,
-                                    allowBlank: true,
-                                    name: 'model.des',
-                                    value: model.des,
-                                    cls: 'attr',
-                                    fieldLabel: '备注'
-                                }]
+                                },]
                         }]
                     }
                     ]

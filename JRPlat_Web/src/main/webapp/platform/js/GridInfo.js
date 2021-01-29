@@ -132,7 +132,8 @@ GridInfo = function () {
             var namespaces = {
                 0: 'security',
                 1: 'base',
-                2: 'unitInfo'
+                2: 'unitInfo',
+                3: 'commodityInfo'
             };
             var gridInfoObj = {}, namespace = '', columns = [];
             var r = this.renderColumns();
@@ -233,7 +234,7 @@ GridInfo = function () {
                     ];
                     break;
                 }
-                case 'unit' : { //单位管理
+                case 'unit' : { //单位信息
                     namespace = namespaces[2];
                     columns = [
                         {header: "单位名称", dataIndex: 'unitName'},
@@ -249,29 +250,63 @@ GridInfo = function () {
                     ];
                     break;
                 }
+                case 'Commodity' : { //商品信息
+                    namespace = namespaces[3];
+                    columns = [
+                        {header: "包装数量", dataIndex: 'quantity'},
+                        {header: "编号格式", dataIndex: 'encodingFormat'},
+                        {header: "编号", dataIndex: 'number'},
+                        {header: "原分类编码", dataIndex: 'YFLNumber'},
+                        {header: "分类编码", dataIndex: 'FLNumber'},
+                        {header: "生产企业名称", dataIndex: 'manufacturer'},
+                        {header: "注册证编号/备案凭证编码", dataIndex: 'ZCNumber'},
+                    ];
+                    break;
+                }
                 /*===================订单管理==================*/
                 case 'order-management' : { //订单信息
                     namespace = namespaces[2];
                     columns = [
                         {header: "平台流水号", dataIndex: 'serialNumber'},
                         {header: "订单类型", dataIndex: 'ordertype'},
-                        {header: "收单方名称", dataIndex: 'unitName'},
-                        {header: "收单方发货日期", dataIndex: 'abc3'},
-                        {header: "收单方发货单号", dataIndex: 'abc4',},
-                        {header: "收单方发货物流公司", dataIndex: 'abc5'},
-                        {header: "收单方发货物流单号", dataIndex: 'abc6'},
-                        {header: "收单方发货备注", dataIndex: 'abc7'},
-                        {header: "下单方名称", dataIndex: 'abc8'},
-                        {header: "下单方证件编号", dataIndex: 'abc9'},
-                        {header: "下单方订单日期", dataIndex: 'abc10'},
-                        {header: "下单方订单单号", dataIndex: 'abc11'},
-                        {header: "下单方退货物流公司", dataIndex: 'abc12'},
-                        {header: "下单方退货物流单号", dataIndex: 'abc13'},
-                        {header: "下单方订单备注", dataIndex: 'abc14'}
+                        {header: "订单状态", dataIndex: 'orderStatus'},
+                        {header: "收单方名称", dataIndex: 'GYSName'},
+                        {header: "收单方证件编号", dataIndex: 'GYSNumber'},
+                        {header: "收单方发货日期", dataIndex: 'GYSDate'},
+                        {header: "收单方发货单号", dataIndex: 'GYSInvoiceNo',},
+                        {header: "收单方发货物流公司", dataIndex: 'GYSLogistics'},
+                        {header: "收单方发货物流单号", dataIndex: 'GYSLogisticsNo'},
+                        {header: "收单方发货备注", dataIndex: 'GYSRemarks'},
+                        {header: "下单方名称", dataIndex: 'KHName'},
+                        {header: "下单方证件编号", dataIndex: 'KHNumber'},
+                        {header: "下单方订单日期", dataIndex: 'KHDate'},
+                        {header: "下单方订单单号", dataIndex: 'KHInvoiceNo'},
+                        {header: "下单方退货物流公司", dataIndex: 'KHTHLogistics'},
+                        {header: "下单方退货物流单号", dataIndex: 'KHTHLogisticsNo'},
+                        {header: "下单方订单备注", dataIndex: 'KHRemarks'}
                     ];
                     break;
                 }
                 case 'order-management-x' : { //订单信息-细单
+                    namespace = namespaces[2];
+                    columns = [
+                        {header: "产品编号", dataIndex: 'abc11'},
+                        {header: "产品名称", dataIndex: 'abc22'},
+                        {header: "规格/型号", dataIndex: 'abc33'},
+                        {header: "包装单位", dataIndex: 'abc44'},
+                        {header: "生产企业名称", dataIndex: 'abc55',},
+                        {header: "下单方订货/退货数量", dataIndex: 'abc66'},
+                        {header: "收单方发货数量", dataIndex: 'abc77'},
+                        {header: "批号", dataIndex: 'abc88'},
+                        {header: "序列号", dataIndex: 'abc99'},
+                        {header: "生产日期", dataIndex: 'abc111'},
+                        {header: "有效期/失效期", dataIndex: 'abc222'},
+                        {header: "下单方产品备注", dataIndex: 'abc333'},
+                        {header: "收单方产品备注", dataIndex: 'abc333'},
+                    ];
+                    break;
+                }
+                case 'outbound-records' : { //出库记录
                     namespace = namespaces[2];
                     columns = [
                         {header: "产品编号", dataIndex: 'abc11'},
