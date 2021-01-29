@@ -253,6 +253,9 @@ GridInfo = function () {
                 case 'Commodity' : { //商品信息
                     namespace = namespaces[3];
                     columns = [
+                        {header: "产品名称", dataIndex: 'productName'},
+                        {header: "规格型号", dataIndex: 'specification'},
+                        {header: "包装单位", dataIndex: '包装单位'},
                         {header: "包装数量", dataIndex: 'quantity'},
                         {header: "编号格式", dataIndex: 'encodingFormat'},
                         {header: "编号", dataIndex: 'number'},
@@ -306,17 +309,17 @@ GridInfo = function () {
                     ];
                     break;
                 }
-                case 'outbound-records' : { //出库记录
+                case 'outboundrecords' : { //出库记录
                     namespace = namespaces[2];
                     columns = [
-                        {header: "产品编号", dataIndex: 'abc11'},
-                        {header: "产品名称", dataIndex: 'abc22'},
+                        {header: "产品编号", dataIndex: 'number'},
+                        {header: "产品名称", dataIndex: 'productName'},
                         {header: "规格/型号", dataIndex: 'abc33'},
-                        {header: "包装单位", dataIndex: 'abc44'},
+                        {header: "包装单位", dataIndex: 'packagingUnit'},
                         {header: "生产企业名称", dataIndex: 'abc55',},
-                        {header: "下单方订货/退货数量", dataIndex: 'abc66'},
-                        {header: "收单方发货数量", dataIndex: 'abc77'},
-                        {header: "批号", dataIndex: 'abc88'},
+                        {header: "下单方订货/退货数量", dataIndex: 'orderQuantity'},
+                        {header: "收单方发货数量", dataIndex: 'shipmentQuantity'},
+                        {header: "批号", dataIndex: 'PH'},
                         {header: "序列号", dataIndex: 'abc99'},
                         {header: "生产日期", dataIndex: 'abc111'},
                         {header: "有效期/失效期", dataIndex: 'abc222'},

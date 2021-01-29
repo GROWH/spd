@@ -71,6 +71,38 @@ public class Outboundrecords extends SimpleModel {
     protected Unit unitNo;
 
 
+    @Transient
+    @FieldRef("orderInformation.PH")
+    @ModelAttr("批号")
+    protected String PH;
+
+    @Transient
+    @FieldRef("orderInformation.orderQuantity")
+    @ModelAttr("客户订货数量")
+    protected Integer orderQuantity;
+
+    @Transient
+    @FieldRef("orderInformation.shipmentQuantity")
+    @ModelAttr("供应商发货数量")
+    protected Integer shipmentQuantity;
+
+    @Transient
+    @FieldRef("orderInformation.productNo.number")
+    @ModelAttr("商品编号")
+    protected String number;
+
+
+    @Transient
+    @FieldRef("orderInformation.productNo.productName")
+    @ModelAttr("商品名称")
+    protected String productName;
+
+
+    @Transient
+    @FieldRef("orderInformation.productNo.packagingUnit")
+    @ModelAttr("包装单位")
+    protected String packagingUnit;
+
     @XmlTransient
     public OrderInformation getOrderInformation() {
         return orderInformation;
@@ -114,6 +146,54 @@ public class Outboundrecords extends SimpleModel {
 
     public void setUnitNo(Unit unitNo) {
         this.unitNo = unitNo;
+    }
+
+    public String getPackagingUnit() {
+        return packagingUnit;
+    }
+
+    public void setPackagingUnit(String packagingUnit) {
+        this.packagingUnit = packagingUnit;
+    }
+
+    public String getPH() {
+        return PH;
+    }
+
+    public void setPH(String PH) {
+        this.PH = PH;
+    }
+
+    public Integer getOrderQuantity() {
+        return orderQuantity;
+    }
+
+    public void setOrderQuantity(Integer orderQuantity) {
+        this.orderQuantity = orderQuantity;
+    }
+
+    public Integer getShipmentQuantity() {
+        return shipmentQuantity;
+    }
+
+    public void setShipmentQuantity(Integer shipmentQuantity) {
+        this.shipmentQuantity = shipmentQuantity;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     @Override
