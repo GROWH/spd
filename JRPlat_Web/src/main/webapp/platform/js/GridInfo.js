@@ -131,7 +131,8 @@ GridInfo = function () {
         getBaseColumnsObj: function (module) {
             var namespaces = {
                 0: 'security',
-                1: 'base'
+                1: 'base',
+                2: 'unitInfo'
             };
             var gridInfoObj = {}, namespace = '', columns = [];
             var r = this.renderColumns();
@@ -149,6 +150,7 @@ GridInfo = function () {
                 case 'user' : { //用户管理
                     namespace = namespaces[0];
                     columns = [
+                        {header: '单位', dataIndex: 'unitName'},
                         {header: '账号', dataIndex: 'username'},
                         {header: '姓名', dataIndex: 'realName'},
                         {header: '状态', dataIndex: 'enabled'},
@@ -232,21 +234,18 @@ GridInfo = function () {
                     break;
                 }
                 case 'unit' : { //单位管理
-                    namespace = namespaces[1];
+                    namespace = namespaces[2];
                     columns = [
                         {header: "单位名称", dataIndex: 'unitName'},
-                        {header: "企业类型", dataIndex: 'enterpriseType'},
-                        {header: "证件类型", dataIndex: 'paperworkType'},
+                        {header: "单位类型", dataIndex: 'unitType'},
                         {header: "证件编号", dataIndex: 'paperworkNo'},
-                        {header: "是否为医疗机构", dataIndex: 'medicalInstitutions', renderer: PubFunc.r_yesorno},
-                        {header: "证件有效期", dataIndex: 'paperworkDate'},
-                        {header: "法人代表", dataIndex: 'legalDeputy'},
-                        {header: "地区", dataIndex: 'area'},
-                        {header: "注册地址", dataIndex: 'registeredAddress'},
-                        {header: "仓库地址", dataIndex: 'warehouseAddress'},
-                        {header: "开户银行", dataIndex: 'bankAccount'},
-                        {header: "银行账号", dataIndex: 'bankNo'},
-                        {header: "税号", dataIndex: 'taxNumber'}
+                        {header: "联系人", dataIndex: 'linkman'},
+                        {header: "联系人电话", dataIndex: 'contactPhone'},
+                        {header: "订单获取密码", dataIndex: 'orderKey'},
+                        {header: "统一社会信用代码", dataIndex: 'enSHDM'},
+                        {header: "法人", dataIndex: 'legalPerson'},
+                        {header: "经营地址", dataIndex: 'businessAddress'},
+                        {header: "仓库地址", dataIndex: 'StorehouseAddress'}
                     ];
                     break;
                 }

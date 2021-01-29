@@ -339,9 +339,9 @@ BDMap = function () {
                 layout: 'fit',
                 items: [{
                     html: '<iframe id="frame" name="frame" src="' +
-                    contextPath + '/platform/js/map.html?address=' +
-                    address + '&detail=' + addressIds.detail + '&lng=' +
-                    addressIds.longitude + '&lat=' + addressIds.latitude + '" width=100% height=100%/>'
+                        contextPath + '/platform/js/map.html?address=' +
+                        address + '&detail=' + addressIds.detail + '&lng=' +
+                        addressIds.longitude + '&lat=' + addressIds.latitude + '" width=100% height=100%/>'
                 }],
                 maximizable: true
             }).show();
