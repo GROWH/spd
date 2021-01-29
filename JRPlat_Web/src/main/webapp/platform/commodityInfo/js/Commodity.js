@@ -6,6 +6,7 @@ var action = 'Commodity';
 // var action = 'unit';
 
 
+
 //添加模型信息
 CreateModel = function () {
     return {
