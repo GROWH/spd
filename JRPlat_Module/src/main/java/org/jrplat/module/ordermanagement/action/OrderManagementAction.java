@@ -82,7 +82,7 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
             return null;
         }
 
-        return super.query();
+        return null;
     }
 
 
