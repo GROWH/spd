@@ -293,7 +293,7 @@ GridInfo = function () {
                     ];
                     break;
                 }
-                case 'outbound-records' : { //订单信息-细单
+                case 'outbound-records' : { //出库记录
                     namespace = namespaces[2];
                     columns = [
                         {header: "产品编号", dataIndex: 'abc11'},

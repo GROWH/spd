@@ -21,11 +21,11 @@
 <html>
 <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>订单信息</title>
+        <title>出库记录</title>
         <%@include file="../include/common.jsp" %>
         <script type="text/javascript" src="../js/JRPlat.js"></script>
         <script type="text/javascript" src="../js/OtherGridModel.js"></script>
-        <script type="text/javascript" src="js/Ordermanagement.js"></script>
+        <script type="text/javascript" src="js/Outboundrecord.js"></script>
 </head>
 <body>
 <div id='grid-div' style="width:100%; height:100%;">

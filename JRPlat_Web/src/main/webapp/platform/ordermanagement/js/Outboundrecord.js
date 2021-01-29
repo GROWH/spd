@@ -19,8 +19,7 @@
  */
 
 var namespace='ordermanagement';
-var action='order-management';
-var detail = 'order-management-x';
+var action='outbound-records';
 
 //添加模型信息
 CreateModel = function () {
@@ -172,7 +171,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加订单信息', 'order-management', 800, 300, this.getItems());
+            CreateBaseModel.show('添加出库记录', 'outbound-records', 800, 300, this.getItems());
         }
     };
 }();
@@ -340,7 +339,7 @@ ModifyModel = function () {
             //         Ext.getCmp('state').setValue("false");
             //     }
             // }
-            ModifyBaseModel.show('修改订单信息', 'order-management', 800, 300, this.getItems(model), model);
+            ModifyBaseModel.show('修改出库记录', 'outbound-records', 800, 300, this.getItems(model), model);
         }
     };
 }();
@@ -369,14 +368,6 @@ GridModel = function () {
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 
-            //选择总单,显示对应的细单
-            GridBaseModel.onRowClick = function (namespace, action, grid, index, e) {
-                var idList = GridBaseModel.getIdList();
-                var propertyCriteria = 'aliasGroup.id:eq:' + (idList.length === 1 ? idList[0] : 0);
-                console.log(idList,propertyCriteria)
-                // DetailGridBaseModel.refresh(propertyCriteria);
-            };
-
             return grid;
         }
     }
@@ -392,7 +383,6 @@ UserPanel = function () {
                 items: [ {
                     region: 'center',
                     autoScroll: true,
-                    height: 300,
                     layout: 'fit',
                     items: [GridModel.getGrid()]
                 }]
