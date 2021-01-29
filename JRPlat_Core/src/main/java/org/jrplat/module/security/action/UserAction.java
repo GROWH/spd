@@ -16,9 +16,11 @@ import org.jrplat.module.security.model.Position;
 import org.jrplat.module.security.model.Role;
 import org.jrplat.module.security.model.User;
 import org.jrplat.module.security.model.UserGroup;
+import org.jrplat.module.security.service.UserHolder;
 import org.jrplat.module.security.service.UserReportService;
 import org.jrplat.module.security.service.UserService;
 import org.jrplat.module.system.service.PropertyHolder;
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.action.ExtJSSimpleAction;
 import org.jrplat.platform.criteria.Operator;
 import org.jrplat.platform.criteria.Property;
@@ -319,20 +321,60 @@ public class UserAction extends ExtJSSimpleAction<User> {
             unitName = model.getUnit().getUnitName();
             id = model.getUnit().getId();
         }
-        map.put("unit",id+ "");
+        map.put("unitId",id+ "");
         map.put("unitName", unitName);
     }
 
     @Override
     public String query() {
-        if (getUnit()!=null){
-            String jpql = "SELECT o FROM User o WHERE o.unit.id = :user";
-            Query query = getService().getEntityManager().createQuery(jpql, User.class)
-                    .setParameter("user",1);
-            List<User> users = query.getResultList();
-            Struts2Utils.renderJson(users);
+        //获取当前用户
+        User user = UserHolder.getCurrentLoginUser();
+        if(!"admin".equals(user.getUsername())) {
+
+
+            int start = super.getStart();
+            int len = super.getLimit();
+            if (start == -1) {
+                start = 0;
+            }
+            if (len == -1) {
+                len = 10;
+            }
+            try {
+
+                List<User> userList = userService.queryuser();
+                if (len > userList.size()) {
+                    len = userList.size();
+                }
+                List<User> models = new ArrayList<>();
+                for (int i = start; i < start + getLimit(); i++) {
+                    if (i >= userList.size()) {
+                        break;
+                    }
+                    models.add(userList.get(i));
+                }
+                // 构造当前页面对象
+                page = new Page<>();
+                page.setModels(models);
+                page.setTotalRecords(userList.size());
+                Map json = new HashMap();
+                json.put("totalProperty", page.getTotalRecords());
+                List<Map> result = new ArrayList<>();
+                renderJsonForQuery(result);
+                json.put("root", result);
+                Struts2Utils.renderJson(json);
+
+            } catch (Exception e) {
+                map = new HashMap();
+                map.put("success", false);
+                map.put("message", "查询失败:" + e.getMessage());
+                Struts2Utils.renderJson(map);
+                return null;
+            }
+        }else {
+            return super.query();
         }
-        return super.query();
+        return null;
     }
 
     public void setNewPassword(String newPassword) {

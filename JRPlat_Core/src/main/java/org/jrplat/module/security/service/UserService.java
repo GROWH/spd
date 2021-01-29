@@ -12,6 +12,7 @@ import org.jrplat.module.security.service.password.PasswordEncoder;
 import org.jrplat.module.security.service.password.PasswordInvalidException;
 import org.jrplat.module.security.service.password.PasswordStrategyExecuter;
 import org.jrplat.module.system.service.PropertyHolder;
+import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.criteria.*;
 import org.jrplat.platform.log.JRPlatLogger;
 import org.jrplat.platform.log.JRPlatLoggerFactory;
@@ -458,5 +459,27 @@ public class UserService extends SimpleService<User> {
     public boolean update(User user) {
         serviceFacade.update(user);
         return true;
+    }
+
+    public List<User> queryuser(){
+        try {
+            //获取当前用户
+            User user = UserHolder.getCurrentLoginUser();
+            //获取当前登录用户的单位ID
+            Unit unit = user.getUnit();
+
+               if (unit != null) {
+                   String jpql = "SELECT o FROM User o WHERE o.unit.id = :user";
+                   Query query = getService().getEntityManager().createQuery(jpql, User.class)
+                           .setParameter("user", user.getUnit().getId());
+                   List<User> users = query.getResultList();
+                   return users;
+
+           }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
     }
 }
