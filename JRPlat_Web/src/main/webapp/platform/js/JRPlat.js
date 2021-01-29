@@ -1458,7 +1458,7 @@ DetailGridBaseModel = function () {
                 // })
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.namespace + '/'
-                    + this.action + '!query.action'
+                    + this.action + this.interfaceName +'.action'
                 })
             });
             store.on('beforeload', function (store) {
@@ -1511,12 +1511,13 @@ DetailGridBaseModel = function () {
             });
         },
         //表格组装
-        getGrid: function (namespace, action, fields, columns, propertyCriteria, initUrlParams) {
+        getGrid: function (interfaceName, namespace, action, fields, columns, propertyCriteria, initUrlParams, ) {
             var fields = GridBaseModel.addField(fields, action);
             this.namespace = namespace;
             this.action = action;
             this.propertyCriteria = propertyCriteria;
             this.initUrlParams = initUrlParams;
+            this.interfaceName = interfaceName;
 
             var pageSize = this.getPageSize();
 

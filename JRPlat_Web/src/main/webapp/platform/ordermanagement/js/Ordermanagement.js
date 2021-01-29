@@ -241,7 +241,8 @@ GridModel = function () {
         getGridDetail: function () {
             var gridObj = GridInfo.getGridObj(detail);
             var queryString = 'orderManagement.id:eq:0';
-            var detailGrid = DetailGridBaseModel.getGrid(namespace, action, gridObj.fields, gridObj.columns, queryString, );
+            var interfaceName = '!queryOrderInformation';
+            var detailGrid = DetailGridBaseModel.getGrid(interfaceName,namespace, action, gridObj.fields, gridObj.columns, queryString, '');
             return detailGrid;
         },
     }
