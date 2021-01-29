@@ -170,7 +170,7 @@
         </module>
         <module english="commodityInfo" chinese="商品管理">
             <subModules>
-                <module english="Commodity" chinese="商品信息">
+                <module english="commodity" chinese="商品信息">
                     <commands>
                         <command english="create" chinese="添加商品信息"/>
                         <command english="delete" chinese="删除商品信息"/>

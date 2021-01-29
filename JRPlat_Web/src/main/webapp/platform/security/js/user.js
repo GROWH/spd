@@ -217,11 +217,11 @@ CreateModel = function () {
                                                 var unitID = Ext.getCmp('unitId').getValue();
                                                 console.log(unitID)
                                                 var thismodule = {};
-                                                thismodule.namespace = "unitInfo";
-                                                thismodule.action = "unit";
+                                                thismodule.namespace = "security";
+                                                thismodule.action = "user";
                                                 var queryString = unitID;
                                                 var idList = ["unitId","unitName"];
-                                                var colList = ["unit","unitName"];
+                                                var colList = ["unitId","unitName"];
                                                 QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
                                             }
                                         }
@@ -404,7 +404,8 @@ ModifyModel = function () {
                                     xtype : 'textfield',
                                     allowBlank: false,
                                     blankText: '单位ID不能为空',
-                                    hidden: true
+                                    hidden: true,
+                                    value: model.unitId,
                                 },
                                 {
                                     cls: 'querybg',

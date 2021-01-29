@@ -73,13 +73,7 @@ CreateModel = function () {
                                         allowBlank: true,
                                         // vtype: 'contact'
                                     },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                    }]
+                                   ]
                             }, {
                                 columnWidth: .5,
                                 layout: 'form',
@@ -90,6 +84,7 @@ CreateModel = function () {
                                 },
                                 items: [{
                                     // id: 'unitType',
+                                    name: 'model.unitType.id',
                                     xtype: 'combo',
                                     store: unitTypeStore,
                                     emptyText: '请选择',
@@ -101,7 +96,7 @@ CreateModel = function () {
                                     editable: false,
                                     cls: 'attr',
                                     labelStyle: 'color: red;',
-                                    hiddenName: 'model.unitType',
+                                    hiddenName: 'model.unitType.id',
                                     fieldLabel: '单位类型',
                                     blankText: '单位类型不能为空'
                                 },
@@ -149,7 +144,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加单位信息', 'unit', 800, 300, this.getItems());
+            CreateBaseModel.show('添加单位信息', 'user', 800, 300, this.getItems());
         }
     };
 }();
@@ -235,14 +230,7 @@ ModifyModel = function () {
                                         value: model.businessAddress,
                                         // vtype: 'contact'
                                     },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                        value: model.version,
-                                    }]
+                                   ]
                             }, {
                                 columnWidth: .5,
                                 layout: 'form',
@@ -254,6 +242,7 @@ ModifyModel = function () {
                                 items: [
                                     {
                                         // id: 'unitType',
+                                        name: 'model.unitType.id',
                                         xtype: 'combo',
                                         store: unitTypeStore,
                                         emptyText: '请选择',
@@ -265,7 +254,7 @@ ModifyModel = function () {
                                         editable: false,
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
-                                        hiddenName: 'model.unitType',
+                                        hiddenName: 'model.unitType.id',
                                         fieldLabel: '单位类型',
                                         blankText: '单位类型不能为空',
                                         value: model.unitType,
@@ -318,15 +307,6 @@ ModifyModel = function () {
         },
 
         show: function (model) {
-            // ModifyBaseModel.prepareSubmit = function () {
-            //     Ext.getCmp('roles').setValue(roleSelector.getValue());
-            //     if ("启用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("true");
-            //     }
-            //     if ("停用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("false");
-            //     }
-            // }
             ModifyBaseModel.show('修改单位信息', 'user', 800, 300, this.getItems(model), model);
         }
     };

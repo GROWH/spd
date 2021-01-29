@@ -16,7 +16,7 @@
     <script type="text/javascript" src="../js/OtherGridModel.js"></script>
     <script type="text/javascript" src="../js/OtherGridModelTwo.js"></script>
 
-    <script type="text/javascript" src="js/Commodity.js"></script>
+    <script type="text/javascript" src="js/commodity.js"></script>
 </head>
 <body>
 <div id='grid-div' style="width:100%; height:100%;">

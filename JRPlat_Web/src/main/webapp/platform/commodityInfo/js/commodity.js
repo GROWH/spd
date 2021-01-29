@@ -1,6 +1,6 @@
 
 var namespace = 'commodityInfo';
-var action = 'Commodity';
+var action = 'commodity';
 
 // var namespace = 'unitinfo';
 // var action = 'unit';
@@ -63,7 +63,8 @@ CreateModel = function () {
                                         editable: false,
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
-                                        hiddenName: 'model.encodingFormat',
+                                        hiddenName: 'model.encodingFormat.id',
+                                        name: 'model.encodingFormat.id',
                                         fieldLabel: '编号格式',
                                         blankText: '编号格式不能为空'
                                     },
@@ -77,18 +78,14 @@ CreateModel = function () {
                                     },
                                     {
                                         cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.YFLNumber',
-                                        fieldLabel: '原分类编码',
+                                        maxLength: 256,
+                                        name: 'model.ZCNumber',
                                         allowBlank: true,
+                                        fieldLabel: '注册证编号/备案凭证编码',
+                                        height:50
                                     },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                    }
+
+
                                     ]
                             }, {
                                 columnWidth: .5,
@@ -134,11 +131,10 @@ CreateModel = function () {
                                     },
                                     {
                                         cls: 'attr',
-                                        maxLength: 256,
-                                        name: 'model.ZCNumber',
+                                        maxLength: 32,
+                                        name: 'model.YFLNumber',
+                                        fieldLabel: '原分类编码',
                                         allowBlank: true,
-                                        fieldLabel: '注册证编号/备案凭证编码',
-                                        height:50
                                     },
 
                                     ]
@@ -152,7 +148,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加商品信息', 'unit', 800, 300, this.getItems());
+            CreateBaseModel.show('添加商品信息', 'user', 800, 300, this.getItems());
         }
     };
 }();
@@ -221,7 +217,8 @@ ModifyModel = function () {
                                         editable: false,
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
-                                        hiddenName: 'model.encodingFormat',
+                                        hiddenName: 'model.encodingFormat.id',
+                                        name: 'model.encodingFormat.id',
                                         fieldLabel: '编号格式',
                                         blankText: '编号格式不能为空',
                                         value: model.encodingFormat,
@@ -237,20 +234,14 @@ ModifyModel = function () {
                                     },
                                     {
                                         cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.YFLNumber',
-                                        fieldLabel: '原分类编码',
+                                        maxLength: 256,
+                                        name: 'model.ZCNumber',
                                         allowBlank: true,
-                                        value: model.YFLNumber,
+                                        fieldLabel: '注册证编号/备案凭证编码',
+                                        value: model.ZCNumber,
+                                        height:50
                                     },
-                                    {
-                                        cls: 'attr',
-                                        maxLength: 32,
-                                        name: 'model.version',
-                                        fieldLabel: '版本号',
-                                        allowBlank: true,
-                                        value: model.version,
-                                    }
+
                                 ]
                             }, {
                                 columnWidth: .5,
@@ -300,12 +291,11 @@ ModifyModel = function () {
                                     },
                                     {
                                         cls: 'attr',
-                                        maxLength: 256,
-                                        name: 'model.ZCNumber',
+                                        maxLength: 32,
+                                        name: 'model.YFLNumber',
+                                        fieldLabel: '原分类编码',
                                         allowBlank: true,
-                                        fieldLabel: '注册证编号/备案凭证编码',
-                                        value: model.ZCNumber,
-                                        height:50
+                                        value: model.YFLNumber,
                                     },
 
                                 ]
@@ -319,15 +309,6 @@ ModifyModel = function () {
         },
 
         show: function (model) {
-            // ModifyBaseModel.prepareSubmit = function () {
-            //     Ext.getCmp('roles').setValue(roleSelector.getValue());
-            //     if ("启用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("true");
-            //     }
-            //     if ("停用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("false");
-            //     }
-            // }
             ModifyBaseModel.show('修改商品信息', 'user', 800, 300, this.getItems(model), model);
         }
     };

@@ -164,50 +164,7 @@ GridInfo = function () {
                 }
 
                 /*==================基础资料===================*/
-                case 'commodity' : { //商品管理
-                    namespace = namespaces[1];
-                    columns = [
-                        {header: "商品货号(出厂)", dataIndex: 'productCode'},
-                        {header: "商品名称", dataIndex: 'productName'},
-                        {header: "生产厂商", dataIndex: 'manufacturer'},
-                        {header: "产地", dataIndex: 'placeOrigin'},
-                        {header: "商品规格", dataIndex: 'productNorm'},
-                        {header: "商品基本单位", dataIndex: 'basicUnit'},
-                        {header: "包装大小", dataIndex: 'packageSize'},
-                        {header: "条形码", dataIndex: 'barCode'},
-                        {header: "储存条件", dataIndex: 'storageConditions'},
-                        {header: "储存属性", dataIndex: 'storageAttribute'},
-                        {header: "商品经营类别", dataIndex: 'commBusinessCategory'},
-                        {header: "双人复核标志", dataIndex: 'reviewMark'},
-                        {header: "批准文号", dataIndex: 'approvalNumber'},
-                        {header: "批准文号有效期", dataIndex: 'approvalPeriod'},
-                        {header: "商品类别", dataIndex: 'productCategory'},
-                        {header: "生产许可证/备案凭证编号", dataIndex: 'productionLicense'},
-                        {header: "注册证号/备案凭证编号", dataIndex: 'registrationNumber'},
-                        {header: "注册有效期", dataIndex: 'registrationPeriod'},
-                        {header: "有效期", dataIndex: 'validityPeriod'},
-                        {header: "有效期单位", dataIndex: 'validityUnit'},
-                        {header: "预警天数", dataIndex: 'warningDays'},
-                        {header: "经营类别", dataIndex: 'businessCategory'},
-                        {header: "运输温度范围", dataIndex: 'transportTemperature'},
-                        {header: "存储温度范围", dataIndex: 'storageTemperature'},
-                        {header: "是否有报告书", dataIndex: 'report', renderer: PubFunc.r_yesorno},
-                        {header: "处方OTC属性", dataIndex: 'attributeOTC'},
-                        {header: "疫苗标志", dataIndex: 'vaccineMark'},
-                        {header: "贵重等级", dataIndex: 'valuableLevel'},
-                        {header: "防寒标志", dataIndex: 'coldProtectionSign', renderer: PubFunc.r_yesorno},
-                        {header: "冷藏类别", dataIndex: 'refrigerationCategory'},
-                        {header: "GMP标志", dataIndex: 'markGMP', renderer: PubFunc.r_yesorno},
-                        {header: "混装类别", dataIndex: 'mixedCategory'},
-                        {header: "剂型分类", dataIndex: 'dosageClassification'},
-                        {header: "保管分类", dataIndex: 'custodyClassification'},
-                        {header: "税种识别号", dataIndex: 'taxIdNumber'},
-                        {header: "药品本位码", dataIndex: 'drugStandardCode'},
-                        {header: "药品编码", dataIndex: 'drugCode'},
-                        {header: "产品说明", dataIndex: 'productManual'}
-                    ];
-                    break;
-                }
+
                 case 'sku-info' : { //sku管理
                     namespace = namespaces[1];
                     columns = [
@@ -250,12 +207,12 @@ GridInfo = function () {
                     ];
                     break;
                 }
-                case 'Commodity' : { //商品信息
+                case 'commodity' : { //商品信息
                     namespace = namespaces[3];
                     columns = [
                         {header: "产品名称", dataIndex: 'productName'},
                         {header: "规格型号", dataIndex: 'specification'},
-                        {header: "包装单位", dataIndex: '包装单位'},
+                        {header: "包装单位", dataIndex: 'PackingUnit'},
                         {header: "包装数量", dataIndex: 'quantity'},
                         {header: "编号格式", dataIndex: 'encodingFormat'},
                         {header: "编号", dataIndex: 'number'},
