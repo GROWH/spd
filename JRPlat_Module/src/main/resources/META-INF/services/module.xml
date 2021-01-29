@@ -32,16 +32,6 @@
                         <command english="help" chinese="帮助" />
                     </commands>
                 </module>
-                <module english="OrderInformation" chinese="订货信息">
-                    <commands>
-                        <command english="create" chinese="添加订货信息"/>
-                        <command english="delete" chinese="删除订货信息"/>
-                        <command english="update" chinese="修改订货信息"/>
-                        <command english="query" chinese="查询订货信息"/>
-                        <command english="refresh" chinese="刷新"/>
-                        <command english="help" chinese="帮助" />
-                    </commands>
-                </module>
                 <module english="Outboundrecords" chinese="出库记录">
                     <commands>
                         <command english="create" chinese="添加出库信息"/>
