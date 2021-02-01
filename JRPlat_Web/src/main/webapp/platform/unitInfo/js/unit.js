@@ -2,7 +2,48 @@
 var namespace = 'unitinfo';
 var action = 'unit';
 
+//高级搜索
+AdvancedSearchModel = function () {
+    return {
+        //搜索表单
+        getItems: function () {
+            var items = [
+                {
+                    xtype: 'textfield',
+                    id: 'unitName',
+                    fieldLabel: '单位名称'
+                },
+                {
+                    xtype: 'textfield',
+                    id: 'paperworkNo',
+                    fieldLabel: '证件编号'
+                }
+            ];
+            return items;
+        },
+        //点击搜索之后的回调方法
+        callback: function () {
+            var data = [];
 
+            var unitName = Ext.getCmp('unitName').getValue();
+            if (unitName != "") {
+                unitName = 'unitName:eq:$' + unitName;
+                data.push(unitName);
+            }
+
+            var paperworkNo = Ext.getCmp('paperworkNo').getValue();
+            if (paperworkNo != "") {
+                paperworkNo = 'realName:eq:' + paperworkNo;
+                data.push(paperworkNo);
+            }
+            AdvancedSearchBaseModel.search(data, "User");
+        },
+
+        show: function () {
+            AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
+        }
+    };
+}();
 
 //添加模型信息
 CreateModel = function () {

@@ -213,15 +213,22 @@ CreateModel = function () {
                                         readOnly: true,
                                         listeners: {
                                             focus: function (field) {
+                                                console.log("111")
                                                 console.log(field)
                                                 var unitID = Ext.getCmp('unitId').getValue();
+                                                var unitName = Ext.getCmp('unitName').getValue();
                                                 console.log(unitID)
+                                                console.log(unitName)
+
                                                 var thismodule = {};
                                                 thismodule.namespace = "security";
                                                 thismodule.action = "user";
                                                 var queryString = unitID;
-                                                var idList = ["unitId","unitName"];
-                                                var colList = ["unitId","unitName"];
+                                                // var idList = ["unitId","unitName"];
+                                                // var colList = ["unitId","unitName"];
+
+                                                var idList = ["unitName"];
+                                                var colList = ["unitName"];
                                                 QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
                                             }
                                         }
@@ -232,7 +239,7 @@ CreateModel = function () {
                                         name: 'model.address',
                                         allowBlank: true,
                                         fieldLabel: '联系地址'
-                                    },
+                                    }
                                 ]
                             }]
                         }
@@ -412,7 +419,7 @@ ModifyModel = function () {
                                     labelStyle: 'color: red;',
                                     maxLength: 32,
                                     fieldLabel: '单位',
-                                    id: "unitNamee",
+                                    id: "unitName",
                                     name : 'model.unitName',
                                     blankText: '单位不能为空',
                                     value: model.unitName,
@@ -421,13 +428,15 @@ ModifyModel = function () {
                                         focus: function (field) {
                                             console.log(field)
                                             var unitID = Ext.getCmp('unitId').getValue();
+                                            var unitName = Ext.getCmp('unitName').getValue();
                                             console.log(unitID)
+                                            console.log(unitName)
                                             var thismodule = {};
                                             thismodule.namespace = "security";
                                             thismodule.action = "user";
                                             var queryString = unitID;
-                                            var idList = ["unitId","unitNamee"];
-                                            var colList = ["unit","unitName"];
+                                            var idList = ["unitId","unitName"];
+                                            var colList = ["unitId","unitName"];
                                             QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
                                         }
                                     }
