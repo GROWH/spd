@@ -3,6 +3,7 @@ package org.jrplat.module.ordermanagement.action;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.jrplat.module.ordermanagement.model.OrderInformation;
+import org.jrplat.module.ordermanagement.model.OrderInformationDto;
 import org.jrplat.module.ordermanagement.model.OrderManagement;
 import org.jrplat.module.ordermanagement.service.OrderInformationService;
 import org.jrplat.module.ordermanagement.service.OrderManagementService;
@@ -103,14 +104,11 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
 
             String orderManagementId = propertyCriteria.substring(propertyCriteria.lastIndexOf(":")+1);
 
-            List<OrderInformation> orderInformationList = orderInformationService.queryOrderInformation(orderManagementId);
-
-            Map json = new HashMap();
-
-            json.put("orderInformationList", orderInformationList);
-            Struts2Utils.renderJson(json);
+            List<OrderInformationDto> orderInformationList = orderInformationService.queryOrderInformation(Integer.valueOf(orderManagementId));
+            Map<String,Object> map = new HashMap();
+            map.put("orderInformationList",orderInformationList);
+            Struts2Utils.renderJson(map);
             }
-
         } catch (Exception e) {
             map = new HashMap();
             map.put("success", false);
