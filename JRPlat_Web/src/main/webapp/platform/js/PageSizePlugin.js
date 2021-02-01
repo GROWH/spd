@@ -37,6 +37,9 @@ Ext.ux.PageSizePlugin = Ext.extend(Ext.PagingToolbar, {
     readPage: Ext.emptyFn,
     onLoad: function (store, r, o) {
         var d = this.getPageData(), ap = d.activePage, ps = d.pages;
+        // 解决禁用分页问题(下一页,最后一页)
+        this.next.setDisabled(ap == ps || !!this.disabledPage);//解决总条数大于当前页条数在禁用翻页的情况下还是可以翻页
+        this.last.setDisabled(ap == ps || !!this.disabledPage);
         this.combo.store.removeAll();
         if (ps == 0) {
             this.combo.store.add(new Ext.data.Record({
@@ -121,19 +124,20 @@ Ext.ux.PageSizePlugin = Ext.extend(Ext.PagingToolbar, {
         if (this.rowComboSelect) {
             var data = this.rowComboData ? this.rowComboData : [[5], [10], [15], [20], [30], [50]];
             this.rowcombo = this.rowcombo || Ext.create({
-                    store: new Ext.data.SimpleStore({
-                        fields: ['pageSize'],
-                        data: data
-                    }),
-                    value: this.pageSize,
-                    width: 50,
-                    mode: 'local',
-                    editable: false,
-                    xtype: 'combo',
-                    allowBlank: false,
-                    minListWidth: 50,
-                    displayField: 'pageSize',
-                    triggerAction: 'all'
+                store: new Ext.data.SimpleStore({
+                    fields: ['pageSize'],
+                    data: data
+                }),
+                value: this.pageSize,
+                width: 50,
+                mode: 'local',
+                editable: false,
+                xtype: 'combo',
+                allowBlank: false,
+                minListWidth: 50,
+                displayField: 'pageSize',
+                triggerAction: 'all',
+                disabled: this.disabledPage  //满足可编辑表格时不可分页情景
                 });
             pagingItems.push(this.rowcombo, "条/页&nbsp;&nbsp;");
 

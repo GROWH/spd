@@ -1450,12 +1450,8 @@ DetailGridBaseModel = function () {
             var store = new Ext.data.Store({
                 reader: new Ext.data.JsonReader({
                     totalProperty: 'totalProperty',
-                    root: 'root'
+                    root: 'detailList'
                 }, Ext.data.Record.create(fields)),
-                // proxy: new parent.Ext.data.HttpProxy({
-                //     url: contextPath + '/' + this.namespace + '/'
-                //     + this.action + '!popupQuery.action' + DetailGridBaseModel.initUrlParams
-                // })
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.namespace + '/'
                     + this.action + this.interfaceName +'.action'
@@ -1465,6 +1461,8 @@ DetailGridBaseModel = function () {
                 store.baseParams = {
                     propertyCriteria: DetailGridBaseModel.propertyCriteria,
                     likeQueryInfo: DetailGridBaseModel.likeQueryInfo,
+                    likeQueryType:  DetailGridBaseModel.initUrlParams.detail,
+                    queryaction: DetailGridBaseModel.initUrlParams.detail + 'Action',
                 };
             });
             store.load({
@@ -1483,14 +1481,15 @@ DetailGridBaseModel = function () {
             GridConfig.cleanGridSet(gridName);
         },
         // 底部工具条
-        getBBar: function (pageSize, store) {
+        getBBar: function (pageSize, store, disabledPage) {
             return new Ext.ux.PageSizePlugin({
                 rowComboSelect: true,
                 pageSize: pageSize,
                 store: store,
                 displayInfo: true,
                 saveGridSet: this.saveGridSet,
-                cleanGridSet: this.cleanGridSet
+                cleanGridSet: this.cleanGridSet,
+                disabledPage: disabledPage  //满足可编辑表格时不可分页情景
             });
         },
         getPageSize: function () {
@@ -1511,7 +1510,7 @@ DetailGridBaseModel = function () {
             });
         },
         //表格组装
-        getGrid: function (interfaceName, namespace, action, fields, columns, propertyCriteria, initUrlParams, ) {
+        getGrid: function (interfaceName, namespace, action, fields, columns, propertyCriteria, initUrlParams, disabledPage) {
             var fields = GridBaseModel.addField(fields, action);
             this.namespace = namespace;
             this.action = action;
@@ -1533,7 +1532,7 @@ DetailGridBaseModel = function () {
             columns = GridBaseModel.addColumn(columns, action);
 
             this.store = this.getStore(fields, pageSize);
-            this.bbar = this.getBBar(pageSize, this.store);
+            this.bbar = this.getBBar(pageSize, this.store, disabledPage || this.disabledPage);
             var cb = new Ext.grid.CheckboxSelectionModel();
             var preColumns = [// 配置表格列
                 new Ext.grid.RowNumberer({

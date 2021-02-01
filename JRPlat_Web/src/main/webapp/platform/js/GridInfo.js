@@ -250,19 +250,21 @@ GridInfo = function () {
                 case 'order-management-x' : { //订单信息-细单
                     namespace = namespaces[2];
                     columns = [
-                        {header: "产品编号", dataIndex: 'abc11'},
-                        {header: "产品名称", dataIndex: 'abc22'},
-                        {header: "规格/型号", dataIndex: 'abc33'},
-                        {header: "包装单位", dataIndex: 'abc44'},
-                        {header: "生产企业名称", dataIndex: 'abc55',},
-                        {header: "下单方订货/退货数量", dataIndex: 'abc66'},
-                        {header: "收单方发货数量", dataIndex: 'abc77'},
-                        {header: "批号", dataIndex: 'abc88'},
-                        {header: "序列号", dataIndex: 'abc99'},
-                        {header: "生产日期", dataIndex: 'abc111'},
-                        {header: "有效期/失效期", dataIndex: 'abc222'},
-                        {header: "下单方产品备注", dataIndex: 'abc333'},
-                        {header: "收单方产品备注", dataIndex: 'abc333'},
+                        {header: "产品编号", dataIndex: 'number'},
+                        {header: "产品名称", dataIndex: 'productName'},
+                        {header: "规格/型号", dataIndex: 'specifications'},
+                        {header: "包装单位", dataIndex: 'packingUnit'},
+                        {header: "生产企业名称", dataIndex: 'manufacturer',},
+                        {header: "细单ID", dataIndex: 'id', hidden: true},
+                        {header: "下单方订货/退货数量", dataIndex: 'packingUnit'},
+                        {header: "收单方发货数量", dataIndex: 'orderQuantity'},
+                        {header: "批号", dataIndex: 'ph'},
+                        {header: "备案凭证编码", dataIndex: 'ZCNumber'},
+                        {header: "序列号", dataIndex: 'serialNumber'},
+                        {header: "生产日期", dataIndex: 'manufacturerDate'},
+                        {header: "有效期/失效期", dataIndex: 'effectiveDate'},
+                        {header: "下单方产品备注", dataIndex: 'GYSRemarks'},
+                        {header: "收单方产品备注", dataIndex: 'KHRemarks'},
                     ];
                     break;
                 }

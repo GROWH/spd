@@ -242,7 +242,8 @@ GridModel = function () {
             var gridObj = GridInfo.getGridObj(detail);
             var queryString = 'orderManagement.id:eq:0';
             var interfaceName = '!queryOrderInformation';
-            var detailGrid = DetailGridBaseModel.getGrid(interfaceName,namespace, action, gridObj.fields, gridObj.columns, queryString, '');
+            var initUrlParams = {detail}
+            var detailGrid = DetailGridBaseModel.getGrid(interfaceName,namespace, action, gridObj.fields, gridObj.columns, queryString, initUrlParams);
             return detailGrid;
         },
     }
@@ -284,5 +285,9 @@ showViewPort = function () {
 
 
 Ext.onReady(function () {
+    DetailGridBaseModel.disabledPage = true;
+    DetailGridBaseModel.getPageSize = function () {
+        return 9999;
+    };
     showViewPort.show();
 });
