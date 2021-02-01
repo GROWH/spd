@@ -1392,7 +1392,7 @@ GridBaseModel = function () {
             return [];
         },
         onRowClick: function (namespace, action, grid, index, e) {
-            GridBaseModel.detail();
+            // GridBaseModel.detail();
         },
         onRowDblClick: function (namespace, action) {
             /*if (parent.isGranted(namespace, action, "updatePart")) {
