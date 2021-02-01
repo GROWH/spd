@@ -39,6 +39,9 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
     @Resource(name = "orderInformationService")
     private OrderInformationService orderInformationService;
 
+    //模糊查询
+    private String likeQueryValue;
+
 
     /**
      * 查询时过滤空记录
@@ -58,7 +61,7 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
         }
         try {
 
-            List<OrderManagement> orderManagementList = orderManagementService.queryOrderManagement();
+            List<OrderManagement> orderManagementList = orderManagementService.queryOrderManagement(likeQueryValue);
             if (len > orderManagementList.size()) {
                 len = orderManagementList.size();
             }
@@ -121,8 +124,13 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
     }
 
 
+    public String getLikeQueryValue() {
+        return likeQueryValue;
+    }
 
-
+    public void setLikeQueryValue(String likeQueryValue) {
+        this.likeQueryValue = likeQueryValue;
+    }
 
     public void setPropertyCriteria(String propertyCriteria) {
         this.propertyCriteria = propertyCriteria;

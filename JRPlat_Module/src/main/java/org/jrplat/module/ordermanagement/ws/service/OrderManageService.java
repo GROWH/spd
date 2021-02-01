@@ -74,12 +74,13 @@ public class OrderManageService extends SimpleService {
                 throw new RuntimeException("收单方单位不存在");
             }
             orderManagement.setGYSName(sunit);
+            orderManagement.setGYSNumber(sunit.getPaperworkNo());
 
-            //订单类型
-            DicItem ordertype = StringUtils.isBlank(obj.getString("ddlx"))
-                    ? DicCache.get("ordertype", obj.getString("ddlx")) : null;
+            //订单类型 默认订货
+//            DicItem ordertype = StringUtils.isBlank(obj.getString("ddlx"))
+//                    ? DicCache.get("ordertype", obj.getString("ddlx")) : null;
 
-            orderManagement.setOrdertype(ordertype);
+            orderManagement.setOrdertype(DicCache.get("ordertype","订货"));
             //供应商发货日期
             if(obj.get("GYSfhsl") != null && !obj.getString("GYSfhsl").equals("") ){
                 Date GYSDate = new Date(obj.getLong("GYSfhrq"));

@@ -21,7 +21,7 @@ public class OrderManagementService extends SimpleService<OrderManagement> {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public List<OrderManagement> queryOrderManagement(){
+    public List<OrderManagement> queryOrderManagement(String likeInfo){
         try {
 
             //获取当前用户
@@ -29,16 +29,20 @@ public class OrderManagementService extends SimpleService<OrderManagement> {
             //获取当前登录用户的单位
             Unit unit = user.getUnit();
             String jpql = "select o from OrderManagement o ";
-//            if(likeInfo != null && !likeInfo.equals("")){
-//                jpqlw += "and  w.workPBBarcode like '%"+likeInfo+"%'";
-//            }
-            Query queryw = getService().getEntityManager().createQuery(jpql, OrderManagement.class);
-            if(unit != null){
-                jpql += "where o.GYSName.paperworkNo =:uNo or o.KHName.paperworkNo =:uNo ";
-                queryw.setParameter("uNo", unit.getPaperworkNo());
+
+
+            //模糊搜索
+            if(likeInfo != null && !likeInfo.equals("")){
+                jpql += "where  (o.id like '%"+likeInfo+"%' or o.GYSNumber like '%"+likeInfo+"%' or o.KHNumber like '%"+likeInfo+"%' or  o.GYSName.unitName like '%"+likeInfo+"%'  or o.KHName.unitName like '%"+likeInfo+"%' )";
             }
 
-            List<OrderManagement> orderManagementList = queryw.getResultList();
+            Query query = getService().getEntityManager().createQuery(jpql, OrderManagement.class);
+            if(unit != null){
+                jpql += "where o.GYSName.paperworkNo =:uNo or o.KHName.paperworkNo =:uNo ";
+                query.setParameter("uNo", unit.getPaperworkNo());
+            }
+
+            List<OrderManagement> orderManagementList = query.getResultList();
             return orderManagementList;
         } catch (Exception e) {
             e.printStackTrace();
