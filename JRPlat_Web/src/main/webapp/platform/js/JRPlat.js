@@ -3103,7 +3103,7 @@ QueryGridWindow = function () {
                 }, Ext.data.Record.create(fields)),
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.querynamespace + '/'
-                    + this.queryaction + '!popupQuery.action' + QueryGridWindow.initUrlParams
+                    + this.queryaction + '!query.action' + QueryGridWindow.initUrlParams
                 })
             });
             store.on('beforeload', function (store) {
@@ -3317,7 +3317,6 @@ QueryGridWindow = function () {
             var fields = gridObj.fields;
             this.querynamespace = gridObj.namespace;
             this.queryaction = gridObj.action;
-
             this.queryString = queryString;
             this.initUrlParams = initUrlParams;
             this.idList = idList;

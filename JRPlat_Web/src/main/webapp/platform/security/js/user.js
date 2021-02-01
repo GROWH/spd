@@ -213,23 +213,11 @@ CreateModel = function () {
                                         readOnly: true,
                                         listeners: {
                                             focus: function (field) {
-                                                console.log("111")
-                                                console.log(field)
-                                                var unitID = Ext.getCmp('unitId').getValue();
-                                                var unitName = Ext.getCmp('unitName').getValue();
-                                                console.log(unitID)
-                                                console.log(unitName)
-
-                                                var thismodule = {};
-                                                thismodule.namespace = "security";
-                                                thismodule.action = "user";
-                                                var queryString = unitID;
-                                                // var idList = ["unitId","unitName"];
-                                                // var colList = ["unitId","unitName"];
-
-                                                var idList = ["unitName"];
-                                                var colList = ["unitName"];
-                                                QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
+                                                var querymodule = 'unit';
+                                                var queryString = '';
+                                                var idList = ["unitId","unitName"]; //赋值文本框的id List
+                                                var colList = ["id","unitName"]; //表格列名List 与idList一一对应
+                                                QueryGridWindow.show(querymodule, queryString, idList, colList, '', '单位信息');
                                             }
                                         }
                                     },
@@ -643,5 +631,5 @@ UserPanel = function () {
 
 Ext.onReady(function () {
     UserPanel.show();
-    PubFunc.filterTree(TreeModel.tree, 'filter_input');
+    // PubFunc.filterTree(TreeModel.tree, 'filter_input');
 });

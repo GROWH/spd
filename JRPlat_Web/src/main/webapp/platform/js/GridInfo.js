@@ -97,6 +97,74 @@ GridInfo = function () {
                     namespace = 'security';
                     break;
                 }
+                case 'unit':{
+                    columns = [
+                        {header: "单位名称", dataIndex: 'unitName'},
+                        {header: "单位类型", dataIndex: 'unitType'},
+                        {header: "证件编号", dataIndex: 'paperworkNo'},
+                        {header: "联系人", dataIndex: 'linkman'},
+                        {header: "联系人电话", dataIndex: 'contactPhone'},
+                        {header: "订单获取密码", dataIndex: 'orderKey'},
+                        {header: "统一社会信用代码", dataIndex: 'enSHDM'},
+                        {header: "法人", dataIndex: 'legalPerson'},
+                        {header: "经营地址", dataIndex: 'businessAddress'},
+                        {header: "仓库地址", dataIndex: 'StorehouseAddress'}
+                    ];
+                    fields = [
+                        {name: 'unitName'},
+                        {name: 'unitType'},
+                        {name: 'paperworkNo'},
+                        {name: 'linkman'},
+                        {name: 'contactPhone'},
+                        {name: 'orderKey'},
+                        {name: 'enSHDM'},
+                        {name: 'legalPerson'},
+                        {name: 'businessAddress'},
+                        {name: 'StorehouseAddress'},
+                    ];
+                    namespace = 'unitinfo';
+                    break;
+                }
+                case 'order-management':{
+                    columns = [
+                        {header: "平台流水号", dataIndex: 'id'},
+                        {header: "订单类型", dataIndex: 'ordertype'},
+                        {header: "订单状态", dataIndex: 'orderStatus'},
+                        {header: "收单方ID", dataIndex: 'GYSName_id', hidden: true},
+                        {header: "收单方名称", dataIndex: 'GYSName_unitName'},
+                        {header: "收单方证件编号", dataIndex: 'GYSNumber'},
+                        {header: "收单方发货日期", dataIndex: 'GYSDate'},
+                        {header: "收单方发货单号", dataIndex: 'GYSInvoiceNo',},
+                        {header: "收单方发货物流公司", dataIndex: 'GYSLogistics'},
+                        {header: "收单方发货物流单号", dataIndex: 'GYSLogisticsNo'},
+                        {header: "收单方发货备注", dataIndex: 'GYSRemarks'},
+                        {header: "下单方ID", dataIndex: 'KHName_id', hidden: true},
+                        {header: "下单方名称", dataIndex: 'KHName_unitName'},
+                        {header: "下单方证件编号", dataIndex: 'KHNumber'},
+                        {header: "下单方订单日期", dataIndex: 'KHDate'},
+                        {header: "下单方订单单号", dataIndex: 'KHInvoiceNo'},
+                        {header: "下单方退货物流公司", dataIndex: 'KHTHLogistics'},
+                        {header: "下单方退货物流单号", dataIndex: 'KHTHLogisticsNo'},
+                        {header: "下单方订单备注", dataIndex: 'KHRemarks'}
+                    ];
+                    fields = [
+                        {name: 'id'},
+                        {name: 'ordertype'},
+                        {name: 'orderStatus'},
+                        {name: 'GYSName_id'},
+                        {name: 'GYSName_unitName'},
+                        {name: 'GYSNumber'},
+                        {name: 'GYSInvoiceNo'},
+                        {name: 'GYSLogisticsNo'},
+                        {name: 'KHName_id'},
+                        {name: 'KHName_unitName'},
+                        {name: 'KHNumber'},
+                        {name: 'KHInvoiceNo'},
+                        {name: 'KHTHLogisticsNo'}
+                    ];
+                    namespace = 'ordermanagement';
+                    break;
+                }
                 default: {
                     break;
                 }
@@ -133,7 +201,8 @@ GridInfo = function () {
                 0: 'security',
                 1: 'base',
                 2: 'unitInfo',
-                3: 'commodityInfo'
+                3: 'commodityInfo',
+                4: 'ordermanagement',
             };
             var gridInfoObj = {}, namespace = '', columns = [];
             var r = this.renderColumns();
@@ -225,19 +294,21 @@ GridInfo = function () {
                 }
                 /*===================订单管理==================*/
                 case 'order-management' : { //订单信息
-                    namespace = namespaces[2];
+                    namespace = namespaces[4];
                     columns = [
-                        {header: "平台流水号", dataIndex: 'serialNumber'},
+                        {header: "平台流水号", dataIndex: 'id'},
                         {header: "订单类型", dataIndex: 'ordertype'},
                         {header: "订单状态", dataIndex: 'orderStatus'},
-                        {header: "收单方名称", dataIndex: 'GYSName'},
+                        {header: "收单方ID", dataIndex: 'GYSName_id', hidden: true},
+                        {header: "收单方名称", dataIndex: 'GYSName_unitName'},
                         {header: "收单方证件编号", dataIndex: 'GYSNumber'},
                         {header: "收单方发货日期", dataIndex: 'GYSDate'},
                         {header: "收单方发货单号", dataIndex: 'GYSInvoiceNo',},
                         {header: "收单方发货物流公司", dataIndex: 'GYSLogistics'},
                         {header: "收单方发货物流单号", dataIndex: 'GYSLogisticsNo'},
                         {header: "收单方发货备注", dataIndex: 'GYSRemarks'},
-                        {header: "下单方名称", dataIndex: 'KHName'},
+                        {header: "下单方ID", dataIndex: 'KHName_id', hidden: true},
+                        {header: "下单方名称", dataIndex: 'KHName_unitName'},
                         {header: "下单方证件编号", dataIndex: 'KHNumber'},
                         {header: "下单方订单日期", dataIndex: 'KHDate'},
                         {header: "下单方订单单号", dataIndex: 'KHInvoiceNo'},
@@ -248,7 +319,7 @@ GridInfo = function () {
                     break;
                 }
                 case 'order-management-x' : { //订单信息-细单
-                    namespace = namespaces[2];
+                    namespace = namespaces[4];
                     columns = [
                         {header: "产品编号", dataIndex: 'number'},
                         {header: "产品名称", dataIndex: 'productName'},
@@ -269,7 +340,7 @@ GridInfo = function () {
                     break;
                 }
                 case 'outboundrecords' : { //出库记录
-                    namespace = namespaces[2];
+                    namespace = namespaces[4];
                     columns = [
                         {header: "产品编号", dataIndex: 'number'},
                         {header: "产品名称", dataIndex: 'productName'},

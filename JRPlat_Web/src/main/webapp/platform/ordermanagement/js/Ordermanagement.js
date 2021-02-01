@@ -22,6 +22,48 @@ var namespace='ordermanagement';
 var action='order-management';
 var detail = 'order-management-x';
 
+//高级搜索
+AdvancedSearchModel = function () {
+    return {
+        //搜索表单
+        getItems: function () {
+            var items = [
+                {
+                    xtype: 'textfield',
+                    id: 'unitName',
+                    fieldLabel: '单位名称'
+                },
+                {
+                    xtype: 'textfield',
+                    id: 'paperworkNo',
+                    fieldLabel: '证件编号'
+                }
+            ];
+            return items;
+        },
+        //点击搜索之后的回调方法
+        callback: function () {
+            var data = [];
+
+            var unitName = Ext.getCmp('unitName').getValue();
+            if (unitName != "") {
+                unitName = 'unitName:eq:$' + unitName;
+                data.push(unitName);
+            }
+
+            var paperworkNo = Ext.getCmp('paperworkNo').getValue();
+            if (paperworkNo != "") {
+                paperworkNo = 'realName:eq:' + paperworkNo;
+                data.push(paperworkNo);
+            }
+            AdvancedSearchBaseModel.search(data, "User");
+        },
+
+        show: function () {
+            AdvancedSearchBaseModel.show('高级搜索', "OrderManagement", 420, 170, this.getItems(), this.callback);
+        }
+    };
+}();
 //添加模型信息
 CreateModel = function () {
     return {
@@ -172,7 +214,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加订单信息', 'order-management', 800, 300, this.getItems());
+            CreateBaseModel.show('添加订单信息', 'OrderManagement', 800, 300, this.getItems());
         }
     };
 }();
@@ -200,7 +242,7 @@ ModifyModel = function () {
         },
 
         show: function (model) {
-            ModifyBaseModel.show('修改订单信息', 'order-management', 800, 300, this.getItems(model), model);
+            ModifyBaseModel.show('修改订单信息', 'OrderManagement', 800, 300, this.getItems(model), model);
         }
     };
 }();
@@ -223,9 +265,9 @@ GridModel = function () {
 
             var gridObj = GridInfo.getGridObj(action);
 
-            var commands = ["create", "delete", "updatePart", "search", "query"];
-            var tips = ['增加', '删除', '修改', '高级搜索', '显示全部'];
-            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.advancedsearch, GridBaseModel.showall];
+            var commands = ["create", "delete", "updatePart", "query"];// "search",
+            var tips = ['增加', '删除', '修改', '显示全部'];//'高级搜索',
+            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify,GridBaseModel.showall]; // GridBaseModel.advancedsearch,
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 
