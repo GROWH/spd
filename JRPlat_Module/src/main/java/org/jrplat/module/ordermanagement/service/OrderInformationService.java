@@ -36,6 +36,7 @@ public class OrderInformationService  extends SimpleService<OrderInformation> {
                     "\to.effectiveDate effectiveDate,\n" +
                     "\to.manufacturerDate manufacturerDate,\n" +
                     "\to.KHRemarks,\n" +
+                    "\to.serialNumber,\n" +
                     "\to.GYSRemarks GYSRemarks \n" +
                     "FROM\n" +
                     "\tOrderInformation o\n" +

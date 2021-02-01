@@ -1,10 +1,12 @@
 package org.jrplat.module.ordermanagement.model;
 
+import org.jrplat.platform.annotation.DisplayIgnore;
 import org.jrplat.platform.annotation.FieldRef;
 import org.jrplat.platform.annotation.ModelAttr;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
@@ -61,6 +63,12 @@ public class OrderInformationDto {
     @FieldRef("ZCNumber")
     @ModelAttr("注册证编号/备案凭证编码")
     private String ZCNumber;
+
+
+    @Transient
+    @FieldRef("ZCNumber")
+    @ModelAttr("注册证编号/备案凭证编码")
+    protected String serialNumber;
 
 
     @Transient
@@ -216,5 +224,11 @@ public class OrderInformationDto {
         this.GYSRemarks = GYSRemarks;
     }
 
+    public String getSerialNumber() {
+        return serialNumber;
+    }
 
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
 }
