@@ -106,7 +106,7 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
 
             List<OrderInformationDto> orderInformationList = orderInformationService.queryOrderInformation(Integer.valueOf(orderManagementId));
             Map<String,Object> map = new HashMap();
-            map.put("orderInformationList",orderInformationList);
+            map.put("detailList",orderInformationList);
             Struts2Utils.renderJson(map);
             }
         } catch (Exception e) {
