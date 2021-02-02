@@ -98,11 +98,10 @@ public class OrderInformationDto {
     protected String deliveryTime;
 
 
-    @DisplayIgnore
-    @RenderDate
-    @Temporal(TemporalType.TIMESTAMP)
+    @Transient
+    @FieldRef("manufacturerDate")
     @ModelAttr("生产日期")
-    private Date manufacturerDate;
+    private String manufacturerDate;
 
 
     @Transient
@@ -205,11 +204,11 @@ public class OrderInformationDto {
         this.effectiveDate = effectiveDate;
     }
 
-    public Date getManufacturerDate() {
+    public String getManufacturerDate() {
         return manufacturerDate;
     }
 
-    public void setManufacturerDate(Date manufacturerDate) {
+    public void setManufacturerDate(String manufacturerDate) {
         this.manufacturerDate = manufacturerDate;
     }
 
