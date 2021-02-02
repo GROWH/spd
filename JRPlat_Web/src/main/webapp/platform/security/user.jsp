@@ -10,7 +10,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>用户管理</title>
     <%@include file="../include/common.jsp" %>
-    <script type="text/javascript" src="../js/JRPlat.js"></script>
     <script type="text/javascript" src="js/user.js"></script>
 </head>
 <body>

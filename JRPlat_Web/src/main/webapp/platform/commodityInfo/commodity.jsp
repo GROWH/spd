@@ -11,8 +11,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>商品信息</title>
     <%@include file="../include/common.jsp" %>
-
-    <script type="text/javascript" src="../js/JRPlat.js"></script>
     <script type="text/javascript" src="../js/OtherGridModel.js"></script>
     <script type="text/javascript" src="../js/OtherGridModelTwo.js"></script>
 

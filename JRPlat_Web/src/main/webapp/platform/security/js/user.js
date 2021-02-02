@@ -21,48 +21,48 @@ var selectRoleStoreURL = contextPath + '/security/role!store.action?recursion=tr
 var resetURL = contextPath + '/' + namespace + '/' + action + '!reset.action';
 var reportURL = contextPath + '/' + namespace + '/' + action + '!report.action';
 
-//高级搜索
-AdvancedSearchModel = function () {
-    return {
-        //搜索表单
-        getItems: function () {
-            var items = [
-                {
-                    xtype: 'textfield',
-                    id: 'search_username',
-                    fieldLabel: '账号'
-                },
-                {
-                    xtype: 'textfield',
-                    id: 'search_realName',
-                    fieldLabel: '姓名'
-                }
-            ];
-            return items;
-        },
-        //点击搜索之后的回调方法
-        callback: function () {
-            var data = [];
-
-            var search_username = Ext.getCmp('search_username').getValue();
-            if (search_username != "") {
-                search_username = 'username:eq:$' + search_username;
-                data.push(search_username);
-            }
-
-            var search_realName = Ext.getCmp('search_realName').getValue();
-            if (search_realName != "") {
-                search_realName = 'realName:eq:' + search_realName;
-                data.push(search_realName);
-            }
-            AdvancedSearchBaseModel.search(data, "User");
-        },
-
-        show: function () {
-            AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
-        }
-    };
-}();
+// //高级搜索
+// AdvancedSearchModel = function () {
+//     return {
+//         //搜索表单
+//         getItems: function () {
+//             var items = [
+//                 {
+//                     xtype: 'textfield',
+//                     id: 'search_username',
+//                     fieldLabel: '账号'
+//                 },
+//                 {
+//                     xtype: 'textfield',
+//                     id: 'search_realName',
+//                     fieldLabel: '姓名'
+//                 }
+//             ];
+//             return items;
+//         },
+//         //点击搜索之后的回调方法
+//         callback: function () {
+//             var data = [];
+//
+//             var search_username = Ext.getCmp('search_username').getValue();
+//             if (search_username != "") {
+//                 search_username = 'username:eq:$' + search_username;
+//                 data.push(search_username);
+//             }
+//
+//             var search_realName = Ext.getCmp('search_realName').getValue();
+//             if (search_realName != "") {
+//                 search_realName = 'realName:eq:' + search_realName;
+//                 data.push(search_realName);
+//             }
+//             AdvancedSearchBaseModel.search(data, "User");
+//         },
+//
+//         show: function () {
+//             AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
+//         }
+//     };
+// }();
 //添加模型信息
 CreateModel = function () {
     return {
@@ -414,18 +414,11 @@ ModifyModel = function () {
                                     readOnly: true,
                                     listeners: {
                                         focus: function (field) {
-                                            console.log(field)
-                                            var unitID = Ext.getCmp('unitId').getValue();
-                                            var unitName = Ext.getCmp('unitName').getValue();
-                                            console.log(unitID)
-                                            console.log(unitName)
-                                            var thismodule = {};
-                                            thismodule.namespace = "security";
-                                            thismodule.action = "user";
-                                            var queryString = unitID;
-                                            var idList = ["unitId","unitName"];
-                                            var colList = ["unitId","unitName"];
-                                            QueryGridWindow.show(thismodule,"unit", queryString, idList, colList);
+                                            var querymodule = 'unit';
+                                            var queryString = '';
+                                            var idList = ["unitId","unitName"]; //赋值文本框的id List
+                                            var colList = ["id","unitName"]; //表格列名List 与idList一一对应
+                                            QueryGridWindow.show(querymodule, queryString, idList, colList, '', '单位信息');
                                         }
                                     }
                                 },
@@ -532,10 +525,13 @@ GridModel = function () {
             };
 
             var gridObj = GridInfo.getGridObj(action);
+            // var commands = ["create", "delete", "updatePart", "search", "query", "export", "reset"];
+            // var tips = ['增加', '删除', '修改', '高级搜索', '显示全部', '导出', "重置密码"];
+            // var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.advancedsearch, GridBaseModel.showall, GridBaseModel.exportData, OptModel.reset];
 
-            var commands = ["create", "delete", "updatePart", "search", "query", "export", "reset"];
-            var tips = ['增加', '删除', '修改', '高级搜索', '显示全部', '导出', "重置密码"];
-            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.advancedsearch, GridBaseModel.showall, GridBaseModel.exportData, OptModel.reset];
+            var commands = ["create", "delete", "updatePart", "query", "export", "reset"];
+            var tips = ['增加', '删除', '修改', '显示全部', '导出', "重置密码"];
+            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.showall, GridBaseModel.exportData, OptModel.reset];
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 
