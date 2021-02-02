@@ -96,13 +96,30 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
         }catch (Exception e){
             map = new HashMap();
             map.put("success", false);
-            map.put("message", "查询失败:" + e.getMessage());
+            map.put("message", "新增失败:" + e.getMessage());
             Struts2Utils.renderJson(map);
             return null;
         }
         super.create();
         return null;
     }
+
+
+    @Override
+    public String updatePart(){
+        try {
+            outboundrecordsService.updateOrderInformationInfo(model);
+        }catch (Exception e){
+            map = new HashMap();
+            map.put("success", false);
+            map.put("message", "修改失败:" + e.getMessage());
+            Struts2Utils.renderJson(map);
+            return null;
+        }
+        super.updatePart()  ;
+        return null;
+    }
+
 
 
     public String getLikeQueryValue() {
