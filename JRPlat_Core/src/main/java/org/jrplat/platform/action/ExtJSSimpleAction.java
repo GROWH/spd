@@ -36,6 +36,7 @@ import javax.persistence.*;
 import javax.servlet.ServletContext;
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -817,8 +818,65 @@ public abstract class ExtJSSimpleAction<T extends Model> extends ExtJSActionSupp
             if (field.isAnnotationPresent(RenderIgnore.class)) {
                 continue;
             }
+            if (field.isAnnotationPresent(FieldRef.class)) {
+                addFieldRefValue(obj, field, map);
+                continue;
+            }
+            if (isLazyType(field)) {
+                addLazyTypeFieldValue(obj, field, map);
+                continue;
+            }
+            if (field.getGenericType() == Double.class) {
+                doubleValue(obj, field, map);
+                continue;
+            }
             addFieldValue(obj, field, map);
         }
+    }
+
+    private void doubleValue(T obj, Field field, Map data) {
+        String fieldName = field.getName();
+        String methodName = "get" + change(fieldName);
+        try {
+            Method method = obj.getClass().getMethod(methodName);
+            Object value = method.invoke(obj);
+            if(value != null){
+                Double d = (double)value;
+                if(d > 100000 || d < -100000){
+                    BigDecimal bigDecimal=new BigDecimal(d).setScale(3, BigDecimal.ROUND_HALF_UP);
+                    data.put(fieldName, bigDecimal.toString());
+                } else {
+                    data.put(fieldName, d.toString());
+                }
+            }
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 判断是否为懒加载
+     *
+     * @param field
+     * @return
+     */
+    private boolean isLazyType(Field field) {
+        if (field.isAnnotationPresent(ManyToOne.class)) {
+            FetchType fetchtype = field.getAnnotation(ManyToOne.class).fetch();
+            if (fetchtype != null && fetchtype.equals(FetchType.LAZY)) {
+                return true;
+            }
+
+        }
+        if (field.isAnnotationPresent(OneToOne.class)) {
+            FetchType fetchtype = field.getAnnotation(OneToOne.class).fetch();
+            if (fetchtype != null && fetchtype.equals(FetchType.LAZY)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected String exportFileName() {
@@ -904,6 +962,125 @@ public abstract class ExtJSSimpleAction<T extends Model> extends ExtJSActionSupp
         data.addAll(temp.values());
     }
 
+    /**
+     * 处理字段显示同步问题
+     *
+     * @param obj
+     * @param field
+     * @param data
+     * @author 赵腾飞
+     */
+    private void addFieldRefValue(T obj, Field field, Map<String, String> data) {
+        FieldRef ref = field.getAnnotation(FieldRef.class);
+        String refField = ref.value();
+        String[] params = refField.split("\\.");
+        String[] methodName = getMethodName(params);
+        Object value = null;
+        if (params.length == 1) {
+            try {
+                Method method = obj.getClass().getMethod(methodName[0]);
+                value = method.invoke(obj);
+            } catch (NoSuchMethodException | SecurityException
+                    | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+
+        }
+        if (params.length == 2) {
+            try {
+                Method method = obj.getClass().getMethod(methodName[0]);
+                T refModel = (T) method.invoke(obj);
+                if (null != refModel) {
+                    method = refModel.getClass().getMethod(methodName[1]);
+                    value = method.invoke(refModel);
+                }
+            } catch (NoSuchMethodException | SecurityException
+                    | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        if (params.length == 3) {
+            try {
+                Method method = obj.getClass().getMethod(methodName[0]);
+                T refModel = (T) method.invoke(obj);
+                if (null != refModel) {
+                    method = refModel.getClass().getMethod(methodName[1]);
+                    refModel = (T) method.invoke(refModel);
+                }
+                if (null != refModel) {
+                    method = refModel.getClass().getMethod(methodName[2]);
+                    value = method.invoke(refModel);
+                }
+            } catch (NoSuchMethodException | SecurityException
+                    | IllegalAccessException | IllegalArgumentException
+                    | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }
+        if (value != null) {
+            if (value instanceof Double) {
+                double d = (double) value;
+                if(d > 100000 || d < -100000){
+                    BigDecimal bigDecimal = BigDecimal.valueOf(d).setScale(3, BigDecimal.ROUND_HALF_UP);
+                    data.put(field.getName(), bigDecimal.toString());
+                } else {
+                    data.put(field.getName(), value.toString());
+                }
+            } else {
+                data.put(field.getName(), value.toString());
+            }
+        } else {
+            data.put(field.getName(), "");
+        }
+    }
+
+    private void addLazyTypeFieldValue(T obj, Field field, Map data) {
+        String fieldName = field.getName();
+        String methodName = "get" + change(fieldName);
+        try {
+            Method method = obj.getClass().getMethod(methodName);
+            Object value = method.invoke(obj);
+            if (value != null && field.isAnnotationPresent(ModelAttrRef.class)) {
+                LOG.debug("处理对象,字段为：" + field.getName());
+                ModelAttrRef ref = field.getAnnotation(ModelAttrRef.class);
+                String fieldRef = ref.value();
+                // 加入复杂对象的ID
+                method = value.getClass().getMethod("getId");
+                Object id = method.invoke(value);
+
+                data.put(fieldName + "_id", id.toString());
+                // 因为是复杂对象，所以变换字段名称
+                fieldName = fieldName + "_" + fieldRef;
+                // 获取fieldRef的值
+                method = value.getClass().getMethod("get" + change(fieldRef));
+                value = method.invoke(value);
+                // value = ReflectionUtils.getFieldValue(value, fieldRef);
+                if (value != null) {
+                    data.put(fieldName, value.toString());
+                }
+            }
+            // 处理下拉菜单
+            if (value!=null && field.isAnnotationPresent(SimpleDic.class)) {
+                // 当修改数据的时候，需要该值
+                // 加入复杂对象的ID
+                method = value.getClass().getMethod("getId");
+                Object id = method.invoke(value);
+                data.put(fieldName + "Id",id.toString());
+                method = value.getClass().getMethod("getName");
+                value = method.invoke(value);
+            }
+            if (value != null) {
+                data.put(fieldName, value.toString());
+            }
+        } catch (NoSuchMethodException | SecurityException
+                | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
     private void addFieldValue(T obj, Field field, Map<String, String> data) {
         String fieldName = field.getName();
         try {
@@ -916,18 +1093,21 @@ public abstract class ExtJSSimpleAction<T extends Model> extends ExtJSActionSupp
                 data.put(fieldName, "");
                 return;
             }
-            //处理集合类型
+            // 处理集合类型
             if (field.isAnnotationPresent(ModelCollRef.class)) {
                 ModelCollRef ref = field.getAnnotation(ModelCollRef.class);
                 String fieldRef = ref.value();
                 Collection col = (Collection) value;
                 String colStr = "";
                 if (col != null) {
-                    LOG.debug("处理集合,字段为：" + field.getName() + ",大小为：" + col.size());
+                    LOG.debug("处理集合,字段为：" + field.getName() + ",大小为："
+                            + col.size());
                     if (col.size() > 0) {
                         StringBuilder str = new StringBuilder();
                         for (Object m : col) {
-                            str.append(ReflectionUtils.getFieldValue(m, fieldRef).toString()).append(",");
+                            str.append(
+                                    ReflectionUtils.getFieldValue(m, fieldRef)
+                                            .toString()).append(",");
                         }
                         str = str.deleteCharAt(str.length() - 1);
                         colStr = str.toString();
@@ -938,32 +1118,29 @@ public abstract class ExtJSSimpleAction<T extends Model> extends ExtJSActionSupp
                 data.put(fieldName, colStr);
                 return;
             }
-            //处理复杂对象类型
+            // 处理复杂对象类型
             if (field.isAnnotationPresent(ModelAttrRef.class)) {
-//                LOG.debug("处理对象,字段为：" + field.getName());
+                LOG.debug("处理对象,字段为：" + field.getName());
                 ModelAttrRef ref = field.getAnnotation(ModelAttrRef.class);
                 String fieldRef = ref.value();
-                //加入复杂对象的ID
-                Object id = ReflectionUtils.getFieldValue(value, "id");
-                if (id == null) {
-                    Method method = value.getClass().getMethod("getId");
-                    id = method.invoke(value);
-                }
-                data.put(fieldName + "_id", id.toString());
-                //因为是复杂对象，所以变换字段名称
-                fieldName = fieldName + "_" + fieldRef;
-                //获取fieldRef的值
-                Object refValue = ReflectionUtils.getFieldValue(value, fieldRef);
-                if (refValue == null) {
-                    Method method = value.getClass().getMethod(getMethodName(fieldRef));
+                // 加入复杂对象的ID
+                Method method = value.getClass().getMethod("getId");
+                // Object id = ReflectionUtils.getFieldValue(value, "id");
+                Object id = method.invoke(value);
+                if (id != null) {
+                    data.put(fieldName + "_id", id.toString());
+                    // 因为是复杂对象，所以变换字段名称
+                    fieldName = fieldName + "_" + fieldRef;
+                    // 获取fieldRef的值
+                    method = value.getClass().getMethod(
+                            "get" + change(fieldRef));
+                    // value = ReflectionUtils.getFieldValue(value, fieldRef);
                     value = method.invoke(value);
-                } else {
-                    value = refValue;
+                    if(value == null){
+                        value = "";
+                    }
+                    data.put(fieldName, value.toString());
                 }
-            }
-            if (value == null) {
-                data.put(fieldName, "");
-                return;
             }
             if (value.getClass() == null) {
                 data.put(fieldName, "");
@@ -980,49 +1157,44 @@ public abstract class ExtJSSimpleAction<T extends Model> extends ExtJSActionSupp
                 } else if (field.isAnnotationPresent(RenderTime.class)) {
                     value = DateTypeConverter.toDefaultDateTime((Date) value);
                 } else {
-                    //如果没有指定渲染类型，则根据@Temporal来判断
-                    String temporal = "TIMESTAMP";
-                    if (field.isAnnotationPresent(Temporal.class)) {
-                        temporal = field.getAnnotation(Temporal.class).value().name();
-                    }
-                    switch (temporal) {
-                        case "TIMESTAMP":
-                            value = DateTypeConverter.toDefaultDateTime((Date) value);
+                    // 对于Date字段，如果没有指定渲染类型，则根据@Temporal来判断
+                    switch (valueClass) {
+                        case "Timestamp":
+                            value = DateTypeConverter
+                                    .toDefaultDateTime((Date) value);
                             break;
-                        case "DATE":
+                        case "Date":
                             value = DateTypeConverter.toDefaultDate((Date) value);
                             break;
                     }
                 }
             }
-            //处理下拉菜单
+            // 处理下拉菜单
             if ("DicItem".equals(valueClass)) {
-                //当修改数据的时候，需要该值
-                data.put(fieldName + "Id", ReflectionUtils.getFieldValue(value, "id").toString());
+                // 当修改数据的时候，需要该值
+                data.put(fieldName + "Id",
+                        ReflectionUtils.getFieldValue(value, "id").toString());
 
                 value = ReflectionUtils.getFieldValue(value, "name");
             }
-            if (value instanceof Number) {
-                BigDecimal number;
-                if (value instanceof Integer) {
-                    number = BigDecimal.valueOf((Integer) value);
-                } else if (value instanceof Long) {
-                    number = BigDecimal.valueOf((Long) value);
-                } else {
-                    number = BigDecimal.valueOf((Double) value);
-                }
-                data.put(fieldName, number.toPlainString());
-            } else {
-                data.put(fieldName, value.toString());
-            }
+            data.put(fieldName, value.toString());
         } catch (Exception e) {
             LOG.error("获取字段值失败", e);
         }
     }
 
-    private String getMethodName(String fieldName) {
-        StringBuilder builder = new StringBuilder("get");
-        return builder.append(change(fieldName)).toString();
+    /**
+     * 得到get方法的名字
+     *
+     * @param params
+     * @return String[] 方法名字
+     */
+    private String[] getMethodName(String[] params) {
+        String[] methodName = new String[params.length];
+        for (int i = 0; i < params.length; i++) {
+            methodName[i] = "get" + change(params[i]);
+        }
+        return methodName;
     }
 
     public T getModel() {

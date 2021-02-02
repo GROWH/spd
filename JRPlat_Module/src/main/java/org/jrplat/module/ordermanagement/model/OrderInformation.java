@@ -33,6 +33,7 @@ import org.springframework.stereotype.Component;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
@@ -48,7 +49,7 @@ public class OrderInformation extends SimpleModel {
     protected Integer lineNumber;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ModelAttr("产品编号")
     @ModelAttrRef("number")
     protected Commodity productNo;
@@ -66,7 +67,7 @@ public class OrderInformation extends SimpleModel {
     @DisplayIgnore
     @ModelAttr("包装单位")
     @Column(length = 500)
-    protected String packagingUnit;
+    protected String packingUnit;
 
     @DisplayIgnore
     @ModelAttr("生产企业名称")
@@ -142,6 +143,7 @@ public class OrderInformation extends SimpleModel {
         this.lineNumber = lineNumber;
     }
 
+
     public Commodity getProductNo() {
         return productNo;
     }
@@ -169,12 +171,12 @@ public class OrderInformation extends SimpleModel {
     }
 
     @XmlAttribute
-    public String getPackagingUnit() {
-        return packagingUnit;
+    public String getPackingUnit() {
+        return packingUnit;
     }
 
-    public void setPackagingUnit(String packagingUnit) {
-        this.packagingUnit = packagingUnit;
+    public void setPackingUnit(String packingUnit) {
+        this.packingUnit = packingUnit;
     }
 
     @XmlAttribute

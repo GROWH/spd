@@ -22,7 +22,7 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
 
 
     @Transactional(rollbackFor = Exception.class)
-    public List<Outboundrecords> queryOutboundrecords(){
+    public List<Outboundrecords> queryOutboundrecords(String likeInfo){
         try {
 
             //获取当前用户
@@ -30,12 +30,18 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
             //获取当前登录用户的单位
             Unit unit = user.getUnit();
             String jpql = "select o from Outboundrecords o ";
-//            if(likeInfo != null && !likeInfo.equals("")){
-//                jpqlw += "and  w.workPBBarcode like '%"+likeInfo+"%'";
-//            }
+
+            if(likeInfo != null && !likeInfo.equals("") || unit != null ){
+                jpql +=  "where 1=1" ;
+            }
+
+            //模糊搜索
+            if(likeInfo != null && !likeInfo.equals("")){
+                jpql += " and (o.id like '%"+likeInfo+"%' or o.orderInformation.productNo.number like '%"+likeInfo+"%' or o.orderInformation.productName like '%"+likeInfo+"%' )";
+            }
             Query queryw = getService().getEntityManager().createQuery(jpql, Outboundrecords.class);
             if(unit != null){
-                jpql += "where o.unitNo.paperworkNo =:uNo";
+                jpql += "and o.unitNo.paperworkNo =:uNo";
                 queryw.setParameter("uNo", unit.getPaperworkNo());
             }
 

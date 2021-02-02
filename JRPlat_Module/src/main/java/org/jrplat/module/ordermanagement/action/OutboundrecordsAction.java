@@ -34,6 +34,9 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
     @Resource(name = "outboundrecordsService")
     private OutboundrecordsService outboundrecordsService;
 
+    //模糊查询
+    private String likeQueryValue;
+
     /**
      * 查询时过滤空记录
      *
@@ -52,7 +55,7 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
         }
         try {
 
-            List<Outboundrecords> outboundrecordsList = outboundrecordsService.queryOutboundrecords();
+            List<Outboundrecords> outboundrecordsList = outboundrecordsService.queryOutboundrecords(likeQueryValue);
             if (len > outboundrecordsList.size()) {
                 len = outboundrecordsList.size();
             }
@@ -88,7 +91,13 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
 
 
 
+    public String getLikeQueryValue() {
+        return likeQueryValue;
+    }
 
+    public void setLikeQueryValue(String likeQueryValue) {
+        this.likeQueryValue = likeQueryValue;
+    }
 
 
     public void setPropertyCriteria(String propertyCriteria) {

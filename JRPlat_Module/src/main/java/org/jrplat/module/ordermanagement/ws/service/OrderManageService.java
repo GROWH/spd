@@ -173,7 +173,7 @@ public class OrderManageService extends SimpleService {
                 //包装单位
                 String packagingUnit = StringUtils.isBlank(ox.getString("bzdw"))
                         ? ox.getString("bzdw") : null;
-                orderInformation.setPackagingUnit(packagingUnit);
+                orderInformation.setPackingUnit(packagingUnit);
                 //生产企业名称
                 String manufacturer = StringUtils.isBlank(ox.getString("scqymc"))
                         ? ox.getString("scqymc") : null;

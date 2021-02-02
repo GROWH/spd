@@ -56,7 +56,7 @@ public class Commodity extends SimpleModel {
     @DisplayIgnore
     @ModelAttr("包装单位")
     @Column(length = 500)
-    protected String PackingUnit;
+    protected String packingUnit;
 
     @DisplayIgnore
     @ModelAttrNotNull
@@ -161,7 +161,7 @@ public class Commodity extends SimpleModel {
     public void setZCNumber(String ZCNumber) {
         this.ZCNumber = ZCNumber;
     }
-
+    @XmlAttribute
     public String getProductName() {
         return productName;
     }
@@ -169,7 +169,7 @@ public class Commodity extends SimpleModel {
     public void setProductName(String productName) {
         this.productName = productName;
     }
-
+    @XmlAttribute
     public String getSpecification() {
         return specification;
     }
@@ -177,13 +177,13 @@ public class Commodity extends SimpleModel {
     public void setSpecification(String specification) {
         this.specification = specification;
     }
-
+    @XmlAttribute
     public String getPackingUnit() {
-        return PackingUnit;
+        return packingUnit;
     }
 
     public void setPackingUnit(String packingUnit) {
-        PackingUnit = packingUnit;
+        packingUnit = packingUnit;
     }
 
     @Override

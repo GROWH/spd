@@ -42,10 +42,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Outboundrecords")
 public class Outboundrecords extends SimpleModel {
 
-    @DisplayIgnore
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @ModelAttr("细单")
-    @ModelAttrRef("lineNumber")
+    @ModelAttrRef("id")
     protected OrderInformation orderInformation;
 
     @DisplayIgnore
@@ -70,12 +69,7 @@ public class Outboundrecords extends SimpleModel {
     @ModelAttrRef("paperworkNo")
     protected Unit unitNo;
 
-
-    @Transient
-    @FieldRef("orderInformation.PH")
-    @ModelAttr("批号")
-    protected String PH;
-
+    
     @Transient
     @FieldRef("orderInformation.orderQuantity")
     @ModelAttr("客户订货数量")
@@ -99,7 +93,7 @@ public class Outboundrecords extends SimpleModel {
 
 
     @Transient
-    @FieldRef("orderInformation.productNo.packagingUnit")
+    @FieldRef("orderInformation.productNo.packingUnit")
     @ModelAttr("包装单位")
     protected String packagingUnit;
 
@@ -155,14 +149,7 @@ public class Outboundrecords extends SimpleModel {
     public void setPackagingUnit(String packagingUnit) {
         this.packagingUnit = packagingUnit;
     }
-
-    public String getPH() {
-        return PH;
-    }
-
-    public void setPH(String PH) {
-        this.PH = PH;
-    }
+    
 
     public Integer getOrderQuantity() {
         return orderQuantity;
@@ -196,6 +183,7 @@ public class Outboundrecords extends SimpleModel {
         this.productName = productName;
     }
 
+    
     @Override
     public String getMetaData() {
         return "订货信息";
