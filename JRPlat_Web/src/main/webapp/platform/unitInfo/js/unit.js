@@ -298,7 +298,7 @@ ModifyModel = function () {
                                         hiddenName: 'model.unitType.id',
                                         fieldLabel: '单位类型',
                                         blankText: '单位类型不能为空',
-                                        value: model.unitType,
+                                        value: model.unitTypeId,
                                     },
                                     {
                                         cls: 'attr',

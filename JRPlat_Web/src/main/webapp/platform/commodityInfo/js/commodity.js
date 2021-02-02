@@ -261,7 +261,7 @@ ModifyModel = function () {
                                         name: 'model.encodingFormat.id',
                                         fieldLabel: '编号格式',
                                         blankText: '编号格式不能为空',
-                                        value: model.encodingFormat,
+                                        value: model.encodingFormatId,
                                     },
                                     {
                                         cls: 'attr',
