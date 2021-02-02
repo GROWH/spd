@@ -160,12 +160,6 @@ CreateModel = function () {
 ModifyModel = function () {
     return {
         getItems: function (model) {
-            var cfg = {
-                allowBlank: false,
-                labelStyle: 'color: red;',
-                readOnly: true
-            };
-
             var items = [{
                 layout: 'form',
                 items: [{
@@ -286,7 +280,6 @@ ModifyModel = function () {
             }];
             return items;
         },
-
         show: function (model) {
             ModifyBaseModel.show('修改出库记录', 'outboundrecords', 800, 300, this.getItems(model), model);
         }
