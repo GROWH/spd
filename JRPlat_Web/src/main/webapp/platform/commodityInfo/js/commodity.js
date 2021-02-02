@@ -5,47 +5,47 @@ var action = 'commodity';
 
 
 //高级搜索
-AdvancedSearchModel = function () {
-    return {
-        //搜索表单
-        getItems: function () {
-            var items = [
-                {
-                    xtype: 'textfield',
-                    id: 'productName',
-                    fieldLabel: '产品名称'
-                },
-                {
-                    xtype: 'textfield',
-                    id: 'specification',
-                    fieldLabel: '规格型号'
-                }
-            ];
-            return items;
-        },
-        //点击搜索之后的回调方法
-        callback: function () {
-            var data = [];
-
-            var productName = Ext.getCmp('productName').getValue();
-            if (productName != "") {
-                productName = 'productName:eq:$' + productName;
-                data.push(productName);
-            }
-
-            var specification = Ext.getCmp('specification').getValue();
-            if (specification != "") {
-                specification = 'realName:eq:' + specification;
-                data.push(specification);
-            }
-            AdvancedSearchBaseModel.search(data, "User");
-        },
-
-        show: function () {
-            AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
-        }
-    };
-}();
+// AdvancedSearchModel = function () {
+//     return {
+//         //搜索表单
+//         getItems: function () {
+//             var items = [
+//                 {
+//                     xtype: 'textfield',
+//                     id: 'productName',
+//                     fieldLabel: '产品名称'
+//                 },
+//                 {
+//                     xtype: 'textfield',
+//                     id: 'specification',
+//                     fieldLabel: '规格型号'
+//                 }
+//             ];
+//             return items;
+//         },
+//         //点击搜索之后的回调方法
+//         callback: function () {
+//             var data = [];
+//
+//             var productName = Ext.getCmp('productName').getValue();
+//             if (productName != "") {
+//                 productName = 'productName:eq:$' + productName;
+//                 data.push(productName);
+//             }
+//
+//             var specification = Ext.getCmp('specification').getValue();
+//             if (specification != "") {
+//                 specification = 'realName:eq:' + specification;
+//                 data.push(specification);
+//             }
+//             AdvancedSearchBaseModel.search(data, "User");
+//         },
+//
+//         show: function () {
+//             AdvancedSearchBaseModel.show('高级搜索', "user", 420, 170, this.getItems(), this.callback);
+//         }
+//     };
+// }();
 
 //添加模型信息
 CreateModel = function () {
@@ -148,7 +148,7 @@ CreateModel = function () {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        name: 'model.PackingUnit',
+                                        name: 'model.packingUnit',
                                         fieldLabel: '包装单位',
                                         blankText: '包装单位不能为空'
                                     },
@@ -261,7 +261,7 @@ ModifyModel = function () {
                                         name: 'model.encodingFormat.id',
                                         fieldLabel: '编号格式',
                                         blankText: '编号格式不能为空',
-                                        value: model.encodingFormat,
+                                        value: model.encodingFormatId,
                                     },
                                     {
                                         cls: 'attr',
@@ -305,10 +305,10 @@ ModifyModel = function () {
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        name: 'model.PackingUnit',
+                                        name: 'model.packingUnit',
                                         fieldLabel: '包装单位',
                                         blankText: '包装单位不能为空',
-                                        value: model.PackingUnit,
+                                        value: model.packingUnit,
                                     },
                                     {
                                         cls: 'attr',
@@ -376,9 +376,9 @@ GridModel = function () {
 
             var gridObj = GridInfo.getGridObj(action);
 
-            var commands = ["create", "delete", "updatePart", "search", "query"];
-            var tips = ['增加', '删除', '修改', '高级搜索', '显示全部'];
-            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.advancedsearch, GridBaseModel.showall];
+            var commands = ["create", "delete", "updatePart", "query"];
+            var tips = ['增加', '删除', '修改', '显示全部'];
+            var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.showall];
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 

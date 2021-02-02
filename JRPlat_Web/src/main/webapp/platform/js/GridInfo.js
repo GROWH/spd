@@ -319,7 +319,7 @@ GridInfo = function () {
                     columns = [
                         {header: "产品名称", dataIndex: 'productName'},
                         {header: "规格型号", dataIndex: 'specification'},
-                        {header: "包装单位", dataIndex: 'PackingUnit'},
+                        {header: "包装单位", dataIndex: 'packingUnit'},
                         {header: "包装数量", dataIndex: 'quantity'},
                         {header: "编号格式", dataIndex: 'encodingFormat'},
                         {header: "编号", dataIndex: 'number'},
