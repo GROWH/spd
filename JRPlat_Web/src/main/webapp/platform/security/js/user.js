@@ -21,7 +21,7 @@ var selectRoleStoreURL = contextPath + '/security/role!store.action?recursion=tr
 var resetURL = contextPath + '/' + namespace + '/' + action + '!reset.action';
 var reportURL = contextPath + '/' + namespace + '/' + action + '!report.action';
 
-// //高级搜索
+//高级搜索
 // AdvancedSearchModel = function () {
 //     return {
 //         //搜索表单
@@ -64,6 +64,8 @@ var reportURL = contextPath + '/' + namespace + '/' + action + '!report.action';
 //     };
 // }();
 //添加模型信息
+//添加模型信息
+//添加模型信息
 CreateModel = function () {
     return {
         getItems: function () {
@@ -83,7 +85,23 @@ CreateModel = function () {
                     text: '角色',
                     id: 'root',
                     expanded: true
-                })
+                }),
+                listeners: {
+                    //监听复选框的选中属性改变事件
+                    checkchange:function (node,checked) {
+                        var roleArray = Ext.getCmp('roleSelector').getValue()
+                        //判断是否选中超级管理员，若选中，则修改单位为非必填
+                        if(roleArray.indexOf('role-2')!=-1){
+                            Ext.apply(Ext.getCmp('unitName'), {allowBlank: true});
+                            Ext.apply(Ext.getCmp('unitId'), {allowBlank: true});
+                            Ext.getCmp('unitName').label.setStyle({"color": ""});
+                        }else{
+                            Ext.apply(Ext.getCmp('unitName'), {allowBlank: false});
+                            Ext.apply(Ext.getCmp('unitId'), {allowBlank: false});
+                            Ext.getCmp('unitName').label.setStyle({"color": "red"});
+                        }
+                    }
+                }
             });
             roleSelector.reset = function () {
                 this.clearValue();
@@ -289,7 +307,23 @@ ModifyModel = function () {
                     text: '角色',
                     id: 'root',
                     expanded: true
-                })
+                }),
+                listeners: {
+                    //监听复选框的选中属性改变事件
+                    checkchange:function (node,checked) {
+                        var roleArray = Ext.getCmp('roleSelector').getValue()
+                        //判断是否选中超级管理员，若选中，则修改单位为非必填
+                        if(roleArray.indexOf('role-2')!=-1){
+                            Ext.apply(Ext.getCmp('unitName'), {allowBlank: true});
+                            Ext.apply(Ext.getCmp('unitId'), {allowBlank: true});
+                            Ext.getCmp('unitName').label.setStyle({"color": ""});
+                        }else{
+                            Ext.apply(Ext.getCmp('unitName'), {allowBlank: false});
+                            Ext.apply(Ext.getCmp('unitId'), {allowBlank: false});
+                            Ext.getCmp('unitName').label.setStyle({"color": "red"});
+                        }
+                    }
+                }
             });
             roleSelector.reset = function () {
                 this.clearValue();
