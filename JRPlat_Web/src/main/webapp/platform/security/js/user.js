@@ -63,8 +63,7 @@ var reportURL = contextPath + '/' + namespace + '/' + action + '!report.action';
 //         }
 //     };
 // }();
-//添加模型信息
-//添加模型信息
+
 //添加模型信息
 CreateModel = function () {
     return {
