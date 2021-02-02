@@ -3095,15 +3095,21 @@ QueryGridWindow = function () {
             if (undefined == this.initUrlParams) {
                 this.initUrlParams = "";
             }
+            if (undefined == this.interfaceName) {
+                this.interfaceName = "!query.action";
+                this.resName = "root";
+            }else {
+                this.resName = "detailList";//细单接口返回key
+            }
             // 定义数据集对象
             var store = new Ext.data.Store({
                 reader: new Ext.data.JsonReader({
                     totalProperty: 'totalProperty',
-                    root: 'root'
+                    root: QueryGridWindow.resName,
                 }, Ext.data.Record.create(fields)),
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.querynamespace + '/'
-                    + this.queryaction + '!query.action' + QueryGridWindow.initUrlParams
+                    + this.queryaction + QueryGridWindow.interfaceName + QueryGridWindow.initUrlParams
                 })
             });
             store.on('beforeload', function (store) {
@@ -3311,7 +3317,7 @@ QueryGridWindow = function () {
          * @params colList 表格store中要取的值,与idList中的参数一一对应
          * @params initUrlParams URL参数
          */
-        show: function (querymodule, queryString, idList, colList, initUrlParams, title) {
+        show: function (querymodule, queryString, idList, colList, initUrlParams, title, interfaceName) {
             var gridObj = GridInfo.get(querymodule);
             var columns = gridObj.columns;
             var fields = gridObj.fields;
@@ -3321,7 +3327,8 @@ QueryGridWindow = function () {
             this.initUrlParams = initUrlParams;
             this.idList = idList;
             this.colList = colList;
-            this.title = title
+            this.title = title;
+            this.interfaceName = interfaceName;
 
             this.grid = this.getGrid(columns, fields);
             this.frm = this.getForm();

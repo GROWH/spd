@@ -165,6 +165,44 @@ GridInfo = function () {
                     namespace = 'ordermanagement';
                     break;
                 }
+                case 'order-management-x':{
+                    columns = [
+                        {header: "产品编号", dataIndex: 'number'},
+                        {header: "产品名称", dataIndex: 'productName'},
+                        {header: "规格/型号", dataIndex: 'specifications'},
+                        {header: "包装单位", dataIndex: 'packingUnit'},
+                        {header: "生产企业名称", dataIndex: 'manufacturer',},
+                        {header: "细单ID", dataIndex: 'id', hidden: true},
+                        {header: "下单方订货/退货数量", dataIndex: 'packingUnit'},
+                        {header: "收单方发货数量", dataIndex: 'orderQuantity'},
+                        {header: "批号", dataIndex: 'ph'},
+                        {header: "备案凭证编码", dataIndex: 'ZCNumber'},
+                        {header: "序列号", dataIndex: 'serialNumber'},
+                        {header: "生产日期", dataIndex: 'manufacturerDate'},
+                        {header: "有效期/失效期", dataIndex: 'effectiveDate'},
+                        {header: "下单方产品备注", dataIndex: 'GYSRemarks'},
+                        {header: "收单方产品备注", dataIndex: 'KHRemarks'},
+                    ];
+                    fields = [
+                        {name: 'id'},
+                        {name: 'number'},
+                        {name: 'productName'},
+                        {name: 'specifications'},
+                        {name: 'packingUnit'},
+                        {name: 'manufacturer'},
+                        {name: 'packingUnit'},
+                        {name: 'orderQuantity'},
+                        {name: 'ph'},
+                        {name: 'ZCNumber'},
+                        {name: 'serialNumber'},
+                        {name: 'manufacturerDate'},
+                        {name: 'effectiveDate'},
+                        {name: 'GYSRemarks'},
+                        {name: 'KHRemarks'},
+                    ];
+                    namespace = 'ordermanagement';
+                    break;
+                }
                 default: {
                     break;
                 }
@@ -172,7 +210,7 @@ GridInfo = function () {
             gridObj.columns = columns;
             gridObj.fields = fields;
             gridObj.namespace = namespace;
-            gridObj.action = module;
+            gridObj.action = module == "order-management-x" ? 'order-management' : module;
             return gridObj;
         },
         get: function (module) {
@@ -349,7 +387,7 @@ GridInfo = function () {
                         {header: "生产企业名称", dataIndex: 'abc55',},
                         {header: "下单方订货/退货数量", dataIndex: 'orderQuantity'},
                         {header: "收单方发货数量", dataIndex: 'shipmentQuantity'},
-                        {header: "批号", dataIndex: 'PH'},
+                        {header: "批号", dataIndex: 'lotNumber'},
                         {header: "序列号", dataIndex: 'abc99'},
                         {header: "生产日期", dataIndex: 'abc111'},
                         {header: "有效期/失效期", dataIndex: 'abc222'},

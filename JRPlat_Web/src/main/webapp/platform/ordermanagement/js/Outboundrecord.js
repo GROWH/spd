@@ -37,132 +37,113 @@ CreateModel = function () {
                         anchor: '98%'
                     },
                     items: [
-                        // {
-                        //     layout: 'column',
-                        //     defaults: {width: 250},
-                        //     items: [{
-                        //         columnWidth: .5,
-                        //         layout: 'form',
-                        //         defaultType: 'textfield',
-                        //         defaults: {
-                        //             allowBlank: false,
-                        //             anchor: "95%"
-                        //         },
-                        //
-                        //         items: [{
-                        //             cls: 'attr',
-                        //             labelStyle: 'color: red;',
-                        //             maxLength: 32,
-                        //             name: 'model.unitName',
-                        //             fieldLabel: '单位名称',
-                        //             blankText: '单位名称不能为空',
-                        //         },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.paperworkNo',
-                        //                 fieldLabel: '证件编号',
-                        //                 blankText: '证件编号不能为空'
-                        //             },
-                        //
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.linkman',
-                        //                 fieldLabel: '联系人',
-                        //                 blankText: '联系人不能为空'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.enSHDM',
-                        //                 fieldLabel: '统一社会信用代码',
-                        //                 allowBlank: false,
-                        //                 blankText: '统一社会信用代码不能为空',
-                        //                 labelStyle: 'color: red;',
-                        //                 // vtype: 'contact'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.businessAddress',
-                        //                 fieldLabel: '经营地址',
-                        //                 allowBlank: true,
-                        //                 // vtype: 'contact'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.version',
-                        //                 fieldLabel: '版本号',
-                        //                 allowBlank: true,
-                        //             }]
-                        //     }, {
-                        //         columnWidth: .5,
-                        //         layout: 'form',
-                        //         defaultType: 'textfield',
-                        //         defaults: {
-                        //             allowBlank: false,
-                        //             anchor: "90%"
-                        //         },
-                        //
-                        //
-                        //         items: [{
-                        //             id: 'unitType',
-                        //             xtype: 'combo',
-                        //             store: userStateStore,
-                        //             emptyText: '',
-                        //             mode: 'remote',
-                        //             valueField: 'value',
-                        //             displayField: 'text',
-                        //             triggerAction: 'all',
-                        //             forceSelection: true,
-                        //             editable: false,
-                        //             cls: 'attr',
-                        //             labelStyle: 'color: red;',
-                        //             hiddenName: 'model.enabled',
-                        //             value: model.enabled,
-                        //             fieldLabel: '单位类型',
-                        //             blankText: '单位类型不能为空'
-                        //         },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.orderKey',
-                        //                 fieldLabel: '订单获取密码',
-                        //                 blankText: '订单获取密码不能为空'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 xtype: 'numberfield',
-                        //                 name: 'model.contactPhone',
-                        //                 fieldLabel: '联系人电话',
-                        //                 allowBlank: false,
-                        //                 blankText: '联系人电话不能为空',
-                        //                 labelStyle: 'color: red;'
-                        //
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 256,
-                        //                 name: 'model.legalPerson',
-                        //                 allowBlank: true,
-                        //                 fieldLabel: '法人'
-                        //             },
-                        //             {
-                        //                 xtype: 'textfield',
-                        //                 maxLength: 256,
-                        //                 allowBlank: true,
-                        //                 name: 'model.StorehouseAddress',
-                        //                 fieldLabel: '仓库地址',
-                        //                 cls: 'attr',
-                        //             }]
-                        //     }]
-                        // }
+                        {
+                            layout: 'column',
+                            defaults: {width: 250},
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                defaultType: 'textfield',
+                                defaults: {
+                                    allowBlank: false,
+                                    anchor: "90%"
+                                },
+                                items: [
+                                    {
+                                        id: 'orderId',
+                                        name: 'model.order.id',
+                                        cls: 'querybg',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        fieldLabel: '订单流水号',
+                                        blankText: '订单流水号不能为空',
+                                        readOnly: true,
+                                        listeners: {
+                                            focus: function (field) {
+                                                var querymodule = 'order-management';
+                                                var queryString = ""; //搜索条件
+                                                var idList = ["orderId"]; //赋值文本框的id List
+                                                var colList = ["id"]; //表格列名List 与idList一一对应
+                                                QueryGridWindow.show(querymodule, queryString, idList, colList,'', '订单信息');
+                                            }
+                                        }
+                                    },
+                                    {
+                                        id:'orderNum',
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.shipmentQuantity',
+                                        fieldLabel: '收单方发货数量',
+                                        blankText: '收单方发货数量不能为空',
+                                    },
+                                    {
+                                        id: 'effectiveDate',
+                                        xtype: 'datefield',
+                                        format: "Y-m-d",
+                                        editable: false,
+                                        vtype: "daterange",
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.effectiveDate',
+                                        fieldLabel: '有效期',
+                                        blankText: '有效期不能为空',
+                                    },
+                                ]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                defaultType: 'textfield',
+                                defaults: {
+                                    allowBlank: false,
+                                    anchor: "90%"
+                                },
+                                items: [
+                                    {
+                                        id: "proId",
+                                        cls: 'querybg',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        fieldLabel: '细单号',
+                                        name: 'model.orderInformation.id',
+                                        blankText: '细单不能为空',
+                                        readOnly: true,
+                                        listeners: {
+                                            focus: function (field) {
+                                                var oId = Ext.getCmp('orderId').getValue();
+                                                var querymodule = 'order-management-x';
+                                                var interfaceName = '!queryOrderInformation.action';//
+                                                var queryString = "orderManagement.id:eq:" + oId; //搜索条件
+                                                var idList = ["proId","orderNum","orderPH","effectiveDate"]; //赋值文本框的id List
+                                                var colList = ["id","orderQuantity","lotNumber","effectiveDate"]; //表格列名List 与idList一一对应
+                                                QueryGridWindow.show(querymodule, queryString, idList, colList, '','订单信息-细单', interfaceName);
+                                            }
+                                        }
+                                    },
+                                    {
+                                        id: 'orderPH',
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.lotNumber',
+                                        fieldLabel: '批号',
+                                        blankText: '批号不能为空',
+                                    },
+                                    {
+                                        id:'deliveryTime',
+                                        xtype: 'datefield',
+                                        format: "Y-m-d",
+                                        editable: false,
+                                        vtype: "daterange",
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.deliveryTime',
+                                        fieldLabel: '出货时间',
+                                        blankText: '出货时间不能为空',
+                                    },
+                                ]
+                            }]
+                        }
                     ]
                 }
                 ]
@@ -171,7 +152,7 @@ CreateModel = function () {
         },
 
         show: function () {
-            CreateBaseModel.show('添加出库记录', 'outboundrecords', 800, 300, this.getItems());
+            CreateBaseModel.show('添加出库记录', 'outboundrecords', 800, 250, this.getItems());
         }
     };
 }();
@@ -197,131 +178,108 @@ ModifyModel = function () {
                         anchor: '95%'
                     },
                     items: [
-                        // {
-                        //     layout: 'column',
-                        //     defaults: {width: 250},
-                        //     items: [{
-                        //         columnWidth: .5,
-                        //         layout: 'form',
-                        //         defaultType: 'textfield',
-                        //         defaults: {
-                        //             allowBlank: false,
-                        //             anchor: "90%"
-                        //         },
-                        //
-                        //         items: [{
-                        //             cls: 'attr',
-                        //             labelStyle: 'color: red;',
-                        //             maxLength: 32,
-                        //             name: 'model.unitName',
-                        //             fieldLabel: '单位名称',
-                        //             blankText: '单位名称不能为空',
-                        //             value: model.unitName,
-                        //         },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.paperworkNo',
-                        //                 fieldLabel: '证件编号',
-                        //                 blankText: '证件编号不能为空',
-                        //                 value: model.paperworkNo,
-                        //             },
-                        //
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.linkman',
-                        //                 fieldLabel: '联系人',
-                        //                 blankText: '联系人不能为空',
-                        //                 value: model.linkman,
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.enSHDM',
-                        //                 fieldLabel: '统一社会信用代码',
-                        //                 allowBlank: false,
-                        //                 blankText: '统一社会信用代码不能为空',
-                        //                 labelStyle: 'color: red;',
-                        //                 value: model.enSHDM,
-                        //                 // vtype: 'contact'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.businessAddress',
-                        //                 fieldLabel: '经营地址',
-                        //                 allowBlank: true,
-                        //                 // vtype: 'contact'
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 name: 'model.version',
-                        //                 fieldLabel: '版本号',
-                        //                 allowBlank: true,
-                        //                 value: model.version,
-                        //             }]
-                        //     }, {
-                        //         columnWidth: .5,
-                        //         layout: 'form',
-                        //         defaultType: 'textfield',
-                        //         defaults: {
-                        //             allowBlank: false,
-                        //             anchor: "90%"
-                        //         },
-                        //
-                        //
-                        //         items: [{
-                        //             cls: 'attr',
-                        //             labelStyle: 'color: red;',
-                        //             maxLength: 32,
-                        //             id: 'password',
-                        //             name: 'model.unitType',
-                        //             fieldLabel: '单位类型',
-                        //             blankText: '单位类型不能为空',
-                        //             value: model.unitType,
-                        //         },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 labelStyle: 'color: red;',
-                        //                 maxLength: 32,
-                        //                 name: 'model.orderKey',
-                        //                 fieldLabel: '订单获取密码',
-                        //                 blankText: '订单获取密码不能为空',
-                        //                 value: model.orderKey,
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 32,
-                        //                 xtype: 'numberfield',
-                        //                 name: 'model.contactPhone',
-                        //                 fieldLabel: '联系人电话',
-                        //                 allowBlank: false,
-                        //                 blankText: '联系人电话不能为空',
-                        //                 labelStyle: 'color: red;',
-                        //                 value: model.contactPhone,
-                        //
-                        //             },
-                        //             {
-                        //                 cls: 'attr',
-                        //                 maxLength: 256,
-                        //                 name: 'model.legalPerson',
-                        //                 allowBlank: true,
-                        //                 fieldLabel: '法人'
-                        //             },
-                        //             {
-                        //                 xtype: 'textfield',
-                        //                 maxLength: 256,
-                        //                 allowBlank: true,
-                        //                 name: 'model.StorehouseAddress',
-                        //                 fieldLabel: '仓库地址',
-                        //                 cls: 'attr',
-                        //             }]
-                        //     }]
-                        // }
+                        {
+                            layout: 'column',
+                            defaults: {width: 250},
+                            items: [{
+                                columnWidth: .5,
+                                layout: 'form',
+                                defaultType: 'textfield',
+                                defaults: {
+                                    allowBlank: false,
+                                    anchor: "90%"
+                                },
+                                items: [
+                                    {
+                                        id: 'proNum',
+                                        name: 'model.number',
+                                        value: model.number,
+                                        xtype : 'textfield',
+                                        allowBlank: false,
+                                        blankText: '产品编号不能为空',
+                                        hidden: true,
+                                    },
+                                    {
+                                        cls: 'querybg',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        fieldLabel: '产品名称',
+                                        id: "proName",
+                                        name : 'model.productName',
+                                        value: model.productName,
+                                        blankText: '产品名称不能为空',
+                                        readOnly: true,
+                                        listeners: {
+                                            focus: function (field) {
+                                                var oId = Ext.getCmp('orderId').getValue();
+                                                var querymodule = 'order-management-x';
+                                                var interfaceName = '!queryOrderInformation.action';//
+                                                var queryString = "orderManagement.id:eq:" + oId; //搜索条件
+                                                var idList = ["proNum","proName","orderNum","orderPH","orderEffectiveDate"]; //赋值文本框的id List
+                                                var colList = ["number","productName","orderQuantity","ph","effectiveDate"]; //表格列名List 与idList一一对应
+                                                QueryGridWindow.show(querymodule, queryString, idList, colList, '','订单信息-细单', interfaceName);
+                                            }
+                                        }
+                                    },
+                                    {
+                                        id:'orderNum',
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.shipmentQuantity',
+                                        value: model.shipmentQuantity,
+                                        fieldLabel: '收单方发货数量',
+                                        blankText: '收单方发货数量不能为空',
+                                    },
+                                    {
+                                        id:'deliveryTime',
+                                        xtype: 'datefield',
+                                        format: "Y-m-d",
+                                        editable: false,
+                                        vtype: "daterange",
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.deliveryTime',
+                                        value: model.deliveryTime,
+                                        fieldLabel: '出货时间',
+                                        blankText: '出货时间不能为空',
+                                    },
+                                ]
+                            }, {
+                                columnWidth: .5,
+                                layout: 'form',
+                                defaultType: 'textfield',
+                                defaults: {
+                                    allowBlank: false,
+                                    anchor: "90%"
+                                },
+                                items: [
+                                    {
+                                        id: 'orderPH',
+                                        cls: 'attr',
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.lotNumber',
+                                        value: model.lotNumber,
+                                        fieldLabel: '批号',
+                                        blankText: '批号不能为空',
+                                    },
+                                    {
+                                        id: 'effectiveDate',
+                                        xtype: 'datefield',
+                                        format: "Y-m-d",
+                                        editable: false,
+                                        vtype: "daterange",
+                                        labelStyle: 'color: red;',
+                                        maxLength: 32,
+                                        name: 'model.effectiveDate',
+                                        value: model.effectiveDate,
+                                        fieldLabel: '有效期',
+                                        blankText: '有效期不能为空',
+                                    },
+                                ]
+                            }]
+                        }
                     ]
                 }
                 ]
@@ -330,68 +288,9 @@ ModifyModel = function () {
         },
 
         show: function (model) {
-            // ModifyBaseModel.prepareSubmit = function () {
-            //     Ext.getCmp('roles').setValue(roleSelector.getValue());
-            //     if ("启用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("true");
-            //     }
-            //     if ("停用" == Ext.getCmp('state').getValue()) {
-            //         Ext.getCmp('state').setValue("false");
-            //     }
-            // }
             ModifyBaseModel.show('修改出库记录', 'outboundrecords', 800, 300, this.getItems(model), model);
         }
     };
-}();
-OptModel = function () {
-    return {
-        addSpecialTbar: function (obj) {
-            var items = [
-                {
-                    html: '<div style="color: red;">订单流水号:</div>'
-                },
-                {
-                    id: 'orderId',
-                    cls: 'querybg',
-                    width: 150,
-                    xtype: 'textfield',
-                    readOnly: true,
-                    listeners: {
-                        'focus': function (field, e, opt) {
-                            var querymodule = 'order-management';
-                            var queryString = ""; //搜索条件
-                            var idList = ["orderId"]; //赋值文本框的id List
-                            var colList = ["id"]; //表格列名List 与idList一一对应
-                            QueryGridWindow.show(querymodule, queryString, idList, colList,'', '订单信息');
-                        }
-                    }
-                }, '-',
-                {
-                    iconCls: "query",
-                    text: "查询",
-                    handler: function () {
-                        OptModel.searchQuery();
-                    }
-                }, '-'
-            ];
-            var enableQuery = parent.isGranted(namespace, action, "query");
-            if (enableQuery) {//权限控制
-                obj.add(items);
-            }
-        },
-        //查询数据
-        searchQuery: function (propertyCriteria) {
-            GridBaseModel.propertyCriteria = "";
-            var orderId = Ext.getCmp("orderId").getValue();
-            if (orderId === "") {
-                parent.Ext.ux.Toast.msg('操作提示：', "请选择订单！");
-                return;
-            }
-            GridBaseModel.storeURLParameter = "?oid="+ orderId;
-            GridBaseModel.changeURL(contextPath, namespace, action);
-            GridBaseModel.refresh(propertyCriteria);
-        },
-    }
 }();
 //表格
 GridModel = function () {
@@ -414,11 +313,6 @@ GridModel = function () {
             var commands = ["create", "delete", "updatePart", "search", "query"];
             var tips = ['增加', '删除', '修改', '高级搜索', '显示全部'];
             var callbacks = [GridBaseModel.create, GridBaseModel.remove, GridBaseModel.modify, GridBaseModel.advancedsearch, GridBaseModel.showall];
-
-            //添加特殊菜单
-            GridBaseModel.specialHeadTbar = function (obj) {
-                OptModel.addSpecialTbar(obj);
-            };
 
             var grid = GridBaseModel.getGrid(contextPath, namespace, action, pageSize, gridObj.fields, gridObj.columns, commands, tips, callbacks);
 
