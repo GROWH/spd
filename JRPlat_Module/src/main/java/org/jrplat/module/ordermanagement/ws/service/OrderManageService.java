@@ -180,7 +180,7 @@ public class OrderManageService extends SimpleService {
 
                 orderInformation.setManufacturer(manufacturer);
                 //客户订货/退货数量
-                if (StringUtils.isNotBlank(ox.getString("dhsl"))) {
+                if (StringUtils.isBlank(ox.getString("dhsl"))) {
                     throw new RuntimeException("订货数量不能为空");
                 }
                 Integer orderQuantity = StringUtils.isNotBlank(ox.getString("dhsl"))
