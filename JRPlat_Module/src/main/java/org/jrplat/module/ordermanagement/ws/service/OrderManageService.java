@@ -167,23 +167,23 @@ public class OrderManageService extends SimpleService {
                 }
                 orderInformation.setProductNo(commodity);
                 //规格/型号
-                String specifications = StringUtils.isBlank(ox.getString("spgg"))
+                String specifications = StringUtils.isNotBlank(ox.getString("spgg"))
                         ? ox.getString("spgg") : null;
                 orderInformation.setSpecifications(specifications);
                 //包装单位
-                String packagingUnit = StringUtils.isBlank(ox.getString("bzdw"))
+                String packagingUnit = StringUtils.isNotBlank(ox.getString("bzdw"))
                         ? ox.getString("bzdw") : null;
                 orderInformation.setPackingUnit(packagingUnit);
                 //生产企业名称
-                String manufacturer = StringUtils.isBlank(ox.getString("scqymc"))
+                String manufacturer = StringUtils.isNotBlank(ox.getString("scqymc"))
                         ? ox.getString("scqymc") : null;
 
                 orderInformation.setManufacturer(manufacturer);
                 //客户订货/退货数量
-                if (StringUtils.isBlank(ox.getString("dhsl"))) {
+                if (StringUtils.isNotBlank(ox.getString("dhsl"))) {
                     throw new RuntimeException("订货数量不能为空");
                 }
-                Integer orderQuantity = StringUtils.isBlank(ox.getString("dhsl"))
+                Integer orderQuantity = StringUtils.isNotBlank(ox.getString("dhsl"))
                         ? ox.getInt("dhsl") : null;
                 orderInformation.setOrderQuantity(orderQuantity);
                 //供应商发货数量
@@ -193,11 +193,11 @@ public class OrderManageService extends SimpleService {
                 }
 
                 //批号
-                String PH = StringUtils.isBlank(ox.getString("ph"))
+                String PH = StringUtils.isNotBlank(ox.getString("ph"))
                         ? ox.getString("ph") : null;
                 orderInformation.setPH(PH);
                 //序列号
-                String serialNumber = StringUtils.isBlank(ox.getString("xlh"))
+                String serialNumber = StringUtils.isNotBlank(ox.getString("xlh"))
                         ? ox.getString("xlh") : null;
                 orderInformation.setSerialNumber(serialNumber);
 
@@ -214,11 +214,11 @@ public class OrderManageService extends SimpleService {
                 }
 
                 //客户产品备注
-                String KHRemarksx = StringUtils.isBlank(ox.getString("KHspbz"))
+                String KHRemarksx = StringUtils.isNotBlank(ox.getString("KHspbz"))
                         ? ox.getString("KHspbz") : null;
                 orderInformation.setKHRemarks(KHRemarksx);
                 //供应商产品备注
-                String GYSRemarksx = StringUtils.isBlank(ox.getString("GYSspbz"))
+                String GYSRemarksx = StringUtils.isNotBlank(ox.getString("GYSspbz"))
                         ? ox.getString("GYSspbz") : null;
                 orderInformation.setGYSRemarks(GYSRemarksx);
                 orderInformation.setOrderManagement(orderManagement);
