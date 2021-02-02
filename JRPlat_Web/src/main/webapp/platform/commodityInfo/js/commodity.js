@@ -308,7 +308,7 @@ ModifyModel = function () {
                                         name: 'model.packingUnit',
                                         fieldLabel: '包装单位',
                                         blankText: '包装单位不能为空',
-                                        value: model.PackingUnit,
+                                        value: model.packingUnit,
                                     },
                                     {
                                         cls: 'attr',
