@@ -30,7 +30,7 @@ public class OrderInformationService  extends SimpleService<OrderInformation> {
                     "\tc.PackingUnit packingUnit,\n" +
                     "\tc.manufacturer manufacturer,\n" +
                     "\tc.ZCNumber ZCNumber,\n" +
-                    "\to.orderQuantity orderQuantity,\n" +
+                    "\to.orderQuantity quantity,\n" +
                     "\to.shipmentQuantity shipmentQuantity,\n" +
                     "\to.PH ph,\n" +
                     "\to.effectiveDate effectiveDate,\n" +
