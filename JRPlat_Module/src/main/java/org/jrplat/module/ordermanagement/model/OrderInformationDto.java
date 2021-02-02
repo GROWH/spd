@@ -3,13 +3,11 @@ package org.jrplat.module.ordermanagement.model;
 import org.jrplat.platform.annotation.DisplayIgnore;
 import org.jrplat.platform.annotation.FieldRef;
 import org.jrplat.platform.annotation.ModelAttr;
+import org.jrplat.platform.annotation.RenderDate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
@@ -88,14 +86,21 @@ public class OrderInformationDto {
     @ModelAttr("ph")
     private String ph;
 
+
     @Transient
     @FieldRef("effectiveDate")
-    @ModelAttr("有效期")
-    private Date effectiveDate;
-
+    @ModelAttr("有效期/失效期")
+    protected String effectiveDate;
 
     @Transient
-    @FieldRef("manufacturerDate")
+    @FieldRef("deliveryTime")
+    @ModelAttr("出库时间")
+    protected String deliveryTime;
+
+
+    @DisplayIgnore
+    @RenderDate
+    @Temporal(TemporalType.TIMESTAMP)
     @ModelAttr("生产日期")
     private Date manufacturerDate;
 
@@ -192,11 +197,11 @@ public class OrderInformationDto {
         this.ph = ph;
     }
 
-    public Date getEffectiveDate() {
+    public String getEffectiveDate() {
         return effectiveDate;
     }
 
-    public void setEffectiveDate(Date effectiveDate) {
+    public void setEffectiveDate(String effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
@@ -230,5 +235,13 @@ public class OrderInformationDto {
 
     public void setSerialNumber(String serialNumber) {
         this.serialNumber = serialNumber;
+    }
+
+    public String getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(String deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 }

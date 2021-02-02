@@ -1,7 +1,9 @@
 package org.jrplat.module.ordermanagement.service;
 
 
+import org.jrplat.module.dictionary.cache.DicCache;
 import org.jrplat.module.ordermanagement.model.OrderInformation;
+import org.jrplat.module.ordermanagement.model.OrderManagement;
 import org.jrplat.module.ordermanagement.model.Outboundrecords;
 import org.jrplat.module.security.model.User;
 import org.jrplat.module.security.service.UserHolder;
@@ -53,5 +55,37 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
         return null;
 
     }
+    @Transactional(rollbackFor = Exception.class)
+     public void updateOrderInformationInfo(Outboundrecords outboundrecords){
+      try {
+          //根据细单id查询细单
+          String jpql = "select o from OrderInformation o where o.id =:oId";
+          Query query = getService().getEntityManager().createQuery(jpql, OrderInformation.class).setParameter("oId",outboundrecords.getOrderInformation().getId());
+          List<OrderInformation> o = query.getResultList();
+          OrderInformation orderInformation = o.get(0);
+          //出货日期
+          orderInformation.setDeliveryTime(outboundrecords.getDeliveryTime());
+          //有效日期
+          orderInformation.setEffectiveDate(outboundrecords.getEffectiveDate());
+          //批号
+          orderInformation.setPH(outboundrecords.getLotNumber());
+          //实际出货数量
+          orderInformation.setShipmentQuantity(outboundrecords.getShipmentQuantity());
+          //查询总单
+          String jpqlz = "select o from OrderManagement o where o.id =:ozId";
+          Query queryz = getService().getEntityManager().createQuery(jpqlz, OrderManagement.class).setParameter("ozId",orderInformation.getOrderManagement().getId());
+          List<OrderManagement> oz = queryz.getResultList();
+          OrderManagement orderManagement = oz.get(0);
+          //更改状态总单状态为录入
+          orderManagement.setOrderStatus(DicCache.get("orderStatus","录入"));
+          getService().update(orderInformation);
+      }catch (Exception e){
+          throw new RuntimeException(e.getMessage());
+      }
+
+
+    }
+
+
 
 }

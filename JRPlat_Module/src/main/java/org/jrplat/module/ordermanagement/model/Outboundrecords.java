@@ -97,6 +97,11 @@ public class Outboundrecords extends SimpleModel {
     @ModelAttr("包装单位")
     protected String packagingUnit;
 
+    @Transient
+    @FieldRef("orderInformation.effectiveDate")
+    @ModelAttr("有效期")
+    protected Date effectiveDate;
+
     @XmlTransient
     public OrderInformation getOrderInformation() {
         return orderInformation;
@@ -183,7 +188,14 @@ public class Outboundrecords extends SimpleModel {
         this.productName = productName;
     }
 
-    
+    public Date getEffectiveDate() {
+        return effectiveDate;
+    }
+
+    public void setEffectiveDate(Date effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
+
     @Override
     public String getMetaData() {
         return "订货信息";

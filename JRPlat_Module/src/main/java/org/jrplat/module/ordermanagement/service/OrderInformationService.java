@@ -34,6 +34,7 @@ public class OrderInformationService  extends SimpleService<OrderInformation> {
                     "\to.shipmentQuantity shipmentQuantity,\n" +
                     "\to.PH ph,\n" +
                     "\to.effectiveDate effectiveDate,\n" +
+                    "\to.deliveryTime deliveryTime,\n" +
                     "\to.manufacturerDate manufacturerDate,\n" +
                     "\to.KHRemarks,\n" +
                     "\to.serialNumber,\n" +
