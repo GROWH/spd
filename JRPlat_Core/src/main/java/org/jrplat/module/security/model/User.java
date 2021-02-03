@@ -75,6 +75,11 @@ public class User extends SimpleModel implements UserDetails {
     @ModelAttr("单位信息")
     @ModelAttrRef("id")
     protected Unit unit;
+
+    @SupportLikeQuery
+    @ModelAttr("单位名称")
+    protected String unitName;
+
     @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinTable(name = "user_role", joinColumns = {
             @JoinColumn(name = "userID")}, inverseJoinColumns = {
@@ -573,6 +578,15 @@ public class User extends SimpleModel implements UserDetails {
     public void setUnit(Unit unit) {
         this.unit = unit;
     }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
+
     @Override
     public String getMetaData() {
         return "用户信息";

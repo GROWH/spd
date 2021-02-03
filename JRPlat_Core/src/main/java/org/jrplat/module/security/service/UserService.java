@@ -6,6 +6,7 @@
 package org.jrplat.module.security.service;
 
 import org.apache.commons.lang.StringUtils;
+import org.jrplat.module.commodityInfo.model.Commodity;
 import org.jrplat.module.module.service.ModuleCache;
 import org.jrplat.module.security.model.*;
 import org.jrplat.module.security.service.password.PasswordEncoder;
@@ -20,6 +21,7 @@ import org.jrplat.platform.result.Page;
 import org.jrplat.platform.service.ServiceFacade;
 import org.jrplat.platform.service.SimpleService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
@@ -461,25 +463,23 @@ public class UserService extends SimpleService<User> {
         return true;
     }
 
-    public List<User> queryuser(){
+    public List<User> queryUser(){
         try {
             //获取当前用户
             User user = UserHolder.getCurrentLoginUser();
             //获取当前登录用户的单位ID
             Unit unit = user.getUnit();
-
                if (unit != null) {
                    String jpql = "SELECT o FROM User o WHERE o.unit.id = :user";
                    Query query = getService().getEntityManager().createQuery(jpql, User.class)
                            .setParameter("user", user.getUnit().getId());
                    List<User> users = query.getResultList();
                    return users;
-
            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
-
     }
+
 }

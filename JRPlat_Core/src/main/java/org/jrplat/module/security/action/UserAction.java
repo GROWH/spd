@@ -5,22 +5,13 @@
 
 package org.jrplat.module.security.action;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.CycleDetectionStrategy;
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
-import org.jrplat.module.security.model.Position;
-import org.jrplat.module.security.model.Role;
-import org.jrplat.module.security.model.User;
-import org.jrplat.module.security.model.UserGroup;
+import org.jrplat.module.security.model.*;
 import org.jrplat.module.security.service.UserHolder;
 import org.jrplat.module.security.service.UserReportService;
 import org.jrplat.module.security.service.UserService;
 import org.jrplat.module.system.service.PropertyHolder;
-import org.jrplat.module.unitInfo.model.Unit;
 import org.jrplat.platform.action.ExtJSSimpleAction;
 import org.jrplat.platform.criteria.Operator;
 import org.jrplat.platform.criteria.Property;
@@ -32,7 +23,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,6 +65,9 @@ public class UserAction extends ExtJSSimpleAction<User> {
     @Override
     public String create() {
         try {
+            Org org =new Org();
+            org.setId(1);
+            model.setOrg(org);
             userService.create(model, roles);
         } catch (Exception e) {
             map = new HashMap();
@@ -330,8 +323,6 @@ public class UserAction extends ExtJSSimpleAction<User> {
         //获取当前用户
         User user = UserHolder.getCurrentLoginUser();
         if(!"admin".equals(user.getUsername())) {
-
-
             int start = super.getStart();
             int len = super.getLimit();
             if (start == -1) {
@@ -341,8 +332,7 @@ public class UserAction extends ExtJSSimpleAction<User> {
                 len = 10;
             }
             try {
-
-                List<User> userList = userService.queryuser();
+                List<User> userList = userService.queryUser();
                 if (len > userList.size()) {
                     len = userList.size();
                 }
