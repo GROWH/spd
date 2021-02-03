@@ -52,18 +52,27 @@ CreateModel = function () {
                                     {
                                         id: 'orderId',
                                         name: 'model.order.id',
+                                        xtype : 'textfield',
+                                        allowBlank: false,
+                                        fieldLabel: '订单流水号',
+                                        blankText: '订单流水号不能为空',
+                                        hidden: true
+                                    },
+                                    {
+                                        id: 'KHName',
+                                        name: 'model.KHName',
                                         cls: 'querybg',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        fieldLabel: '订单流水号',
-                                        blankText: '订单流水号不能为空',
+                                        fieldLabel: '下单方名称',
+                                        blankText: '下单方名称不能为空',
                                         readOnly: true,
                                         listeners: {
                                             focus: function (field) {
                                                 var querymodule = 'order-management';
                                                 var queryString = ""; //搜索条件
-                                                var idList = ["orderId"]; //赋值文本框的id List
-                                                var colList = ["id"]; //表格列名List 与idList一一对应
+                                                var idList = ["orderId", 'KHName']; //赋值文本框的id List
+                                                var colList = ["id",'KHName_unitName']; //表格列名List 与idList一一对应
                                                 QueryGridWindow.show(querymodule, queryString, idList, colList,'', '订单信息');
                                             }
                                         }
@@ -100,13 +109,22 @@ CreateModel = function () {
                                 },
                                 items: [
                                     {
-                                        id: "proId",
+                                        id: 'proId',
+                                        name: 'model.orderInformation.id',
+                                        xtype : 'textfield',
+                                        allowBlank: false,
+                                        fieldLabel: '细单号',
+                                        blankText: '细单号不能为空',
+                                        hidden: true
+                                    },
+                                    {
+                                        id: "proName",
                                         cls: 'querybg',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        fieldLabel: '细单号',
-                                        name: 'model.orderInformation.id',
-                                        blankText: '细单不能为空',
+                                        fieldLabel: '产品名称',
+                                        name: 'model.proName',
+                                        blankText: '产品名称不能为空',
                                         readOnly: true,
                                         listeners: {
                                             focus: function (field) {
@@ -114,8 +132,8 @@ CreateModel = function () {
                                                 var querymodule = 'order-management-x';
                                                 var interfaceName = '!queryOrderInformation.action';//
                                                 var queryString = "orderManagement.id:eq:" + oId; //搜索条件
-                                                var idList = ["proId","orderNum","orderPH","effectiveDate"]; //赋值文本框的id List
-                                                var colList = ["id","orderQuantity","lotNumber","effectiveDate"]; //表格列名List 与idList一一对应
+                                                var idList = ["proId","proName","orderNum","orderPH","effectiveDate"]; //赋值文本框的id List
+                                                var colList = ["id","productName","orderQuantity","lotNumber","effectiveDate"]; //表格列名List 与idList一一对应
                                                 QueryGridWindow.show(querymodule, queryString, idList, colList, '','订单信息-细单', interfaceName);
                                             }
                                         }
@@ -160,7 +178,6 @@ CreateModel = function () {
 ModifyModel = function () {
     return {
         getItems: function (model) {
-            var effectiveDate = model.effectiveDate.split(' ')[0];
             var items = [{
                 layout: 'form',
                 items: [{
@@ -186,14 +203,24 @@ ModifyModel = function () {
                                 },
                                 items: [
                                     {
+                                        id: 'proId',
+                                        name: 'model.orderInformation.id',
+                                        value:model.orderInformation_id,
+                                        xtype : 'textfield',
+                                        allowBlank: false,
+                                        fieldLabel: '细单号',
+                                        blankText: '细单号不能为空',
+                                        hidden: true
+                                    },
+                                    {
                                         id: "proId",
                                         cls: 'attr',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        fieldLabel: '细单号',
-                                        name: 'model.orderInformation.id',
-                                        value:model.orderInformation_id,
-                                        blankText: '细单不能为空',
+                                        fieldLabel: '产品名称',
+                                        name: 'model.proName',
+                                        value:model.productName,
+                                        blankText: '产品名称不能为空',
                                         readOnly: true,
                                     },
                                     {
@@ -248,7 +275,7 @@ ModifyModel = function () {
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
                                         name: 'model.effectiveDate',
-                                        value: effectiveDate,
+                                        value: model.effectiveDate,
                                         fieldLabel: '有效期',
                                         blankText: '有效期不能为空',
                                     },
