@@ -1324,7 +1324,7 @@ GridBaseModel = function () {
             this.toolbar = this.getToolbar(commands, tips, callbacks);
             this.contextmenu = this.getContextMenu(commands, tips, callbacks);
             this.bbar = this.getBBar(pageSize, this.store);
-            var cb = new Ext.grid.CheckboxSelectionModel();
+            var cb = new Ext.grid.CheckboxSelectionModel();  //复选框一列
             var preColumns = [//配置表格列
                 new Ext.grid.RowNumberer({
                     header: '行号',
@@ -1342,7 +1342,7 @@ GridBaseModel = function () {
                 store: this.store,
                 tbar: this.toolbar,
                 bbar: this.bbar,
-                stripeRows: true,
+                stripeRows: true,　　//斑马线
                 autoScroll: true,
                 loadMask: true,
                 trackMouseOver: true,
