@@ -185,35 +185,15 @@ ModifyModel = function () {
                                 },
                                 items: [
                                     {
-                                        id: 'proNum',
-                                        name: 'model.number',
-                                        value: model.number,
-                                        xtype : 'textfield',
-                                        allowBlank: false,
-                                        blankText: '产品编号不能为空',
-                                        hidden: true,
-                                    },
-                                    {
-                                        cls: 'querybg',
+                                        id: "proId",
+                                        cls: 'attr',
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
-                                        fieldLabel: '产品名称',
-                                        id: "proName",
-                                        name : 'model.productName',
-                                        value: model.productName,
-                                        blankText: '产品名称不能为空',
+                                        fieldLabel: '细单号',
+                                        name: 'model.orderInformation.id',
+                                        value:model.orderInformation_id,
+                                        blankText: '细单不能为空',
                                         readOnly: true,
-                                        listeners: {
-                                            focus: function (field) {
-                                                var oId = Ext.getCmp('orderId').getValue();
-                                                var querymodule = 'order-management-x';
-                                                var interfaceName = '!queryOrderInformation.action';//
-                                                var queryString = "orderManagement.id:eq:" + oId; //搜索条件
-                                                var idList = ["proNum","proName","orderNum","orderPH","orderEffectiveDate"]; //赋值文本框的id List
-                                                var colList = ["number","productName","orderQuantity","ph","effectiveDate"]; //表格列名List 与idList一一对应
-                                                QueryGridWindow.show(querymodule, queryString, idList, colList, '','订单信息-细单', interfaceName);
-                                            }
-                                        }
                                     },
                                     {
                                         id:'orderNum',
