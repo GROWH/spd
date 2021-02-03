@@ -20,10 +20,7 @@
 package org.jrplat.module.commodityInfo.model;
 
 import org.jrplat.module.dictionary.model.DicItem;
-import org.jrplat.platform.annotation.DisplayIgnore;
-import org.jrplat.platform.annotation.ModelAttr;
-import org.jrplat.platform.annotation.ModelAttrNotNull;
-import org.jrplat.platform.annotation.SimpleDic;
+import org.jrplat.platform.annotation.*;
 import org.jrplat.platform.generator.ActionGenerator;
 import org.jrplat.platform.model.SimpleModel;
 import org.springframework.context.annotation.Scope;
@@ -55,6 +52,7 @@ public class Commodity extends SimpleModel {
 
     @DisplayIgnore
     @ModelAttr("包装单位")
+    @SupportLikeQuery
     @Column(length = 500)
     protected String packingUnit;
 
@@ -177,13 +175,13 @@ public class Commodity extends SimpleModel {
     public void setSpecification(String specification) {
         this.specification = specification;
     }
-    @XmlAttribute
+
     public String getPackingUnit() {
         return packingUnit;
     }
 
     public void setPackingUnit(String packingUnit) {
-        packingUnit = packingUnit;
+        this.packingUnit = packingUnit;
     }
 
     @Override
