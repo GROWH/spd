@@ -160,6 +160,7 @@ CreateModel = function () {
 ModifyModel = function () {
     return {
         getItems: function (model) {
+            var effectiveDate = model.effectiveDate.split(' ')[0];
             var items = [{
                 layout: 'form',
                 items: [{
@@ -247,7 +248,7 @@ ModifyModel = function () {
                                         labelStyle: 'color: red;',
                                         maxLength: 32,
                                         name: 'model.effectiveDate',
-                                        value: model.effectiveDate,
+                                        value: effectiveDate,
                                         fieldLabel: '有效期',
                                         blankText: '有效期不能为空',
                                     },
