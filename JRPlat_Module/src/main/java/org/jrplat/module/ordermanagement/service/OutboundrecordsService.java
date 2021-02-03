@@ -56,7 +56,7 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
 
     }
     @Transactional(rollbackFor = Exception.class)
-     public void updateOrderInformationInfo(Outboundrecords outboundrecords){
+     public Outboundrecords updateOrderInformationInfo(Outboundrecords outboundrecords){
       try {
           //根据细单id查询细单
           String jpql = "select o from OrderInformation o where o.id =:oId";
@@ -79,6 +79,9 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
           //更改状态总单状态为录入
           orderManagement.setOrderStatus(DicCache.get("orderStatus","录入"));
           getService().update(orderInformation);
+          //供应商单位添加
+          outboundrecords.setUnitNo(orderManagement.getGYSName());
+          return outboundrecords;
       }catch (Exception e){
           throw new RuntimeException(e.getMessage());
       }

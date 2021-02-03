@@ -100,14 +100,12 @@ public class OrderInformation extends SimpleModel {
 
     @DisplayIgnore
     @RenderDate
-    @Temporal(TemporalType.TIMESTAMP)
     @ModelAttr("有效期/失效期")
     protected Date effectiveDate;
 
 
     @DisplayIgnore
     @RenderDate
-    @Temporal(TemporalType.TIMESTAMP)
     @ModelAttr("出库时间")
     protected Date deliveryTime;
 

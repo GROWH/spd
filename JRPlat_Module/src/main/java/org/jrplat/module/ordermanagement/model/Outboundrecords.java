@@ -59,12 +59,11 @@ public class Outboundrecords extends SimpleModel {
 
     @DisplayIgnore
     @RenderDate
-    @Temporal(TemporalType.TIMESTAMP)
     @ModelAttr("出库时间")
     protected Date deliveryTime;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ModelAttr("供应商名称")
     @ModelAttrRef("paperworkNo")
     protected Unit unitNo;
@@ -138,7 +137,7 @@ public class Outboundrecords extends SimpleModel {
         this.deliveryTime = deliveryTime;
     }
 
-
+    @XmlTransient
     public Unit getUnitNo() {
         return unitNo;
     }

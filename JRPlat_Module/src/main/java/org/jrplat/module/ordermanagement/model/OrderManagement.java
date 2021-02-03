@@ -57,7 +57,7 @@ public class OrderManagement extends SimpleModel {
     protected DicItem ordertype;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ModelAttr("供应商名称")
     @ModelAttrRef("unitName")
     protected Unit GYSName;

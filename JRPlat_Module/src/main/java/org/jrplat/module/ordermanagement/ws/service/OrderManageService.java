@@ -337,6 +337,8 @@ public class OrderManageService extends SimpleService {
                 List<OrderInformation> orderInformations = getOrderInformationById(orderManagement.getId(),ox.getString("spbm"));
                 OrderInformation orderInformation = orderInformations.get(0);
                 Outboundrecords outboundrecords = new Outboundrecords();
+                //下单方单位
+                outboundrecords.setUnitNo(orderManagement.getGYSName());
                 //实际销售数量
                 if (StringUtils.isBlank(ox.getString("xssl"))) {
                     throw new RuntimeException("实际销售数量不能为空");

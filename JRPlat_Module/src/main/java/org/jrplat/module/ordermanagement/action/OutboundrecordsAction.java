@@ -92,7 +92,8 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
     @Override
     public String create(){
         try {
-            outboundrecordsService.updateOrderInformationInfo(model);
+            Outboundrecords outboundrecords = outboundrecordsService.updateOrderInformationInfo(model);
+            model.setUnitNo(outboundrecords.getUnitNo());
         }catch (Exception e){
             map = new HashMap();
             map.put("success", false);
@@ -108,7 +109,8 @@ public class OutboundrecordsAction extends ExtJSSimpleAction<Outboundrecords> {
     @Override
     public String updatePart(){
         try {
-            outboundrecordsService.updateOrderInformationInfo(model);
+            Outboundrecords outboundrecords = outboundrecordsService.updateOrderInformationInfo(model);
+            model.setUnitNo(outboundrecords.getUnitNo());
         }catch (Exception e){
             map = new HashMap();
             map.put("success", false);
