@@ -8,7 +8,6 @@ package org.jrplat.module.security.action;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.jrplat.module.security.model.*;
-import org.jrplat.module.security.service.UserHolder;
 import org.jrplat.module.security.service.UserReportService;
 import org.jrplat.module.security.service.UserService;
 import org.jrplat.module.system.service.PropertyHolder;
@@ -55,6 +54,9 @@ public class UserAction extends ExtJSSimpleAction<User> {
     @Resource(name = "userService")
     private UserService userService;
 
+    //模糊查询
+    private String likeQueryValue;
+
     @Override
     public String report() {
         byte[] report = userReportService.getReport(ServletActionContext.getServletContext(), ServletActionContext.getRequest());
@@ -65,7 +67,7 @@ public class UserAction extends ExtJSSimpleAction<User> {
     @Override
     public String create() {
         try {
-            Org org =new Org();
+            Org org = new Org();
             org.setId(1);
             model.setOrg(org);
             userService.create(model, roles);
@@ -314,55 +316,48 @@ public class UserAction extends ExtJSSimpleAction<User> {
             unitName = model.getUnit().getUnitName();
             id = model.getUnit().getId();
         }
-        map.put("unitId",id+ "");
+        map.put("unitId", id + "");
         map.put("unitName", unitName);
     }
 
     @Override
     public String query() {
-        //获取当前用户
-        User user = UserHolder.getCurrentLoginUser();
-        if(!"admin".equals(user.getUsername())) {
-            int start = super.getStart();
-            int len = super.getLimit();
-            if (start == -1) {
-                start = 0;
+        int start = super.getStart();
+        int len = super.getLimit();
+        if (start == -1) {
+            start = 0;
+        }
+        if (len == -1) {
+            len = 10;
+        }
+        try {
+            List<User> userList = userService.queryUser(likeQueryValue);
+            if (len > userList.size()) {
+                len = userList.size();
             }
-            if (len == -1) {
-                len = 10;
-            }
-            try {
-                List<User> userList = userService.queryUser();
-                if (len > userList.size()) {
-                    len = userList.size();
+            List<User> models = new ArrayList<>();
+            for (int i = start; i < start + getLimit(); i++) {
+                if (i >= userList.size()) {
+                    break;
                 }
-                List<User> models = new ArrayList<>();
-                for (int i = start; i < start + getLimit(); i++) {
-                    if (i >= userList.size()) {
-                        break;
-                    }
-                    models.add(userList.get(i));
-                }
-                // 构造当前页面对象
-                page = new Page<>();
-                page.setModels(models);
-                page.setTotalRecords(userList.size());
-                Map json = new HashMap();
-                json.put("totalProperty", page.getTotalRecords());
-                List<Map> result = new ArrayList<>();
-                renderJsonForQuery(result);
-                json.put("root", result);
-                Struts2Utils.renderJson(json);
-
-            } catch (Exception e) {
-                map = new HashMap();
-                map.put("success", false);
-                map.put("message", "查询失败:" + e.getMessage());
-                Struts2Utils.renderJson(map);
-                return null;
+                models.add(userList.get(i));
             }
-        }else {
-            return super.query();
+            // 构造当前页面对象
+            page = new Page<>();
+            page.setModels(models);
+            page.setTotalRecords(userList.size());
+            Map json = new HashMap();
+            json.put("totalProperty", page.getTotalRecords());
+            List<Map> result = new ArrayList<>();
+            renderJsonForQuery(result);
+            json.put("root", result);
+            Struts2Utils.renderJson(json);
+        } catch (Exception e) {
+            map = new HashMap();
+            map.put("success", false);
+            map.put("message", "查询失败:" + e.getMessage());
+            Struts2Utils.renderJson(map);
+            return null;
         }
         return null;
     }
@@ -413,5 +408,15 @@ public class UserAction extends ExtJSSimpleAction<User> {
 
     public void setUnit(Integer unit) {
         this.unit = unit;
+    }
+
+    @Override
+    public String getLikeQueryValue() {
+        return likeQueryValue;
+    }
+
+    @Override
+    public void setLikeQueryValue(String likeQueryValue) {
+        this.likeQueryValue = likeQueryValue;
     }
 }

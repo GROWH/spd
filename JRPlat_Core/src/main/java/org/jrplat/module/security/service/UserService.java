@@ -6,7 +6,6 @@
 package org.jrplat.module.security.service;
 
 import org.apache.commons.lang.StringUtils;
-import org.jrplat.module.commodityInfo.model.Commodity;
 import org.jrplat.module.module.service.ModuleCache;
 import org.jrplat.module.security.model.*;
 import org.jrplat.module.security.service.password.PasswordEncoder;
@@ -463,23 +462,36 @@ public class UserService extends SimpleService<User> {
         return true;
     }
 
-    public List<User> queryUser(){
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<User> queryUser(String likeInfo) {
         try {
             //获取当前用户
             User user = UserHolder.getCurrentLoginUser();
-            //获取当前登录用户的单位ID
+            //获取当前登录用户的单位
             Unit unit = user.getUnit();
-               if (unit != null) {
-                   String jpql = "SELECT o FROM User o WHERE o.unit.id = :user";
-                   Query query = getService().getEntityManager().createQuery(jpql, User.class)
-                           .setParameter("user", user.getUnit().getId());
-                   List<User> users = query.getResultList();
-                   return users;
-           }
+            String jpql;
+            jpql = "select o from User o ";
+            //是否为管理员
+            boolean superManager = user.isSuperManager();
+            if (!superManager) {
+                //根据单位id筛选用户信息
+                if (likeInfo != null && !likeInfo.equals("") || unit != null) {
+                    jpql += "WHERE o.unit.id = " + user.getUnit().getId();
+                }
+                //模糊搜索
+                if (likeInfo != null && !likeInfo.equals("")) {
+                    jpql += " and (o.id like '%" + likeInfo + "%' or o.username like '%" + likeInfo + "%'  or o.unit.unitName like '%" + likeInfo + "%' )";
+                }
+            } else if (likeInfo != null && !likeInfo.equals("")) {
+                jpql += "  where o.id like '%" + likeInfo + "%' or o.username like '%" + likeInfo + "%'  or o.unit.unitName like '%" + likeInfo + "%' ";
+            }
+            Query queryw = getService().getEntityManager().createQuery(jpql, User.class);
+            List<User> users = queryw.getResultList();
+            return users;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
 }
