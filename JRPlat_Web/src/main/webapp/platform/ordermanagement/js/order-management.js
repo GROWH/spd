@@ -283,7 +283,7 @@ GridModel = function () {
         getGridDetail: function () {
             var gridObj = GridInfo.getGridObj(detail);
             var queryString = 'orderManagement.id:eq:0';
-            var interfaceName = '!queryOrderInformation';
+            var interfaceName = '!query';
             var detailGrid = DetailGridBaseModel.getGrid(interfaceName,namespace, action, gridObj.fields, gridObj.columns, queryString, '');
             return detailGrid;
         },

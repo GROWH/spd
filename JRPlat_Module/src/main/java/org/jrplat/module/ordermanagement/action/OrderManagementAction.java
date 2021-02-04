@@ -51,45 +51,59 @@ public class OrderManagementAction extends ExtJSSimpleAction<OrderManagement> {
     @Override
     public String query() {
 
-        int start = super.getStart();
-        int len = super.getLimit();
-        if (start == -1) {
-            start = 0;
-        }
-        if (len == -1) {
-            len = 10;
-        }
-        try {
+        //判断总单查询还是细单查询
+        if(propertyCriteria !=null && !propertyCriteria.equals("")){
 
-            List<OrderManagement> orderManagementList = orderManagementService.queryOrderManagement(likeQueryValue);
-            if (len > orderManagementList.size()) {
-                len = orderManagementList.size();
-            }
-            List<OrderManagement> models = new ArrayList<>();
-            for (int i = start; i < start + getLimit(); i++) {
-                if (i >= orderManagementList.size()) {
-                    break;
-                }
-                models.add(orderManagementList.get(i));
-            }
-            // 构造当前页面对象
-            page = new Page<>();
-            page.setModels(models);
-            page.setTotalRecords(orderManagementList.size());
-            Map json = new HashMap();
-            json.put("totalProperty", page.getTotalRecords());
-            List<Map> result = new ArrayList<>();
-            renderJsonForQuery(result);
-            json.put("root", result);
-            Struts2Utils.renderJson(json);
+            String orderManagementId = propertyCriteria.substring(propertyCriteria.lastIndexOf(":")+1);
 
-        } catch (Exception e) {
-            map = new HashMap();
-            map.put("success", false);
-            map.put("message", "查询失败:" + e.getMessage());
+            List<OrderInformationDto> orderInformationList = orderInformationService.queryOrderInformation(Integer.valueOf(orderManagementId));
+            Map<String,Object> map = new HashMap();
+            map.put("detailList",orderInformationList);
             Struts2Utils.renderJson(map);
-            return null;
+        }else{
+            int start = super.getStart();
+            int len = super.getLimit();
+            if (start == -1) {
+                start = 0;
+            }
+            if (len == -1) {
+                len = 10;
+            }
+            try {
+
+                List<OrderManagement> orderManagementList = orderManagementService.queryOrderManagement(likeQueryValue);
+                if (len > orderManagementList.size()) {
+                    len = orderManagementList.size();
+                }
+                List<OrderManagement> models = new ArrayList<>();
+                for (int i = start; i < start + getLimit(); i++) {
+                    if (i >= orderManagementList.size()) {
+                        break;
+                    }
+                    models.add(orderManagementList.get(i));
+                }
+                // 构造当前页面对象
+                page = new Page<>();
+                page.setModels(models);
+                page.setTotalRecords(orderManagementList.size());
+                Map json = new HashMap();
+                json.put("totalProperty", page.getTotalRecords());
+                List<Map> result = new ArrayList<>();
+                renderJsonForQuery(result);
+                json.put("root", result);
+                Struts2Utils.renderJson(json);
+
+            } catch (Exception e) {
+                map = new HashMap();
+                map.put("success", false);
+                map.put("message", "查询失败:" + e.getMessage());
+                Struts2Utils.renderJson(map);
+                return null;
+            }
+
         }
+
+
 
         return null;
     }
