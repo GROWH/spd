@@ -26,6 +26,7 @@ GridInfo = function () {
                         {header: "所属单位", width: 40, dataIndex: 'orgName', sortable: true},
                         {header: "所属单位类型", width: 40, dataIndex: 'orgType', sortable: true},
                         {header: "联系方式", width: 40, dataIndex: 'phone', sortable: true},
+                        {header: "备注", width: 40, dataIndex: 'des', sortable: true},
                         {header: "联系地址", width: 40, dataIndex: 'address', sortable: true, hidden: true},
                         {header: "备注", width: 40, dataIndex: 'des', sortable: true, hidden: true},
                         {
@@ -53,6 +54,7 @@ GridInfo = function () {
                         {name: 'orgName'},
                         {name: 'orgType'},
                         {name: 'phone'},
+                        {name: 'des'},
                         {name: 'address'},
                         {name: 'des'},
                         {name: 'driverUse'},
@@ -264,6 +266,7 @@ GridInfo = function () {
                         {header: '状态', dataIndex: 'enabled'},
                         {header: "拥有角色", dataIndex: 'roles'},
                         {header: "联系方式", dataIndex: 'phone'},
+                        {header: "备注", dataIndex: 'des'},
                         {header: "联系地址", dataIndex: 'address', hidden: true},
                         {header: "备注", dataIndex: 'des', hidden: true},
                     ];
