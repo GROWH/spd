@@ -71,7 +71,7 @@ public class User extends SimpleModel implements UserDetails {
     protected String address;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @ModelAttr("单位信息")
     @ModelAttrRef("id")
     protected Unit unit;

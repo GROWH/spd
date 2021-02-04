@@ -36,14 +36,14 @@ public class OrderManagementService extends SimpleService<OrderManagement> {
 
             //模糊搜索
             if(likeInfo != null && !likeInfo.equals("")){
-                jpql += "and (o.id like '%"+likeInfo+"%' or o.GYSNumber like '%"+likeInfo+"%' or o.KHNumber like '%"+likeInfo+"%' or  o.GYSName.unitName like '%"+likeInfo+"%'  or o.KHName.unitName like '%"+likeInfo+"%' )";
+                jpql += " and (o.id like '%"+likeInfo+"%' or o.GYSNumber like '%"+likeInfo+"%' or o.KHNumber like '%"+likeInfo+"%' or  o.GYSName.unitName like '%"+likeInfo+"%'  or o.KHName.unitName like '%"+likeInfo+"%' )";
             }
 
-            Query query = getService().getEntityManager().createQuery(jpql, OrderManagement.class);
             if(unit != null){
-                jpql += "and o.GYSName.paperworkNo =:uNo or o.KHName.paperworkNo =:uNo ";
-                query.setParameter("uNo", unit.getPaperworkNo());
+                jpql += " and (o.GYSName.paperworkNo = '"+unit.getPaperworkNo()+"' or o.KHName.paperworkNo = '"+unit.getPaperworkNo()+"') ";
+
             }
+            Query query = getService().getEntityManager().createQuery(jpql, OrderManagement.class);
 
             List<OrderManagement> orderManagementList = query.getResultList();
             return orderManagementList;

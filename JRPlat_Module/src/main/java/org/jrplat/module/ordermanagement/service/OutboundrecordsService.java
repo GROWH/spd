@@ -41,11 +41,10 @@ public class OutboundrecordsService extends SimpleService<Outboundrecords> {
             if(likeInfo != null && !likeInfo.equals("")){
                 jpql += " and (o.id like '%"+likeInfo+"%' or o.orderInformation.productNo.number like '%"+likeInfo+"%' or o.orderInformation.productName like '%"+likeInfo+"%' )";
             }
-            Query queryw = getService().getEntityManager().createQuery(jpql, Outboundrecords.class);
             if(unit != null){
-                jpql += "and o.unitNo.paperworkNo =:uNo";
-                queryw.setParameter("uNo", unit.getPaperworkNo());
+                jpql += " and o.unitNo.paperworkNo ="+unit.getPaperworkNo();
             }
+            Query queryw = getService().getEntityManager().createQuery(jpql, Outboundrecords.class);
 
             List<Outboundrecords> orderManagementList = queryw.getResultList();
             return orderManagementList;

@@ -22,7 +22,7 @@
 
         <module english="ordermanagement" chinese="订单管理">
             <subModules>
-                <module english="OrderManagement" chinese="订单信息">
+                <module english="order-management" chinese="订单信息">
                     <commands>
                         <command english="create" chinese="添加订单信息"/>
                         <command english="delete" chinese="删除订单信息"/>
@@ -30,14 +30,25 @@
                         <command english="query" chinese="查询订单信息"/>
                         <command english="refresh" chinese="刷新"/>
                         <command english="help" chinese="帮助" />
+                        <command english="queryOrderInformation" chinese="查询细单信息"/>
                     </commands>
                 </module>
-                <module english="Outboundrecords" chinese="出库记录">
+                <module english="outboundrecords" chinese="出货记录">
                     <commands>
                         <command english="create" chinese="添加出库信息"/>
                         <command english="delete" chinese="删除出库信息"/>
                         <command english="update" chinese="修改出库信息"/>
                         <command english="query" chinese="查询出库信息"/>
+                        <command english="refresh" chinese="刷新"/>
+                        <command english="help" chinese="帮助" />
+                    </commands>
+                </module>
+                <module english="orderInformation" chinese="细单信息">
+                    <commands>
+                        <command english="create" chinese="添加细单信息"/>
+                        <command english="delete" chinese="删除细单信息"/>
+                        <command english="update" chinese="修改细单信息"/>
+                        <command english="query" chinese="查询细单信息"/>
                         <command english="refresh" chinese="刷新"/>
                         <command english="help" chinese="帮助" />
                     </commands>
