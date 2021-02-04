@@ -130,7 +130,7 @@ CreateModel = function () {
                                             focus: function (field) {
                                                 var oId = Ext.getCmp('orderId').getValue();
                                                 var querymodule = 'order-management-x';
-                                                var interfaceName = '!queryOrderInformation.action';//
+                                                var interfaceName = '!query.action';
                                                 var queryString = "orderManagement.id:eq:" + oId; //搜索条件
                                                 var idList = ["proId","proName","orderNum","orderPH","effectiveDate"]; //赋值文本框的id List
                                                 var colList = ["id","productName","orderQuantity","lotNumber","effectiveDate"]; //表格列名List 与idList一一对应
