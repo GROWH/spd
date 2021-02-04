@@ -43,16 +43,6 @@
                         <command english="help" chinese="帮助" />
                     </commands>
                 </module>
-                <module english="orderInformation" chinese="细单信息">
-                    <commands>
-                        <command english="create" chinese="添加细单信息"/>
-                        <command english="delete" chinese="删除细单信息"/>
-                        <command english="update" chinese="修改细单信息"/>
-                        <command english="query" chinese="查询细单信息"/>
-                        <command english="refresh" chinese="刷新"/>
-                        <command english="help" chinese="帮助" />
-                    </commands>
-                </module>
             </subModules>
         </module>
     </subModules>
