@@ -23,7 +23,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>出库记录</title>
         <%@include file="../include/common.jsp" %>
-        <script type="text/javascript" src="js/Outboundrecord.js"></script>
+        <script type="text/javascript" src="js/outboundrecord.js"></script>
 </head>
 <body>
 <div id='grid-div' style="width:100%; height:100%;">

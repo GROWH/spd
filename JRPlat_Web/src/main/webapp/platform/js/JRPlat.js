@@ -1454,15 +1454,13 @@ DetailGridBaseModel = function () {
                 }, Ext.data.Record.create(fields)),
                 proxy: new parent.Ext.data.HttpProxy({
                     url: contextPath + '/' + this.namespace + '/'
-                    + this.action + this.interfaceName +'.action'
+                    + this.action + this.interfaceName +'.action'+ this.initUrlParams
                 })
             });
             store.on('beforeload', function (store) {
                 store.baseParams = {
                     propertyCriteria: DetailGridBaseModel.propertyCriteria,
                     likeQueryInfo: DetailGridBaseModel.likeQueryInfo,
-                    likeQueryType:  DetailGridBaseModel.initUrlParams.detail,
-                    queryaction: DetailGridBaseModel.initUrlParams.detail + 'Action',
                 };
             });
             store.load({
